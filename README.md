@@ -11,7 +11,7 @@ In order to run `live-editor` locally you'll have run a local web server.  If yo
 
     python -m SimpleHTTPServer
     
-Or, with Python 3.x.x
+Or, with Python 3.x.x:
 
     python -m http.server
 

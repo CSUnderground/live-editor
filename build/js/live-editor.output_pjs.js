@@ -204,7 +204,8 @@ var PJSCodeInjector = (function () {
                 // Basic console logging
                 debug: function debug() {
                     console.log.apply(console, arguments);
-                }
+                },
+                window: window
             });
 
             Object.assign(this.processing, additionalMethods);

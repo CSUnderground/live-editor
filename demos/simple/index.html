@@ -42,7 +42,8 @@
 //        outputUrl += "?debugger=true";
 //        useDebugger = true;
 //    }
-
+	window.loopProtect = true;
+	
     var code = window.localStorage["test-code"] || "rect(10, 10, 100, 100);";
 
     var search = location.search.substring(1);
@@ -51,7 +52,14 @@
         var tokens = param.split("=");
         params[tokens[0]] = tokens[1];
     });
-
+	if(params.loopProtect){
+		if(params.loopProtect == "0" || params.loopProtect == "false"){
+			loopProtect = false;
+		}else if(params.loopProtect == "1" || params.loopProtect == "true"){
+			loopProtect = true;
+		}
+		
+	}
     if (params.scratchpad) {
         var xhr = new XMLHttpRequest();
         var baseUrl = "https://www.khanacademy.org/api/internal/scratchpads/";
@@ -68,6 +76,7 @@
     if(params.width) width=parseFloat(params.width);
     var height = 400;
 	if(params.height) height=parseFloat(params.height);
+
 
     window.liveEditor = new LiveEditor({
         el: $("#sample-live-editor"),

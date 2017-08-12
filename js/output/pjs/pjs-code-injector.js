@@ -168,7 +168,8 @@ class PJSCodeInjector {
             // Basic console logging
             debug: (...args) => {
                 console.log(...args);
-            }
+            },
+            window: window
         });
 
         Object.assign(this.processing, additionalMethods);

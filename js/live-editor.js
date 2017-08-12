@@ -1,6 +1,18 @@
 // TODO(kevinb) remove after challenges have been converted to use i18n._
 $._ = i18n._;
+$.fn.animateRotate = function(angle, duration, easing, complete) {
+  var args = $.speed(duration, easing, complete);
+  var step = args.step;
+  return this.each(function(i, e) {
+    args.complete = $.proxy(args.complete, e);
+    args.step = function(now) {
+      $.style(e, 'transform', 'rotate(' + now + 'deg)');
+      if (step) return step.apply(e, arguments);
+    };
 
+    $({deg: 0}).animate({deg: angle}, args);
+  });
+};
 window.LiveEditor = Backbone.View.extend({
     dom: {
         DRAW_CANVAS: ".scratchpad-draw-canvas",
@@ -1363,6 +1375,7 @@ window.LiveEditor = Backbone.View.extend({
      * Restart the code in the output frame.
      */
     restartCode: function() {
+        $(".restartIcon").animateRotate(180,300,"swing");
         this.postFrame({ restart: true });
     },
 

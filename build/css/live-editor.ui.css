@@ -440,6 +440,33 @@ button.hilite {
     height: 43px;
 }
 .editor-toolbar .error-buddy-resting {
-    margin-left: 4px;
-    margin-top: 4px;
+    /*margin-left: 4px;
+    margin-top: 4px;*/
+}
+.editor-toolbar .simple-button {
+    background:none;
+    border-radius:10px;
+    border: 1px solid green;
+    color:green;
+    margin-top:5px;
+    margin-right:5px;
+    padding:6px 8px;
+    font-family:"Proxima Nova", Helvetica, Corbel, sans-serif;
+    text-decoration:none;
+    font-size:15px;
+}
+.vam {
+    vertical-align: middle;
+    /*border-top: 1px solid #888;
+    border-bottom: 1px solid #888;*/
+    position:relative !important;
+}
+.vam-trick {
+    height:42px;
+    width:0px;
+    display:inline-block;
+}
+.restartIcon {
+    margin-bottom: -2px;
+    margin-right: -1px;
 }

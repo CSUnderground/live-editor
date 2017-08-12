@@ -339,12 +339,12 @@ function program21(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</span>\r\n            </button>\r\n          </div>\r\n          <div class=\"scratchpad-toolbar editor-toolbar\">\r\n                <div class=\"error-buddy-resting\">\r\n                    <div class=\"error-buddy-happy\" style=\"display:none;\">\r\n                        <img src=\"";
+  buffer += "</span>\r\n            </button>\r\n          </div>\r\n          <div class=\"scratchpad-toolbar editor-toolbar\">\r\n            <span class=\"vam vam-trick\"></span>\r\n                <span class=\"error-buddy-resting vam\">\r\n                    <span class=\"error-buddy-happy vam\" style=\"display:none;\">\r\n                        <img class=\"vam\" src=\"";
   foundHelper = helpers.imagesDir;
   stack1 = foundHelper || depth0.imagesDir;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "imagesDir", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "/creatures/OhNoes-Happy.png\"/>\r\n                    </div>\r\n                    <a class=\"error-buddy-thinking\" style=\"display:none;\" href=\"javascript:void()\">\r\n                        <img src=\"";
+  buffer += escapeExpression(stack1) + "/creatures/OhNoes-Happy.png\"/>\r\n                    </span>\r\n                    <a class=\"error-buddy-thinking vam\" style=\"display:none;\" href=\"javascript:void()\">\r\n                        <img src=\"";
   foundHelper = helpers.imagesDir;
   stack1 = foundHelper || depth0.imagesDir;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
@@ -360,7 +360,7 @@ function program21(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</span>\r\n                    </a>\r\n                </div>\r\n                <button id=\"restart-code\"\r\n                    class=\"simple-button pull-right\">\r\n                    <span class=\"icon-refresh\"></span>\r\n                    ";
+  buffer += "</span>\r\n                    </a>\r\n                </span>\r\n                <span style=\"float:right\">\r\n                <span class=\"vam vam-trick\" style=\"height:47px\"></span>\r\n                    <a id=\"restart-code\" href=\"javascript:void(0)\"\r\n                        class=\"simple-button\">\r\n                        <span class=\"icon-refresh\"><svg class=\"restartIcon\" focusable=\"false\" width=\"1.000020000400008em\" height=\"1em\" viewBox=\"0 0 100 99.998\"><path fill=\"currentColor\" d=\"M50.046 83.391q8.778 0 16.302-4.218t12.084-11.685q.741-1.083 3.477-7.638.513-1.482 1.938-1.482l12.483 0q.855.057 1.482.627t.627 1.14-.057.741q-4.104 17.499-17.442 28.329t-31.179 10.83q-9.519 0-18.411-3.591t-15.846-10.203l-8.379 8.379q-1.254 1.254-2.964 1.254-1.653 0-2.907-1.254t-1.254-2.907l0-29.184q0-1.71 1.254-2.964t2.907-1.197l29.184 0q1.71 0 2.964 1.254 1.197 1.197 1.197 2.907t-1.197 2.907l-8.949 8.949q9.747 9.006 22.686 9.006zm49.989-75.069l0 29.184q.057 1.71-1.197 2.964t-2.964 1.197l-29.184 0q-1.71 0-2.964-1.254t-1.197-2.907q0-1.71 1.254-2.907l9.006-9.006q-9.633-8.949-22.743-8.949-8.721.057-16.302 4.275t-12.141 11.628q-.741 1.083-3.42 7.638-.513 1.482-1.938 1.482l-12.996 0q-.855 0-1.482-.627t-.57-1.425l0-.456q4.218-17.442 17.556-28.272t31.293-10.887q9.462 0 18.468 3.591t15.96 10.203l8.493-8.379q1.197-1.254 2.907-1.254t2.964 1.254 1.197 2.907z\"></path></svg></span>\r\n                        ";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(15, program15, data);
@@ -370,7 +370,7 @@ function program21(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</button>\r\n\r\n                <!-- Widgets for selecting colors to doodle on the canvas during\r\n                    recordings -->\r\n                <div id=\"draw-widgets\" style=\"display:none;\">\r\n                    <a href=\"\" id=\"draw-clear-button\" class=\"ui-button\">\r\n                        <span class=\"ui-icon-cancel\"></span>\r\n                    </a>\r\n                    ";
+  buffer += "</a>\r\n                </span>\r\n\r\n                <!-- Widgets for selecting colors to doodle on the canvas during\r\n                    recordings -->\r\n                <div id=\"draw-widgets\" style=\"display:none;\">\r\n                    <a href=\"\" id=\"draw-clear-button\" class=\"ui-button\">\r\n                        <span class=\"ui-icon-cancel\"></span>\r\n                    </a>\r\n                    ";
   foundHelper = helpers.colors;
   stack1 = foundHelper || depth0.colors;
   stack2 = helpers.each;
@@ -916,35 +916,47 @@ window.ScratchpadRecordView = Backbone.View.extend({
 });
 // TODO(kevinb) remove after challenges have been converted to use i18n._
 $._ = i18n._;
+$.fn.animateRotate = function (angle, duration, easing, complete) {
+    var args = $.speed(duration, easing, complete);
+    var step = args.step;
+    return this.each(function (i, e) {
+        args.complete = $.proxy(args.complete, e);
+        args.step = function (now) {
+            $.style(e, 'transform', 'rotate(' + now + 'deg)');
+            if (step) return step.apply(e, arguments);
+        };
 
+        $({ deg: 0 }).animate({ deg: angle }, args);
+    });
+};
 window.LiveEditor = Backbone.View.extend({
     dom: {
-        DRAW_CANVAS: ".scratchpad-draw-canvas",
-        DRAW_COLOR_BUTTONS: "#draw-widgets a.draw-color-button",
-        CANVAS_WRAP: ".scratchpad-canvas-wrap",
-        EDITOR: ".scratchpad-editor",
-        CANVAS_LOADING: ".scratchpad-canvas-loading",
-        BIG_PLAY_LOADING: ".scratchpad-editor-bigplay-loading",
-        BIG_PLAY_BUTTON: ".scratchpad-editor-bigplay-button",
-        PLAYBAR: ".scratchpad-playbar",
-        PLAYBAR_AREA: ".scratchpad-playbar-area",
-        PLAYBAR_OPTIONS: ".scratchpad-playbar-options",
-        PLAYBAR_LOADING: ".scratchpad-playbar .loading-msg",
-        PLAYBAR_PROGRESS: ".scratchpad-playbar-progress",
-        PLAYBAR_PLAY: ".scratchpad-playbar-play",
-        PLAYBAR_TIMELEFT: ".scratchpad-playbar-timeleft",
-        PLAYBAR_UI: ".scratchpad-playbar-play, .scratchpad-playbar-progress",
-        OUTPUT_FRAME: "#output-frame",
-        OUTPUT_DIV: "#output",
-        ALL_OUTPUT: "#output, #output-frame",
-        RESTART_BUTTON: "#restart-code",
-        GUTTER_ERROR: ".ace_error",
-        ERROR_BUDDY_HAPPY: ".error-buddy-happy",
-        ERROR_BUDDY_THINKING: ".error-buddy-thinking"
+        DRAW_CANVAS: '.scratchpad-draw-canvas',
+        DRAW_COLOR_BUTTONS: '#draw-widgets a.draw-color-button',
+        CANVAS_WRAP: '.scratchpad-canvas-wrap',
+        EDITOR: '.scratchpad-editor',
+        CANVAS_LOADING: '.scratchpad-canvas-loading',
+        BIG_PLAY_LOADING: '.scratchpad-editor-bigplay-loading',
+        BIG_PLAY_BUTTON: '.scratchpad-editor-bigplay-button',
+        PLAYBAR: '.scratchpad-playbar',
+        PLAYBAR_AREA: '.scratchpad-playbar-area',
+        PLAYBAR_OPTIONS: '.scratchpad-playbar-options',
+        PLAYBAR_LOADING: '.scratchpad-playbar .loading-msg',
+        PLAYBAR_PROGRESS: '.scratchpad-playbar-progress',
+        PLAYBAR_PLAY: '.scratchpad-playbar-play',
+        PLAYBAR_TIMELEFT: '.scratchpad-playbar-timeleft',
+        PLAYBAR_UI: '.scratchpad-playbar-play, .scratchpad-playbar-progress',
+        OUTPUT_FRAME: '#output-frame',
+        OUTPUT_DIV: '#output',
+        ALL_OUTPUT: '#output, #output-frame',
+        RESTART_BUTTON: '#restart-code',
+        GUTTER_ERROR: '.ace_error',
+        ERROR_BUDDY_HAPPY: '.error-buddy-happy',
+        ERROR_BUDDY_THINKING: '.error-buddy-thinking'
     },
 
-    mouseCommands: ["move", "over", "out", "down", "up"],
-    colors: ["black", "red", "orange", "green", "blue", "lightblue", "violet"],
+    mouseCommands: ['move', 'over', 'out', 'down', 'up'],
+    colors: ['black', 'red', 'orange', 'green', 'blue', 'lightblue', 'violet'],
 
     defaultOutputWidth: 400,
     defaultOutputHeight: 400,
@@ -956,11 +968,11 @@ window.LiveEditor = Backbone.View.extend({
         this.externalsDir = this._qualifyURL(options.externalsDir);
         this.imagesDir = this._qualifyURL(options.imagesDir);
         this.soundsDir = options.soundsDir;
-        this.execFile = options.execFile ? this._qualifyURL(options.execFile) : "";
-        this.jshintFile = this._qualifyURL(options.jshintFile || this.externalsDir + "jshint/jshint.js");
+        this.execFile = options.execFile ? this._qualifyURL(options.execFile) : '';
+        this.jshintFile = this._qualifyURL(options.jshintFile || this.externalsDir + 'jshint/jshint.js');
         this.redirectUrl = options.redirectUrl;
 
-        this.outputType = options.outputType || "";
+        this.outputType = options.outputType || '';
         this.editorType = options.editorType || _.keys(this.editors)[0];
         this.editorHeight = options.editorHeight;
         this.initialCode = options.code;
@@ -1008,12 +1020,12 @@ window.LiveEditor = Backbone.View.extend({
             // A color has been chosen
             colorSet: (function (color) {
                 // Deactivate all the color buttons
-                this.$el.find(this.dom.DRAW_COLOR_BUTTONS).removeClass("ui-state-active");
+                this.$el.find(this.dom.DRAW_COLOR_BUTTONS).removeClass('ui-state-active');
 
                 // If a new color has actually been chosen
                 if (color !== null) {
                     // Select that color and activate the button
-                    this.$el.find("#" + color).addClass("ui-state-active");
+                    this.$el.find('#' + color).addClass('ui-state-active');
                 }
             }).bind(this)
         });
@@ -1022,7 +1034,7 @@ window.LiveEditor = Backbone.View.extend({
         // Looks to see if "new_error_experience=yes" is in the url,
         //  if it is, then we use the new error buddy behaviour.
         this.newErrorExperience = options.newErrorExperience;
-        if (window.location.search.indexOf("new_error_experience=yes") !== -1) {
+        if (window.location.search.indexOf('new_error_experience=yes') !== -1) {
             this.newErrorExperience = true;
         }
 
@@ -1050,43 +1062,43 @@ window.LiveEditor = Backbone.View.extend({
         if (tooltipEngine.setEnabledStatus) {
             // Looks to see if "autosuggestToggle=yes" is in the url,
             //  if it is, then we disable the live autosuggestions.
-            if (window.location.search.indexOf("autosuggestToggle=yes") !== -1) {
+            if (window.location.search.indexOf('autosuggestToggle=yes') !== -1) {
 
                 // Overrides whatever is in localStorage.
                 // TODO (anyone) remove this when the URL param is removed.
-                window.localStorage["autosuggest"] = "true";
+                window.localStorage['autosuggest'] = 'true';
 
                 // Allows toggling of the autosuggestions.
                 this.editor.editor.commands.addCommand({
-                    name: "toggleAutosuggest",
+                    name: 'toggleAutosuggest',
                     bindKey: {
-                        win: "Ctrl+Alt+A",
-                        mac: "Command+Option+A"
+                        win: 'Ctrl+Alt+A',
+                        mac: 'Command+Option+A'
                     },
                     exec: function exec(editor) {
-                        var status = window.localStorage["autosuggest"] === "true";
+                        var status = window.localStorage['autosuggest'] === 'true';
 
                         tooltipEngine.setEnabledStatus(status !== true);
 
-                        window.localStorage.setItem("autosuggest", String(status !== true));
+                        window.localStorage.setItem('autosuggest', String(status !== true));
                     }
                 });
             } else {
                 // since we load the enabled value from localStorage...
-                tooltipEngine.setEnabledStatus("true");
+                tooltipEngine.setEnabledStatus('true');
             }
         }
 
         // linting in the webpage environment generates slowparseResults which
         // is used in the runCode step so skipping linting won't work in that
         // environment without some more work
-        if (this.editorType === "ace_pjs") {
+        if (this.editorType === 'ace_pjs') {
             this.noLint = false;
-            this.editor.on("scrubbingStarted", (function () {
+            this.editor.on('scrubbingStarted', (function () {
                 this.noLint = true;
             }).bind(this));
 
-            this.editor.on("scrubbingEnded", (function () {
+            this.editor.on('scrubbingEnded', (function () {
                 this.noLint = false;
             }).bind(this));
         }
@@ -1098,15 +1110,15 @@ window.LiveEditor = Backbone.View.extend({
 
         // Set up the debugger;
         if (options.useDebugger) {
-            this["debugger"] = new ScratchpadDebugger({
+            this['debugger'] = new ScratchpadDebugger({
                 liveEditor: this,
                 editor: this.editor.editor
             });
-            this["debugger"].on("enabled", function (enabled) {
+            this['debugger'].on('enabled', function (enabled) {
                 if (enabled) {
-                    this.$el.find(this.dom.RESTART_BUTTON).attr("disabled", "");
+                    this.$el.find(this.dom.RESTART_BUTTON).attr('disabled', '');
                 } else {
-                    this.$el.find(this.dom.RESTART_BUTTON).removeAttr("disabled");
+                    this.$el.find(this.dom.RESTART_BUTTON).removeAttr('disabled');
                 }
             }, this);
         }
@@ -1134,14 +1146,14 @@ window.LiveEditor = Backbone.View.extend({
         }
 
         // Hide the overlay
-        this.$el.find("#page-overlay").hide();
+        this.$el.find('#page-overlay').hide();
 
         // Change the width and height of the output frame if it's been
         // changed by the user, via the query string, or in the settings
         this.updateCanvasSize(options.width, options.height);
 
         if (this.canRecord()) {
-            this.$el.find("#record").show();
+            this.$el.find('#record').show();
         }
 
         this.bind();
@@ -1149,7 +1161,7 @@ window.LiveEditor = Backbone.View.extend({
     },
 
     render: function render() {
-        this.$el.html(Handlebars.templates["live-editor"]({
+        this.$el.html(Handlebars.templates['live-editor']({
             execFile: this.execFile,
             imagesDir: this.imagesDir,
             colors: this.colors
@@ -1164,43 +1176,43 @@ window.LiveEditor = Backbone.View.extend({
         var dom = this.dom;
 
         // Make sure that disabled buttons can't still be used
-        $el.delegate(".simple-button.disabled, .ui-state-disabled", "click", function (e) {
+        $el.delegate('.simple-button.disabled, .ui-state-disabled', 'click', function (e) {
             e.stopImmediatePropagation();
             return false;
         });
 
         // Handle the restart button
-        $el.delegate(this.dom.RESTART_BUTTON, "click", this.restartCode.bind(this));
+        $el.delegate(this.dom.RESTART_BUTTON, 'click', this.restartCode.bind(this));
 
         this.handleMessagesBound = this.handleMessages.bind(this);
-        $(window).on("message", this.handleMessagesBound);
+        $(window).on('message', this.handleMessagesBound);
 
-        $el.find("#output-frame").on("load", function () {
-            _this.outputState = "clean";
+        $el.find('#output-frame').on('load', function () {
+            _this.outputState = 'clean';
             _this.markDirty();
         });
 
         // Whenever the user changes code, execute the code
-        this.editor.on("change", function () {
+        this.editor.on('change', function () {
             _this.markDirty();
         });
 
-        this.editor.on("userChangedCode", function () {
+        this.editor.on('userChangedCode', function () {
             if (!_this.record.recording && !_this.record.playing) {
-                _this.trigger("userChangedCode");
+                _this.trigger('userChangedCode');
             }
         });
 
-        this.on("runDone", this.runDone.bind(this));
+        this.on('runDone', this.runDone.bind(this));
 
         // This function will fire once after each synchrynous block which changes the cursor
         // or the current selection. We use it for tag highlighting in webpages.
         var cursorDirty = function cursorDirty() {
-            if (self.outputState !== "clean") {
+            if (self.outputState !== 'clean') {
                 // This will fire after markDirty() itself gets a chance to start a new run
                 // So it will just keep resetting itself until one run comes back and there are
                 // no changes waiting
-                self.once("runDone", cursorDirty);
+                self.once('runDone', cursorDirty);
             } else {
                 setTimeout(function () {
                     if (self.editor.getSelectionIndices) {
@@ -1208,7 +1220,7 @@ window.LiveEditor = Backbone.View.extend({
                             setCursor: self.editor.getSelectionIndices()
                         });
                     }
-                    self.editor.once("changeCursor", cursorDirty);
+                    self.editor.once('changeCursor', cursorDirty);
                 }, 0);
             }
             // This makes sure that we pop up the error
@@ -1217,24 +1229,24 @@ window.LiveEditor = Backbone.View.extend({
                 self.maybeShowErrors();
             }, 0);
         };
-        this.editor.once("changeCursor", cursorDirty);
+        this.editor.once('changeCursor', cursorDirty);
 
-        this.config.on("versionSwitched", (function (e, version) {
+        this.config.on('versionSwitched', (function (e, version) {
             // Re-run the code after a version switch
             this.markDirty();
             // Run the JSHint config
-            this.config.runVersion(version, "jshint");
+            this.config.runVersion(version, 'jshint');
         }).bind(this));
 
         if (this.hasAudio()) {
-            $el.find(".overlay").show();
+            $el.find('.overlay').show();
             $el.find(dom.BIG_PLAY_LOADING).show();
             $el.find(dom.PLAYBAR).show();
         }
 
         // Set up color button handling
         $el.find(dom.DRAW_COLOR_BUTTONS).each(function () {
-            $(this).addClass("ui-button").children().css("background", this.id);
+            $(this).addClass('ui-button').children().css('background', this.id);
         });
 
         // Set up toolbar buttons
@@ -1243,20 +1255,20 @@ window.LiveEditor = Backbone.View.extend({
         }
 
         // Handle color button clicks during recording
-        $el.on("buttonClick", "a.draw-color-button", function () {
+        $el.on('buttonClick', 'a.draw-color-button', function () {
             self.drawCanvas.setColor(this.id);
             self.editor.focus();
         });
 
         // If the user clicks the disable overlay (which is laid over
         // the editor and canvas on playback) then pause playback.
-        $el.on("click", ".disable-overlay", function () {
+        $el.on('click', '.disable-overlay', function () {
             self.record.pausePlayback();
         });
 
         // Set up the playback progress bar
         $el.find(dom.PLAYBAR_PROGRESS).slider({
-            range: "min",
+            range: 'min',
             value: 0,
             min: 0,
             max: 100,
@@ -1318,7 +1330,7 @@ window.LiveEditor = Backbone.View.extend({
         };
 
         // Handle the play button
-        $el.find(dom.PLAYBAR_PLAY).off("click.play-button").on("click.play-button", handlePlayClick);
+        $el.find(dom.PLAYBAR_PLAY).off('click.play-button').on('click.play-button', handlePlayClick);
 
         var handlePlayButton = function handlePlayButton() {
             // Show the playback bar and hide the loading message
@@ -1326,17 +1338,17 @@ window.LiveEditor = Backbone.View.extend({
             $el.find(dom.PLAYBAR_AREA).show();
 
             // Handle the big play button click event
-            $el.find(dom.BIG_PLAY_BUTTON).off("click.big-play-button").on("click.big-play-button", function () {
+            $el.find(dom.BIG_PLAY_BUTTON).off('click.big-play-button').on('click.big-play-button', function () {
                 $el.find(dom.BIG_PLAY_BUTTON).hide();
                 handlePlayClick();
             });
 
-            $el.find(dom.PLAYBAR_PLAY).on("click", function () {
+            $el.find(dom.PLAYBAR_PLAY).on('click', function () {
                 $el.find(dom.BIG_PLAY_BUTTON).hide();
             });
 
             // Hide upon interaction with the editor
-            $el.find(dom.EDITOR).on("click", function () {
+            $el.find(dom.EDITOR).on('click', function () {
                 $el.find(dom.BIG_PLAY_BUTTON).hide();
             });
 
@@ -1344,37 +1356,37 @@ window.LiveEditor = Backbone.View.extend({
             $el.find(dom.BIG_PLAY_LOADING).hide();
             $el.find(dom.BIG_PLAY_BUTTON).show();
 
-            self.off("readyToPlay", handlePlayButton);
+            self.off('readyToPlay', handlePlayButton);
         };
 
         // Set up all the big play button interactions
-        this.on("readyToPlay", handlePlayButton);
+        this.on('readyToPlay', handlePlayButton);
 
         // Handle the clear button click during recording
-        $el.on("buttonClick", "#draw-clear-button", function () {
+        $el.on('buttonClick', '#draw-clear-button', function () {
             self.drawCanvas.clear();
             self.drawCanvas.endDraw();
             self.editor.focus();
         });
 
         // Handle the restart button
-        $el.on("click", this.dom.RESTART_BUTTON, function () {
-            self.record.log("restart");
+        $el.on('click', this.dom.RESTART_BUTTON, function () {
+            self.record.log('restart');
         });
 
         // Handle the gutter errors
-        $el.on("click", this.dom.GUTTER_ERROR, function () {
+        $el.on('click', this.dom.GUTTER_ERROR, function () {
             var lineNum = parseInt($(this).text(), 10);
             self.setErrorPosition(this.gutterDecorations[lineNum]);
         });
 
         // Handle clicks on the thinking Error Buddy
-        $el.on("click", this.dom.ERROR_BUDDY_THINKING, function () {
+        $el.on('click', this.dom.ERROR_BUDDY_THINKING, function () {
             self.setErrorPosition(0);
         });
 
         // Bind the handler to start a new recording
-        $el.find("#record").on("click", function () {
+        $el.find('#record').on('click', function () {
             self.recordHandler(function (err) {
                 if (err) {
                     // TODO: Change this:
@@ -1399,7 +1411,7 @@ window.LiveEditor = Backbone.View.extend({
     },
 
     remove: function remove() {
-        $(window).off("message", this.handleMessagesBound);
+        $(window).off('message', this.handleMessagesBound);
         this.editor.remove();
     },
 
@@ -1420,7 +1432,7 @@ window.LiveEditor = Backbone.View.extend({
         var rebootTimer;
 
         soundManager.setup({
-            url: this.externalsDir + "SoundManager2/swf/",
+            url: this.externalsDir + 'SoundManager2/swf/',
             debugMode: false,
             // Un-comment this to test Flash on FF:
             // debugFlash: true, preferFlash: true, useHTML5Audio: false,
@@ -1446,7 +1458,7 @@ window.LiveEditor = Backbone.View.extend({
                 window.clearTimeout(rebootTimer);
                 rebootTimer = window.setTimeout(function () {
                     // Clear flashblocker divs
-                    self.$el.find("#sm2-container div").remove();
+                    self.$el.find('#sm2-container div').remove();
                     soundManager.reboot();
                 }, 3000);
             }
@@ -1474,7 +1486,7 @@ window.LiveEditor = Backbone.View.extend({
             // SoundManager errors if no ID is passed in,
             // even though we don't use it
             // The ID should be a string starting with a letter.
-            id: "sound" + new Date().getTime(),
+            id: 'sound' + new Date().getTime(),
 
             url: this.recordingMP3,
 
@@ -1488,10 +1500,10 @@ window.LiveEditor = Backbone.View.extend({
 
                 if (!record.seeking) {
                     // Slider takes values in seconds
-                    self.$el.find(self.dom.PLAYBAR_PROGRESS).slider("option", "value", record.currentTime() / 1000);
+                    self.$el.find(self.dom.PLAYBAR_PROGRESS).slider('option', 'value', record.currentTime() / 1000);
                 }
 
-                record.trigger("playUpdate");
+                record.trigger('playUpdate');
             }).bind(this),
 
             // Hook audio playback into Record command playback
@@ -1508,25 +1520,25 @@ window.LiveEditor = Backbone.View.extend({
             },
             onload: function onload() {
                 record.durationEstimate = record.duration = this.duration;
-                record.trigger("loaded");
+                record.trigger('loaded');
             },
             whileloading: function whileloading() {
                 record.duration = null;
                 record.durationEstimate = this.durationEstimate;
-                record.trigger("loading");
+                record.trigger('loading');
             },
             // When audio playback is complete, notify everyone listening
             // that playback is officially done
             onfinish: function onfinish() {
                 record.stopPlayback();
-                record.trigger("playEnded");
+                record.trigger('playEnded');
             },
             onsuspend: function onsuspend() {
                 // Suspend happens when the audio can't be loaded automatically
                 // (such is the case on iOS devices). Thus we trigger a
                 // readyToPlay event anyway and let the load happen when the
                 // user clicks the play button later on.
-                self.trigger("readyToPlay");
+                self.trigger('readyToPlay');
             }
         });
 
@@ -1536,7 +1548,7 @@ window.LiveEditor = Backbone.View.extend({
             // We've loaded enough to start playing
             if (self.audioReadyToPlay()) {
                 clearInterval(checkStreaming);
-                self.trigger("readyToPlay");
+                self.trigger('readyToPlay');
             }
         }, 16);
 
@@ -1569,7 +1581,7 @@ window.LiveEditor = Backbone.View.extend({
                 var commands = record.commands;
 
                 if (commands) {
-                    commands.push([Math.max(record.endTime(), commands[commands.length - 1][0]), "seek"]);
+                    commands.push([Math.max(record.endTime(), commands[commands.length - 1][0]), 'seek']);
                 }
                 self.updateDurationDisplay();
             },
@@ -1622,26 +1634,26 @@ window.LiveEditor = Backbone.View.extend({
 
                 if (!record.recording) {
                     // Disable the record button during playback
-                    self.$el.find("#record").addClass("disabled");
+                    self.$el.find('#record').addClass('disabled');
                 }
 
                 // During playback disable the restart button
-                self.$el.find(self.dom.RESTART_BUTTON).addClass("disabled");
+                self.$el.find(self.dom.RESTART_BUTTON).addClass('disabled');
 
                 if (!record.recording) {
                     // Turn on playback-related styling
-                    $("html").addClass("playing");
+                    $('html').addClass('playing');
 
                     // Show an invisible overlay that blocks interactions with
                     // the editor and canvas areas (preventing the user from
                     // being able to disturb playback)
-                    self.$el.find(".disable-overlay").show();
+                    self.$el.find('.disable-overlay').show();
                 }
 
                 self.editor.unfold();
 
                 // Activate the play button
-                self.$el.find(self.dom.PLAYBAR_PLAY).find("span").removeClass("glyphicon-play icon-play").addClass("glyphicon-pause icon-pause");
+                self.$el.find(self.dom.PLAYBAR_PLAY).find('span').removeClass('glyphicon-play icon-play').addClass('glyphicon-pause icon-pause');
             },
 
             playEnded: function playEnded() {
@@ -1653,19 +1665,19 @@ window.LiveEditor = Backbone.View.extend({
             // Playback of a recording has been paused
             playPaused: function playPaused() {
                 // Turn off playback-related styling
-                $("html").removeClass("playing");
+                $('html').removeClass('playing');
 
                 // Disable the blocking overlay
-                self.$el.find(".disable-overlay").hide();
+                self.$el.find('.disable-overlay').hide();
 
                 // Allow the user to restart the code again
-                self.$el.find(self.dom.RESTART_BUTTON).removeClass("disabled");
+                self.$el.find(self.dom.RESTART_BUTTON).removeClass('disabled');
 
                 // Re-enable the record button after playback
-                self.$el.find("#record").removeClass("disabled");
+                self.$el.find('#record').removeClass('disabled');
 
                 // Deactivate the play button
-                self.$el.find(self.dom.PLAYBAR_PLAY).find("span").addClass("glyphicon-play icon-play").removeClass("glyphicon-pause icon-pause");
+                self.$el.find(self.dom.PLAYBAR_PLAY).find('span').addClass('glyphicon-play icon-play').removeClass('glyphicon-pause icon-pause');
             },
 
             // Recording has begun
@@ -1673,19 +1685,19 @@ window.LiveEditor = Backbone.View.extend({
                 // Let the output know that recording has begun
                 self.postFrame({ recording: true });
 
-                self.$el.find("#draw-widgets").removeClass("hidden").show();
+                self.$el.find('#draw-widgets').removeClass('hidden').show();
 
                 // Hides the invisible overlay that blocks interactions with the
                 // editor and canvas areas (preventing the user from being able
                 // to disturb the recording)
-                self.$el.find(".disable-overlay").hide();
+                self.$el.find('.disable-overlay').hide();
 
                 // Allow the editor to be changed
                 self.editor.setReadOnly(false);
 
                 // Turn off playback-related styling
                 // (hides hot numbers, for example)
-                $("html").removeClass("playing");
+                $('html').removeClass('playing');
 
                 // Reset the canvas to its initial state only if this is the
                 // very first chunk we are recording.
@@ -1695,10 +1707,10 @@ window.LiveEditor = Backbone.View.extend({
                 }
 
                 // Disable the save button
-                self.$el.find("#save-button, #fork-button").addClass("disabled");
+                self.$el.find('#save-button, #fork-button').addClass('disabled');
 
                 // Activate the recording button
-                self.$el.find("#record").addClass("toggled");
+                self.$el.find('#record').addClass('toggled');
             },
 
             // Recording has ended
@@ -1711,13 +1723,13 @@ window.LiveEditor = Backbone.View.extend({
                 }
 
                 // Re-enable the save button
-                self.$el.find("#save-button, #fork-button").removeClass("disabled");
+                self.$el.find('#save-button, #fork-button').removeClass('disabled');
 
                 // Enable playbar UI
-                self.$el.find(self.dom.PLAYBAR_UI).removeClass("ui-state-disabled");
+                self.$el.find(self.dom.PLAYBAR_UI).removeClass('ui-state-disabled');
 
                 // Return the recording button to normal
-                self.$el.find("#record").removeClass("toggled disabled");
+                self.$el.find('#record').removeClass('toggled disabled');
 
                 // Stop any sort of user playback
                 record.stopPlayback();
@@ -1725,16 +1737,16 @@ window.LiveEditor = Backbone.View.extend({
                 // Show an invisible overlay that blocks interactions with the
                 // editor and canvas areas (preventing the user from being able
                 // to disturb the recording)
-                self.$el.find(".disable-overlay").show();
+                self.$el.find('.disable-overlay').show();
 
                 // Turn on playback-related styling (hides hot numbers, for
                 // example)
-                $("html").addClass("playing");
+                $('html').addClass('playing');
 
                 // Prevent the editor from being changed
                 self.editor.setReadOnly(true);
 
-                self.$el.find("#draw-widgets").addClass("hidden").hide();
+                self.$el.find('#draw-widgets').addClass('hidden').hide();
 
                 // Because we are recording in chunks, do not reset the canvas
                 // to its initial state.
@@ -1761,10 +1773,10 @@ window.LiveEditor = Backbone.View.extend({
         record.handlers.restart = function () {
             var $restart = self.$el.find(self.dom.RESTART_BUTTON);
 
-            if (!$restart.hasClass("hilite")) {
-                $restart.addClass("hilite green");
+            if (!$restart.hasClass('hilite')) {
+                $restart.addClass('hilite green');
                 setTimeout(function () {
-                    $restart.removeClass("hilite green");
+                    $restart.removeClass('hilite green');
                 }, 300);
             }
 
@@ -1799,14 +1811,14 @@ window.LiveEditor = Backbone.View.extend({
         // otherwise the student will be starting with a blank editor,
         // which is confusing
         if (!saveCode) {
-            callback({ error: "empty" });
+            callback({ error: 'empty' });
         } else if (this.config.curVersion() !== this.config.latestVersion()) {
-            callback({ error: "outdated" });
+            callback({ error: 'outdated' });
         } else if (this.canRecord() && !this.hasAudio()) {
             this.startRecording();
             this.editor.focus();
         } else {
-            callback({ error: "exists" });
+            callback({ error: 'exists' });
         }
     },
 
@@ -1821,12 +1833,12 @@ window.LiveEditor = Backbone.View.extend({
             // of the site (instead of the domain that the "exec" page is on).
             // This is dumb and a KA-specific bit of functionality that we
             // should change, somehow.
-            var workersDir = this.workersDir.replace(/^https?:\/\/[^\/]*/, "");
+            var workersDir = this.workersDir.replace(/^https?:\/\/[^\/]*/, '');
 
             this.recordView = new ScratchpadRecordView({
-                el: $el.find(".scratchpad-dev-record-row"),
-                recordButton: $el.find("#record"),
-                saveButton: $el.find("#save-button"),
+                el: $el.find('.scratchpad-dev-record-row'),
+                recordButton: $el.find('#record'),
+                saveButton: $el.find('#save-button'),
                 record: this.record,
                 editor: this.editor,
                 config: this.config,
@@ -1851,7 +1863,7 @@ window.LiveEditor = Backbone.View.extend({
             templateId: this.transloaditTemplate,
             steps: steps,
             successCb: (function (results) {
-                this.recordingMP3 = results.mp3[0].url.replace(/^http:/, "https:");
+                this.recordingMP3 = results.mp3[0].url.replace(/^http:/, 'https:');
                 callback(null, this.recordingMP3);
             }).bind(this),
             errorCb: callback
@@ -1873,13 +1885,13 @@ window.LiveEditor = Backbone.View.extend({
 
         // Set the duration of the progress bar based upon the track duration
         // Slider position is set in seconds
-        this.$el.find(this.dom.PLAYBAR_PROGRESS).slider("option", "max", this.record.endTime() / 1000);
+        this.$el.find(this.dom.PLAYBAR_PROGRESS).slider('option', 'max', this.record.endTime() / 1000);
     },
 
     // Update the time left in playback of the track
     updateTimeLeft: function updateTimeLeft(time) {
         // Update the time indicator with a nicely formatted time
-        this.$el.find(".scratchpad-playbar-timeleft").text("-" + this.formatTime(this.record.endTime() - time));
+        this.$el.find('.scratchpad-playbar-timeleft').text('-' + this.formatTime(this.record.endTime() - time));
     },
 
     // Utility method for formatting time in minutes/seconds
@@ -1893,7 +1905,7 @@ window.LiveEditor = Backbone.View.extend({
             sec = 0;
         }
 
-        return min + ":" + (sec < 10 ? "0" : "") + sec;
+        return min + ':' + (sec < 10 ? '0' : '') + sec;
     },
 
     // Seek the player to a particular time
@@ -1901,7 +1913,7 @@ window.LiveEditor = Backbone.View.extend({
         // Don't update the slider position when seeking
         // (since this triggers an event on the #progress element)
         if (!this.record.seeking) {
-            this.$el.find(this.dom.PLAYBAR_PROGRESS).slider("option", "value", timeMS / 1000);
+            this.$el.find(this.dom.PLAYBAR_PROGRESS).slider('option', 'value', timeMS / 1000);
         }
 
         // Move the recording and player positions
@@ -1935,16 +1947,16 @@ window.LiveEditor = Backbone.View.extend({
             return;
         }
 
-        if (typeof data !== "object") {
+        if (typeof data !== 'object') {
             return;
         }
 
-        if (data.type === "debugger") {
+        if (data.type === 'debugger') {
             // these messages are handled by ui/debugger.js:listenMessages
             return;
         }
 
-        this.trigger("update", data);
+        this.trigger('update', data);
 
         // Hide loading overlay if output is loaded
         // We previously just looked at data.loaded,
@@ -1973,10 +1985,10 @@ window.LiveEditor = Backbone.View.extend({
         }
 
         if (data.results) {
-            this.trigger("runDone");
+            this.trigger('runDone');
         }
 
-        if (this.editorType.indexOf("ace_") === 0 && data.results) {
+        if (this.editorType.indexOf('ace_') === 0 && data.results) {
             // Remove previously added markers
             this.removeMarkers();
             if (data.results.assertions || data.results.warnings) {
@@ -1993,7 +2005,7 @@ window.LiveEditor = Backbone.View.extend({
                         // This is escaped by the gutter annotation display
                         // code, so we don't need to escape it here.
                         text: assertion.text.toString(),
-                        type: "warning"
+                        type: 'warning'
                     });
                     this.addUnderlineMarker(+assertion.row);
                 }
@@ -2007,7 +2019,7 @@ window.LiveEditor = Backbone.View.extend({
                         // This is escaped by the gutter annotation display
                         // code, so we don't need to escape it here.
                         text: warning.text.toString(),
-                        type: "warning"
+                        type: 'warning'
                     });
                     this.addUnderlineMarker(+warning.row);
                 }
@@ -2054,9 +2066,9 @@ window.LiveEditor = Backbone.View.extend({
     addUnderlineMarker: function addUnderlineMarker(row) {
         // Underline the problem line to make it more obvious
         //  if they don't notice the gutter icon
-        var AceRange = ace.require("ace/range").Range;
+        var AceRange = ace.require('ace/range').Range;
         var line = this.editor.editor.session.getDocument().getLine(row);
-        this.editor.editor.session.addMarker(new AceRange(row, 0, row, line.length), "ace_problem_line", "text", false);
+        this.editor.editor.session.addMarker(new AceRange(row, 0, row, line.length), 'ace_problem_line', 'text', false);
     },
 
     removeMarkers: function removeMarkers() {
@@ -2072,7 +2084,7 @@ window.LiveEditor = Backbone.View.extend({
         // Remove old gutter decorations
         var session = this.editor.editor.session;
         _.each(this.gutterDecorations, function (errorOffset, errorRow) {
-            session.removeGutterDecoration(errorRow - 1, "ace_error");
+            session.removeGutterDecoration(errorRow - 1, 'ace_error');
         });
     },
 
@@ -2118,7 +2130,7 @@ window.LiveEditor = Backbone.View.extend({
                 // are shown the relevant error message.
                 if (gutterDecorations[error.row + 1] === null) {
                     gutterDecorations[error.row + 1] = index;
-                    session.addGutterDecoration(error.row, "ace_error");
+                    session.addGutterDecoration(error.row, 'ace_error');
                 }
 
                 this.addUnderlineMarker(error.row);
@@ -2185,7 +2197,7 @@ window.LiveEditor = Backbone.View.extend({
     // - thinking (the ambigous state where there may be an error in what the
     //             typer is currently typing)
     // - error (there is an error that we want to display prominently)
-    errorState: "",
+    errorState: '',
     hasErrors: function hasErrors() {
         return this.tipbar.errors.length;
     },
@@ -2197,21 +2209,21 @@ window.LiveEditor = Backbone.View.extend({
         this.tipbar.setErrorPosition(errorPos);
     },
     setErrorState: function setErrorState() {
-        this.errorState = "error";
+        this.errorState = 'error';
         this.$el.find(this.dom.ERROR_BUDDY_THINKING).hide();
         this.$el.find(this.dom.ERROR_BUDDY_HAPPY).hide();
         this.tipbar.update(true);
     },
     setThinkingState: function setThinkingState() {
-        if (this.errorState !== "thinking") {
-            this.errorState = "thinking";
+        if (this.errorState !== 'thinking') {
+            this.errorState = 'thinking';
             this.tipbar.hide();
             this.$el.find(this.dom.ERROR_BUDDY_HAPPY).hide();
-            this.$el.find(this.dom.ERROR_BUDDY_THINKING).show().animate({ left: -2 }, { duration: 300, easing: "linear" }).animate({ left: 2 }, { duration: 300, easing: "linear" }).animate({ left: 0 }, { duration: 300, easing: "linear" });
+            this.$el.find(this.dom.ERROR_BUDDY_THINKING).show().animate({ left: -2 }, { duration: 300, easing: 'linear' }).animate({ left: 2 }, { duration: 300, easing: 'linear' }).animate({ left: 0 }, { duration: 300, easing: 'linear' });
         }
     },
     setHappyState: function setHappyState() {
-        this.errorState = "happy";
+        this.errorState = 'happy';
         this.tipbar.hide();
         this.$el.find(this.dom.ERROR_BUDDY_THINKING).hide();
         this.$el.find(this.dom.ERROR_BUDDY_HAPPY).show();
@@ -2219,14 +2231,14 @@ window.LiveEditor = Backbone.View.extend({
 
     // Extract the origin from the embedded frame location
     postFrameOrigin: function postFrameOrigin() {
-        var match = /^.*:\/\/[^\/]*/.exec(this.$el.find("#output-frame").attr("data-src"));
+        var match = /^.*:\/\/[^\/]*/.exec(this.$el.find('#output-frame').attr('data-src'));
 
-        return match ? match[0] : window.location.protocol + "//" + window.location.host;
+        return match ? match[0] : window.location.protocol + '//' + window.location.host;
     },
 
     postFrame: function postFrame(data) {
         // Send the data to the frame using postMessage
-        this.$el.find("#output-frame")[0].contentWindow.postMessage(JSON.stringify(data), this.postFrameOrigin());
+        this.$el.find('#output-frame')[0].contentWindow.postMessage(JSON.stringify(data), this.postFrameOrigin());
     },
 
     hasFrame: function hasFrame() {
@@ -2237,6 +2249,7 @@ window.LiveEditor = Backbone.View.extend({
      * Restart the code in the output frame.
      */
     restartCode: function restartCode() {
+        $('.restartIcon').animateRotate(180, 300, 'swing');
         this.postFrame({ restart: true });
     },
 
@@ -2254,7 +2267,7 @@ window.LiveEditor = Backbone.View.extend({
         var options = {
             code: arguments.length === 0 ? this.editor.text() : code,
             cursor: this.editor.getSelectionIndices ? this.editor.getSelectionIndices() : -1,
-            validate: this.validation || "",
+            validate: this.validation || '',
             noLint: this.noLint,
             version: this.config.curVersion(),
             settings: this.settings || {},
@@ -2268,7 +2281,7 @@ window.LiveEditor = Backbone.View.extend({
             enableLoopProtect: this.enableLoopProtect
         };
 
-        this.trigger("runCode", options);
+        this.trigger('runCode', options);
 
         this.postFrame(options);
     }, 20),
@@ -2297,21 +2310,21 @@ window.LiveEditor = Backbone.View.extend({
             this.tipbar.hide();
         }
 
-        if (this.outputState === "clean") {
+        if (this.outputState === 'clean') {
             // We will run at the end of this code block
             // This stops replace from trying to execute code
             // between deleting the old code and adding the new code
             setTimeout(this.runCode.bind(this), 0);
-            this.outputState = "running";
+            this.outputState = 'running';
 
             // 500ms is an arbitrary timeout. Hopefully long enough for
             // reasonable programs to execute, but short enough for editor to
             // not freeze.
             this.runTimeout = setTimeout(function () {
-                _this2.trigger("runDone");
+                _this2.trigger('runDone');
             }, 500);
         } else {
-            this.outputState = "dirty";
+            this.outputState = 'dirty';
         }
     },
 
@@ -2320,27 +2333,27 @@ window.LiveEditor = Backbone.View.extend({
     runDone: function runDone() {
         clearTimeout(this.runTimeout);
         var lastOutputState = this.outputState;
-        this.outputState = "clean";
-        if (lastOutputState === "dirty") {
+        this.outputState = 'clean';
+        if (lastOutputState === 'dirty') {
             this.markDirty();
         }
     },
 
     // This stops us from sending any updates until the current run has finished
     // Reset output state to clean as a part of the frame load handler
-    outputState: "dirty",
+    outputState: 'dirty',
 
     updateCanvasSize: function updateCanvasSize(width, height) {
         width = width || this.defaultOutputWidth;
         height = height || this.defaultOutputHeight;
-        $(".scratchpad-wrap .scratchpad-editor-wrap").css("margin-right", width.toString() + "px");
+        $('.scratchpad-wrap .scratchpad-editor-wrap').css('margin-right', width.toString() + 'px');
         this.$el.find(this.dom.CANVAS_WRAP).width(width);
         this.$el.find(this.dom.ALL_OUTPUT).height(height);
 
         // Set the editor height to be the same as the canvas height
         this.$el.find(this.dom.EDITOR).height(this.editorHeight || height);
 
-        this.trigger("canvasSizeUpdated", {
+        this.trigger('canvasSizeUpdated', {
             width: width,
             height: height
         });
@@ -2350,10 +2363,10 @@ window.LiveEditor = Backbone.View.extend({
         // If we don't have an output frame then we need to render our
         // own screenshot (so we just use the text in the editor)
         if (!this.hasFrame()) {
-            var canvas = document.createElement("canvas");
+            var canvas = document.createElement('canvas');
             canvas.width = 200;
             canvas.height = 200;
-            var ctx = canvas.getContext("2d");
+            var ctx = canvas.getContext('2d');
 
             // Default sizing, we also use a 5px margin
             var lineHeight = 24;
@@ -2363,25 +2376,25 @@ window.LiveEditor = Backbone.View.extend({
             var text = this.editor.text();
 
             // Remove all HTML markup and un-escape entities
-            text = text.replace(/<[^>]+>/g, "");
-            text = text.replace(/&nbsp;|&#160;/g, " ");
-            text = text.replace(/&lt;|&#60;/g, "<");
-            text = text.replace(/&gt;|&#62;/g, ">");
-            text = text.replace(/&amp;|&#38;/g, "&");
-            text = text.replace(/&quot;|&#34;/g, "\"");
-            text = text.replace(/&apos;|&#39;/g, "'");
+            text = text.replace(/<[^>]+>/g, '');
+            text = text.replace(/&nbsp;|&#160;/g, ' ');
+            text = text.replace(/&lt;|&#60;/g, '<');
+            text = text.replace(/&gt;|&#62;/g, '>');
+            text = text.replace(/&amp;|&#38;/g, '&');
+            text = text.replace(/&quot;|&#34;/g, '"');
+            text = text.replace(/&apos;|&#39;/g, '\'');
 
             var words = text.split(/\s+/);
             var lines = 0;
             var currentLine = words[0];
 
-            ctx.font = lineHeight + "px serif";
+            ctx.font = lineHeight + 'px serif';
 
             for (var i = 1; i < words.length; i++) {
                 var word = words[i];
-                var width = ctx.measureText(currentLine + " " + word).width;
+                var width = ctx.measureText(currentLine + ' ' + word).width;
                 if (width < maxWidth) {
-                    currentLine += " " + word;
+                    currentLine += ' ' + word;
                 } else {
                     lines += 1;
                     ctx.fillText(currentLine, 5, (lineHeight + 5) * lines);
@@ -2392,16 +2405,16 @@ window.LiveEditor = Backbone.View.extend({
             ctx.fillText(currentLine, 5, (lineHeight + 5) * lines + 5);
 
             // Render it to an image and we're done!
-            callback(canvas.toDataURL("image/png"));
+            callback(canvas.toDataURL('image/png'));
             return;
         }
 
         // Unbind any handlers this function may have set for previous
         // screenshots
-        $(window).off("message.getScreenshot");
+        $(window).off('message.getScreenshot');
 
         // We're only expecting one screenshot back
-        $(window).on("message.getScreenshot", function (e) {
+        $(window).on('message.getScreenshot', function (e) {
             // Only call if the data is actually an image!
             if (/^data:/.test(e.originalEvent.data)) {
                 callback(e.originalEvent.data);
@@ -2417,18 +2430,18 @@ window.LiveEditor = Backbone.View.extend({
     },
 
     _qualifyURL: function _qualifyURL(url) {
-        var a = document.createElement("a");
+        var a = document.createElement('a');
         a.href = url;
         return a.href;
     },
 
     cleanErrors: function cleanErrors(errors) {
         var loopProtectMessages = {
-            "WhileStatement": i18n._("<code>while</code> loop"),
-            "DoWhileStatement": i18n._("<code>do-while</code> loop"),
-            "ForStatement": i18n._("<code>for</code> loop"),
-            "FunctionDeclaration": i18n._("<code>function</code>"),
-            "FunctionExpression": i18n._("<code>function</code>")
+            'WhileStatement': i18n._('<code>while</code> loop'),
+            'DoWhileStatement': i18n._('<code>do-while</code> loop'),
+            'ForStatement': i18n._('<code>for</code> loop'),
+            'FunctionDeclaration': i18n._('<code>function</code>'),
+            'FunctionExpression': i18n._('<code>function</code>')
         };
 
         errors = errors.map((function (error) {
@@ -2444,7 +2457,7 @@ window.LiveEditor = Backbone.View.extend({
             // appropriately sanitized.
             var loopNodeType = error.infiniteLoopNodeType;
             if (loopNodeType) {
-                error.html = i18n._("A %(type)s is taking too long to run. " + "Perhaps you have a mistake in your code?", {
+                error.html = i18n._('A %(type)s is taking too long to run. ' + 'Perhaps you have a mistake in your code?', {
                     type: loopProtectMessages[loopNodeType]
                 });
             }
@@ -2453,12 +2466,12 @@ window.LiveEditor = Backbone.View.extend({
 
             // error.html was cleared above, so if it exists it's because we
             // reset it, and it's safe.
-            if (typeof error === "string") {
+            if (typeof error === 'string') {
                 newError.text = this.clean(this.prettify(error));
             } else if (error.html) {
                 newError.text = this.prettify(error.html);
             } else {
-                newError.text = this.prettify(this.clean(error.text || error.message || ""));
+                newError.text = this.prettify(this.clean(error.text || error.message || ''));
             }
 
             // Coerce anything from the user to the expected types before
@@ -2470,9 +2483,9 @@ window.LiveEditor = Backbone.View.extend({
                 // least only pass through the things we'll actually use.
                 // Also, get a stronger guarantee that none of these
                 // strings ever get used unescaped.
-                var numberProps = ["character", "line"];
-                var stringProps = ["code", "evidence", "id", "raw", "reason", "scope", "type"];
-                var objectProps = ["openTag"];
+                var numberProps = ['character', 'line'];
+                var stringProps = ['code', 'evidence', 'id', 'raw', 'reason', 'scope', 'type'];
+                var objectProps = ['openTag'];
 
                 numberProps.forEach(function (prop) {
                     if (error.lint[prop] != undefined) {
@@ -2526,8 +2539,8 @@ window.LiveEditor = Backbone.View.extend({
 
     // This adds html tags around quoted lines so they can be formatted
     prettify: function prettify(str) {
-        str = str.split("\"");
-        var htmlString = "";
+        str = str.split('"');
+        var htmlString = '';
         for (var i = 0; i < str.length; i++) {
             if (str[i].length === 0) {
                 continue;
@@ -2535,17 +2548,17 @@ window.LiveEditor = Backbone.View.extend({
 
             if (i % 2 === 0) {
                 //regular text
-                htmlString += "<span class=\"text\">" + str[i] + "</span>";
+                htmlString += '<span class="text">' + str[i] + '</span>';
             } else {
                 // text in quotes
-                htmlString += "<span class=\"quote\">" + str[i] + "</span>";
+                htmlString += '<span class="quote">' + str[i] + '</span>';
             }
         }
         return htmlString;
     },
 
     clean: function clean(str) {
-        return String(str).replace(/</g, "&lt;");
+        return String(str).replace(/</g, '&lt;');
     }
 });
 

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="../bower_components/ace-builds/src/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../node_modules/jquery/dist/jquery.js"></script>
+  <script src="../node_modules/gehry/dist/gehry.js"></script>
+  <script src="../node_modules/poster/dist/poster.js"></script>
+  <script src="../node_modules/iframe-overlay/dist/iframe-overlay.js"></script>
+  <script src="../external/object-browser/dist/object-browser.js"></script>
+  <script src="index.js" async></script>
+  <link rel="stylesheet" href="../external/object-browser/dist/object-browser.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div id="wrapper">
+  
+  <div id="header">
+    <div id="select">
+      Select a program to debug: 
+      <select id="programSelect">
+        <option value="paint.js">Paint</option>
+        <option value="keyboard.js">Keyboard</option>
+      </select>
+    </div>
+    <div id="title">
+      <a href="https://github.com/kevinb7/debugger">debugger.js</a>
+    </div>
+  </div>
+
+  <div id="container">
+
+    <div id="editor-container">
+      <div id="editor"></div>
+    </div>
+
+    <div id="side">
+      <iframe width="400" height="400" src="output.html"></iframe>
+
+      <div id="inspector-container">
+
+        <div class="button-menu">
+          <span class="button" id="startButton">Start</span>
+          <span class="button" id="continueButton">Continue</span>
+          <span class="button" id="stepInButton">In</span>
+          <span class="button" id="stepOverButton">Over</span>
+          <span class="button" id="stepOutButton">Out</span>
+        </div>
+        <div id="inspector" class="ace_editor">
+          <div class="column">
+            <div class="section_header">Call Stack</div>
+            <div id="callStack"></div>
+          </div>
+          <div class="column">
+            <div class="section_header">Local Variables</div>
+            <div id="variableList" class="object-browser"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+</body>
+</html>

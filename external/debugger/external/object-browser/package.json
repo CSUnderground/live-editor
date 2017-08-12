@@ -1,0 +1,32 @@
+{
+  "name": "object-browser",
+  "version": "0.0.1",
+  "description": "",
+  "main": "object-browser.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/testee test/runner.html --browsers firefox"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevinb7/object-browser.git"
+  },
+  "author": "Kevin Barabash <kevinb7@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kevinb7/object-browser/issues"
+  },
+  "homepage": "https://github.com/kevinb7/object-browser",
+  "devDependencies": {
+    "JSONPath": "^0.10.0",
+    "eventsim": "git://github.com/kevinb7/eventsim",
+    "expect.js": "^0.3.1",
+    "jquery": "^2.1.1",
+    "mocha": "^2.0.1",
+    "phantomjs": "^1.9.12",
+    "testee": "^0.1.7",
+    "typescript": "^1.3.0"
+  }
+}

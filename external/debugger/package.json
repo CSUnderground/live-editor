@@ -1,0 +1,39 @@
+{
+  "name": "stepper",
+  "version": "0.1.0",
+  "description": "Debug JavaScript using JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/testee test/runner.html --browsers firefox"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevinb7/stepper.git"
+  },
+  "author": "Kevin Barabash <kevinb7@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kevinb7/js-step/issues"
+  },
+  "homepage": "https://github.com/kevinb7/js-step",
+  "devDependencies": {
+    "6to5ify": "^2.0.0",
+    "browserify": "^8.0.1",
+    "expect.js": "^0.3.1",
+    "gehry": "0.1.0",
+    "iframe-overlay": "0.1.1",
+    "jquery": "^2.1.1",
+    "mocha": "^2.0.1",
+    "poster": "git://github.com/kevinb7/poster.git",
+    "testee": "^0.1.7"
+  },
+  "dependencies": {
+    "ast-types": "~0.6.1",
+    "basic-ds": "git://github.com/kevinb7/basic-ds.git",
+    "escodegen": "git://github.com/kevinb7/escodegen.git#yield_with_parentheses",
+    "escope": "^1.0.1",
+    "esprima-fb": "^8001.1001.0-dev-harmony-fb",
+    "estraverse": "^1.9.0",
+    "regenerator": "^0.8.1"
+  }
+}

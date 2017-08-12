@@ -1,0 +1,188 @@
+@import 'nib'
+
+html
+  height: 100%;
+
+body
+  background: white;
+  margin: 0;
+  height: 100%;
+  font-size: 1.0em;
+
+.ace_editor
+  font-size: 1.0em;
+  
+#wrapper
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 20px 50px;
+  
+#container
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+
+#editor-container
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-direction: column;
+
+#editor
+  flex-grow: 1;
+  border: solid 1px gray;
+
+#side
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  margin-left: 5px;
+
+#header
+  margin-bottom: 1em;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  flex-grow: 0;
+  align-items: flex-end;
+  font-family: sans-serif;
+
+#select 
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-shrink: 0;
+
+#title
+  display: flex;
+  flex-direction: row;
+  flex-grow: 0;
+  flex-shrink: 0;
+  font-size: 32pt;
+  font-weight: 900;
+  margin-bottom: -0.2em;
+  
+  a
+    color black
+    text-decoration none
+    
+  a:hover
+    text-decoration underline
+
+.tab
+  background-color: #EEE;
+  flex-shrink: 1;
+  flex-grow: 0;
+  font-family: sans-serif;
+  padding: 4px 10px;
+  border-bottom: solid 1px gray;
+  border-right: solid 1px gray;
+
+canvas
+  background-color: white;
+
+#inspector
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-shrink: 0;
+
+#inspector-container
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 0;
+  border: solid 1px gray;
+  box-sizing: border-box;
+
+.column
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 0;
+  align-items: stretch;
+  border-right: solid 1px gray;
+  width: 50%;
+
+h2
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  font-weight: normal;
+
+.button
+  flex-shrink: 1;
+  flex-grow: 0;
+  font-family: sans-serif;
+  padding: 4px 10px;
+  border-right: solid 1px gray;
+  background-color: lightgray;
+  cursor: pointer;
+  font-size: 1em;
+  padding-top: 6px;
+  color: #333;
+
+.button[disabled]
+  color: #999;
+
+.button-menu
+  display: flex;
+  flex-shrink: 1;
+  flex-grow: 0;
+  flex-direction: row;
+  border-bottom: solid 1px gray;
+  background-color:#BBB;
+
+#variableList
+  list-style-type: none;
+  padding-left:0;
+
+.ace_breakpoint
+  background-color: rgb(0, 128, 255);
+
+.ace_active-line
+  background-color: rgb(179, 217, 255) !important;
+  
+.ace_fold
+  background-color: mediumpurple;
+
+.section_header
+  background-color: #EEE;
+  border-bottom: solid 1px gray;
+  font-family: sans-serif;
+  font-size: 1.0em;
+  font-weight: normal;
+  padding: 5px 10px;
+  padding-bottom: 2px;
+  color: #333;
+  flex-shrink: 0;
+
+#callStack 
+  ul
+    list-style-type: none;
+    margin-top: 2px;
+    padding:0;
+  
+    li
+      padding-left: 16px;
+      padding-right: 16px;
+
+iframe
+  border: solid 1px gray;
+  margin-bottom: 5px;
+  display:block;
+
+.overlay:focus
+  outline: none;
+
+select
+  margin-left: 10px;
+  
+[disabled]
+  .ace_content
+    background-color: rgba(255,255,0,0.25);

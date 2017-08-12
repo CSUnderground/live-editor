@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Live input record and playback</title>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <style type='text/css'>
+    #recordings-list {
+      list-style: none;
+    }
+    #recordings-list button {
+      margin-top: -20px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>Multi-Recorder Example</h1>
+
+  <p>This uses a modified version of RecorderJS to enable recording
+    of multiple files and subsequent combination of them.</p>
+
+  <button id="record-button" class="btn">Record</button>
+
+  <div id="record-status" style="width:200px;"></div>
+
+  <h2>Recordings:</h2>
+  <ul id="recordings-list">
+  </ul>
+
+  <h2>Combined:</h2>
+  <div id="combined-recording"></div>
+
+  </div>
+
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="multirecorder.js"></script>
+  <!--<script src="workerconsole.js"></script>-->
+  <script>
+
+
+  $(document).ready(function() {
+    var multiRecorder = new MultiRecorder();
+    var recordings = [];
+    var combined;
+
+    function addRecordingToList(recording) {
+      recordings.push(recording);
+      var $item = $('<li>');
+      $item.append(recording.createAudioPlayer());
+
+      var $deleteButton = $('<button class="btn">');
+      $deleteButton.text('Delete');
+      $deleteButton.on('click', function() {
+        for (var i = 0; i < recordings.length; i++) {
+          if (recording.wav == recordings[i].wav) {
+            recordings.splice(i, 1);
+          }
+        }
+        $item.remove();
+        updateCombined();
+      });
+      $item.append($deleteButton);
+
+      $('#recordings-list').append($item);
+
+      updateCombined();
+    }
+
+    function updateCombined() {
+      multiRecorder.combineRecordings(recordings)
+        .done(function(recording) {
+          $('#combined-recording').html(recording.createAudioPlayer());
+          $('#combined-recording').append(recording.createDownloadLink());
+          combined = recording;
+        });
+    }
+
+    function updateStatus(message) {
+      $('#record-button').html(message);
+    }
+
+    $('#record-button').on('click', function() {
+      if (!multiRecorder.isRecording()) {
+        multiRecorder.startRecording(3)
+          .progress(function(seconds) {
+            updateStatus(seconds + '...');
+          })
+          .done(function() {
+            updateStatus('Recording! (Click to Stop)');
+          })
+          .fail(function(error) {
+            alert(error);
+          });
+      } else {
+        multiRecorder.stopRecording()
+          .done(function(recording) {
+            addRecordingToList(recording);
+            updateStatus('Start Recording');
+          });
+      }
+    });
+
+  });
+
+  </script>
+</body>
+</html>

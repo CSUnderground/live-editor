@@ -1,0 +1,42 @@
+.object-browser .label {
+    color: rgb(200,0,200);
+}
+
+.object-browser .read-only {
+    color: rgb(220,160,220);
+}
+
+.object-browser .number, .object-browser .boolean {
+    color: rgb(0,0,255);
+}
+
+.object-browser .string {
+    color: rgb(255,0,0);
+}
+
+.object-browser .undefined {
+    color: #999;
+}
+
+.object-browser .null {
+    color: #999;
+}
+
+.object-browser .triangle {
+    position:absolute;
+    width:1.5em;
+    left:-1.5em;
+    top:0.25em;
+    text-align:center;
+    font-size:0.75em;
+    color: #666;
+    cursor: pointer;
+}
+
+.object-browser ul {
+    margin: 0;
+    list-style-type: none;
+    font-family: 'monaco', 'lucida console', monospace;
+    font-size: 12px;
+    padding-left: 16px;
+}

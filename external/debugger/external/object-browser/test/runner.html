@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css"/>
+    <link rel="stylesheet" href="../dist/object-browser.css"/>
+</head>
+<body>
+<div id="mocha"></div>
+<script src="../dist/object-browser.js"></script>
+<script src="../node_modules/mocha/mocha.js"></script>
+<script src="../node_modules/expect.js/index.js"></script>
+<script>mocha.setup('bdd')</script>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="../node_modules/eventsim/dist/eventsim.js"></script>
+<script src="object-browser-spec.js"></script>
+</body>
+</html>
+<script>
+
+    window.onload = function () {
+        mocha.run();
+    };
+
+</script>

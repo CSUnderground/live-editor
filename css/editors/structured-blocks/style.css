@@ -1,0 +1,111 @@
+.block-editor {
+    margin-right: 218px;
+}
+
+.block-toolbox {
+    display: table;
+    position: absolute;
+    top: 0;
+    right: -300px;
+    padding-right: 300px;
+    background: #93C263;
+    height: 100%;
+}
+
+.block-toolbox .toolbox-group {
+    display: table-cell;
+}
+
+.block-toolbox .block-trash .text-out {
+    color: #FFF;
+    font-size: 24px;
+    font-family: Helvetica;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* CSS Trash icon from: http://codepen.io/gab/pen/qLmDg */
+
+.block-toolbox .block-trash .trash-icon {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 10px auto;
+}
+
+.block-toolbox .block-trash.over .trash-icon .lid,
+.block-toolbox .block-trash.over .trash-icon .lidcap {
+    transform: rotate(10deg);
+    margin-bottom: 10.5px;
+}
+
+.block-toolbox .block-trash .lidcap,
+.block-toolbox .block-trash .lid,
+.block-toolbox .block-trash .bin {
+    position: absolute;
+}
+
+.block-toolbox .block-trash .lidcap,
+.block-toolbox .block-trash .lid {
+    border-top-left-radius: 2.8px;
+    border-top-right-radius: 2.8px;
+    background: #FFF;
+    transition: transform .2s linear, margin .2s linear;
+}
+
+.block-toolbox .block-trash .lidcap {
+    bottom: 96.6px;
+    left: 63.0px;
+    height: 7px;
+    width: 14px;
+}
+
+.block-toolbox .block-trash .lid {
+    bottom: 84px;
+    left: 21px;
+    width: 98px;
+    height: 14px;
+}
+
+.block-toolbox .block-trash .bin {
+    bottom: 0;
+    left: 28px;
+    width: 70px;
+    border-top: 84px solid #FFF;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+}
+
+.empty-help {
+    background: rgba(0, 0, 0, 0.5);
+    color: #FFF;
+    position: absolute;
+    top: 100px;
+    left: 20px;
+    right: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 215px;
+    font-family: Helvetica;
+    font-size: 20px;
+    opacity: 1;
+    transition: opacity .3s linear;
+}
+
+.empty-help.help-hidden {
+    opacity: 0;
+}
+
+.empty-help span {
+    display: block;
+}
+
+.empty-help span:first-child {
+    text-align: right;
+}
+
+.empty-help span strong {
+    font-size: 1.2em;
+}

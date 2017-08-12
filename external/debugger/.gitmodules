@@ -1,0 +1,9 @@
+[submodule "external/object-browser"]
+	path = external/object-browser
+	url = https://github.com/kevinb7/object-browser.git
+[submodule "external/scheduler"]
+	path = external/scheduler
+	url = https://github.com/kevinb7/scheduler.git
+[submodule "external/processing-js"]
+	path = external/processing-js
+	url = https://github.com/kevinb7/processing-js.git

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css"/>
+</head>
+<body>
+<div id="mocha"></div>
+<script src="../node_modules/mocha/mocha.js"></script>
+<script src="../node_modules/expect.js/index.js"></script>
+<script src="../dist/scheduler.js"></script>
+<script src="task.js"></script>
+<script>mocha.setup('bdd')</script>
+</body>
+</html>
+<script src="scheduler-spec.js"></script>
+<script>
+
+    window.onload = function () {
+        if (window.mochaPhantomJS) {
+            mochaPhantomJS.run();
+        } else {
+            mocha.run();
+        }
+    };
+
+</script>

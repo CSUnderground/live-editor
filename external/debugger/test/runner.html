@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css"/>
+</head>
+<body>
+<div id="mocha"></div>
+<!-- build files -->
+<script src="../build/debugger.js"></script>
+<script src="../build/processing-debugger.js"></script>
+<!-- test dependencies -->
+<script src="../node_modules/mocha/mocha.js"></script>
+<script src="../node_modules/expect.js/index.js"></script>
+<script src="test_utils.js"></script>
+<script src="sinon.js"></script>
+<script>mocha.setup('bdd')</script>
+</body>
+</html>
+<script src="debugger-spec.js"></script>
+<script src="processing-debugger-spec.js"></script>
+<script src="array-spec.js"></script>
+<script>
+
+  window.onload = function () {
+    mocha.run();
+  };
+
+</script>

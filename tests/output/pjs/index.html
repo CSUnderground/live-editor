@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var iframe = document.createElement('iframe');
+    iframe.setAttribute('width', 800);
+    iframe.setAttribute('height', 600);
+    
+    if (location.search) {
+        iframe.setAttribute('src', 'iframe.html' + location.search);
+    } else {
+        iframe.setAttribute('src', 'iframe.html');
+    }
+ 
+    document.body.appendChild(iframe);
+</script>
+</body>
+</html>

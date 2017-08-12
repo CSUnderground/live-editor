@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    textarea {
+      font-family: 'monaco', 'lucida console', monospace;
+      font-size: 12pt;
+      width: 350px;
+      height: 200px;
+    }
+
+    #container {
+      display: flex;
+      flex-direction: row;
+    }
+  </style>
+  <link rel="stylesheet" href="../dist/object-browser.css"/>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../dist/object-browser.js"></script>
+</head>
+<body>
+
+<button id="update">Update</button>
+
+<div id="container">
+  <div id="browser" class="object-browser"></div>
+</div>
+
+</body>
+</html>
+<script>
+
+  var a = {};
+  var b = {};
+  a.b = b;
+  b.a = a;
+
+  var obj = {
+    x: 5,
+    y: 10,
+    z: undefined,
+    items: ["apple", "pineapple", [1,2,3]],
+    sub: {
+      p: 1,
+      q: -1
+    },
+    message: "hello, world",
+    on: false,
+    a: a,
+    c: null
+  };
+
+  var $container = $("#browser");
+  var browser = new ObjectBrowser(document.getElementById("browser"));
+
+  browser.object = obj;
+
+  document.querySelector("#update").addEventListener("click", function () {
+    browser.object = obj;
+  });
+
+</script>

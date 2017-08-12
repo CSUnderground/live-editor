@@ -1,0 +1,29 @@
+{
+  "name": "scheduler",
+  "version": "0.0.3",
+  "description": "Schedule and run \"reentrant\" tasks in JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha-phantomjs ./test/runner.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevinb7/scheduler.git"
+  },
+  "author": "kevinb7",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kevinb7/scheduler/issues"
+  },
+  "homepage": "https://github.com/kevinb7/scheduler",
+  "dependencies": {
+    "basic-ds": "git://github.com/kevinb7/basic-ds.git"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^2.0.1",
+    "mocha-phantomjs": "^3.5.1",
+    "phantomjs": "^1.9.12",
+    "tsbuild": "git://github.com/kevinb7/tsbuild"
+  }
+}

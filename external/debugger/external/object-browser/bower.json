@@ -1,0 +1,19 @@
+{
+  "name": "object-browser",
+  "version": "0.0.1",
+  "authors": [
+    "Kevin Barabash <kevinb7@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "observe-js": "~0.5.1",
+    "jquery": "~2.1.1"
+  }
+}

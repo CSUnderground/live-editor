@@ -1,4 +1,4 @@
-# Live Code Editor (unofficial)
+# Live Code Editor (unofficial fork)
 
 This is the live coding environment developed for the [Khan Academy Computer Programming curriculum](https://www.khanacademy.org/computer-programming/). It gives learners an editor on the left (either ACE or our Blocks-based drag-and-drop editor) and an output on the right (either JS+ProcessingJS, HTML, or SQL).
 Here's a [tour of how it's used on KA](https://www.youtube.com/watch?v=bPCWwEApKw4).

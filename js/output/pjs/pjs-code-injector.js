@@ -171,7 +171,8 @@ class PJSCodeInjector {
             },
             exposed: {
                 "huskyOverriden":true,
-                document: document
+                document: document,
+                window: window
             }
         });
 

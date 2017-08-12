@@ -5,7 +5,7 @@ Here's a [tour of how it's used on KA](https://www.youtube.com/watch?v=bPCWwEApK
 
 The demos will work and should be up to date in this repo. Simply download the repo and start a python http server as described below.
 
-Otherwise, you can use [this](https://khan.github.io/live-editor/demos/simple/).
+Otherwise, you can use [this](https://codehusky.github.io/live-editor/demos/simple/).
 
 ## Running
 

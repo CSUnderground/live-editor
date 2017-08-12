@@ -270,11 +270,17 @@ ASTTransforms.findResources = function(resources) {
 
                 AllImages.forEach(group => {
                     group.images.forEach(image => {
-                        if (node.value.indexOf(image) !== -1) {
+                        if (node.value.toLowerCase() == (group.groupName.toLowerCase() + "/" + image.toLowerCase())) {
                             resources[`${group.groupName}/${image}.png`] = true;
                         }
                     });
                 });
+                if(node.value.indexOf("http") == 0){
+                    if(node.value.toLowerCase().indexOf(".png") > -1 || node.value.toLowerCase().indexOf(".jpg") > -1){
+                        resources[node.value] = true;
+                        console.log(node.value);
+                    }
+                }
 
                 OutputSounds.forEach(cls => {
                     cls.groups.forEach(group => {

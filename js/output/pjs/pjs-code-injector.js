@@ -1074,8 +1074,11 @@ class PJSCodeInjector {
                     img.onerror = function() {
                         deferred.resolve(); // always resolve
                     }.bind(this);
-
-                    img.src = imageDir + filename;
+                    if(filename.indexOf("http") == 0){
+                        img.src = filename;
+                    }else{
+                        img.src = imageDir + filename;
+                    }
                     imageHolder.appendChild(img);
                     resourceCache[filename] = img;
 
@@ -1108,7 +1111,7 @@ class PJSCodeInjector {
                 };
 
                 var promises = Object.keys(resources).map(function(filename) {
-                    if (filename.indexOf(".png") !== -1) {
+                    if (filename.indexOf(".png") !== -1 || filename.indexOf(".jpg") !== -1) {
                         return loadImage(filename);
                     } else if (filename.indexOf(".mp3") !== -1) {
                         return loadSound(filename);

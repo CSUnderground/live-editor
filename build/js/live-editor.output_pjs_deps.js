@@ -87820,11 +87820,17 @@ ASTTransforms.findResources = function (resources) {
 
                 AllImages.forEach(function (group) {
                     group.images.forEach(function (image) {
-                        if (node.value.indexOf(image) !== -1) {
+                        if (node.value.toLowerCase() == group.groupName.toLowerCase() + "/" + image.toLowerCase()) {
                             resources[group.groupName + "/" + image + ".png"] = true;
                         }
                     });
                 });
+                if (node.value.indexOf("http") == 0) {
+                    if (node.value.toLowerCase().indexOf(".png") > -1 || node.value.toLowerCase().indexOf(".jpg") > -1) {
+                        resources[node.value] = true;
+                        console.log(node.value);
+                    }
+                }
 
                 OutputSounds.forEach(function (cls) {
                     cls.groups.forEach(function (group) {

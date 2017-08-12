@@ -37,7 +37,7 @@ PJSResourceCache.prototype.cacheResources = function(resources) {
 };
 
 PJSResourceCache.prototype.loadResource = function(filename) {
-    if (filename.endsWith(".png")) {
+    if (filename.endsWith(".png") || filename.endsWith(".jpg")) {
         return this.loadImage(filename);
     } else if (filename.endsWith(".mp3")) {
         return this.loadSound(filename);
@@ -56,8 +56,11 @@ PJSResourceCache.prototype.loadImage = function(filename) {
     img.onerror = function() {
         deferred.resolve(); // always resolve
     }.bind(this);
-
-    img.src = path;
+    if(filename.indexOf("http") == 0){
+        img.src = filename;
+    }else{
+        img.src = path;
+    }
     this.imageHolder.append(img);
 
     return deferred;
@@ -109,8 +112,11 @@ PJSResourceCache.prototype.getImage = function(filename) {
     var image = this.cache[filename + ".png"];
 
     if (!image) {
-        throw {message:
-            i18n._("Image '%(file)s' was not found.", {file: filename})};
+        image = this.cache[filename];
+        if(!image){
+            throw {message:
+                i18n._("Image '%(file)s' was not found.", {file: filename})};
+        }
     }
 
     // cache <img> instead of PImage until we investigate how caching

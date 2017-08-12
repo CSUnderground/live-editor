@@ -5,6 +5,8 @@ Here's a [tour of how it's used on KA](https://www.youtube.com/watch?v=bPCWwEApK
 
 The demos will work and should be up to date in this repo. Simply download the repo and start a python http server as described below.
 
+Otherwise, you can use [this](khan.github.io/live-editor/demos/simple/).
+
 ## Running
 
 In order to run `live-editor` locally you'll have run a local web server.  If you have Python 2.x.x installed this can be accomplished by running the following command from the `live-editor` folder:

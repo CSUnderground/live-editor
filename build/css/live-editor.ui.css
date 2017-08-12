@@ -117,6 +117,7 @@
     color: black;
     float: right;
     text-shadow: 0 1px 0 #CDCDCD;
+    font-size:17px;
 }
 .tipbar .text a {
     text-decoration: underline;
@@ -469,4 +470,11 @@ button.hilite {
 .restartIcon {
     margin-bottom: -2px;
     margin-right: -1px;
+}
+
+.error-buddy-hmm {
+    font-family:"Proxima Nova", Helvetica, Corbel, sans-serif;
+    text-decoration:none;
+    font-size:15px;
+    color:black;
 }

@@ -304,3 +304,10 @@ button.hilite {
     margin-bottom: -2px;
     margin-right: -1px;
 }
+
+.error-buddy-hmm {
+    font-family:"Proxima Nova", Helvetica, Corbel, sans-serif;
+    text-decoration:none;
+    font-size:15px;
+    color:black;
+}

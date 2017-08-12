@@ -343,20 +343,22 @@ var BabyHint = {
     checkBannedProperties: function(line, lineNumber) {
         var errors = [];
         var words = line.split(/[^~`@#\$\^\w]/g);
-        _.each(words, function(word) {
-            if (BabyHint.bannedProperties.hasOwnProperty(word)) {
-                var error = {
-                    row: lineNumber,
-                    column: line.indexOf(word),
-                    text: i18n._("%(word)s is a reserved word.", {word: word}),
-                    breaksCode: true,
-                    source: "bannedwords",
-                    context: {word: word}
-                };
+        if(window.security){
+            _.each(words, function(word) {
+                if (BabyHint.bannedProperties.hasOwnProperty(word)) {
+                    var error = {
+                        row: lineNumber,
+                        column: line.indexOf(word),
+                        text: i18n._("%(word)s is a reserved word.", {word: word}),
+                        breaksCode: true,
+                        source: "bannedwords",
+                        context: {word: word}
+                    };
 
-                errors.push(error);
-            }
-        });
+                    errors.push(error);
+                }
+            });
+        }
         return errors;
     },
 

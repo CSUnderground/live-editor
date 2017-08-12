@@ -205,7 +205,10 @@ var PJSCodeInjector = (function () {
                 debug: function debug() {
                     console.log.apply(console, arguments);
                 },
-                window: window
+                exposed: {
+                    "huskyOverriden": true,
+                    document: document
+                }
             });
 
             Object.assign(this.processing, additionalMethods);
@@ -1215,15 +1218,16 @@ var PJSCodeInjector = (function () {
             // the top-level 'this' is empty except for this.externals, which
             // throws this message this is how users were getting at everything
             // from playing sounds to displaying pop-ups
-            var badProgram = i18n._("This program uses capabilities we've turned " + "off for security reasons. Khan Academy prohibits showing " + "external images, playing external sounds, or displaying pop-ups.");
-            var topLevelThis = "{ get externals() { throw { message: " + JSON.stringify(badProgram) + " } } }";
+            /*let badProgram = i18n._("This error should not fire.");
+            let topLevelThis = "{ get externals() { throw { message: " +
+                JSON.stringify(badProgram) + " } } }";*/
 
             try {
                 if (this["debugger"]) {
                     this["debugger"].exec(code);
                 } else {
                     var transformedCode = this.transformCode(code, context, mutatingCalls);
-                    var funcBody = "var " + this.envName + " = context;\n" + ("(function(){\n" + transformedCode + "\n}).apply(" + topLevelThis + ");");
+                    var funcBody = "var " + this.envName + " = context;\n" + ("(function(){\n" + transformedCode + "\n})();");
                     var func = new Function("context", funcBody);
                     func(context);
                 }
@@ -1973,20 +1977,22 @@ var BabyHint = {
     checkBannedProperties: function checkBannedProperties(line, lineNumber) {
         var errors = [];
         var words = line.split(/[^~`@#\$\^\w]/g);
-        _.each(words, function (word) {
-            if (BabyHint.bannedProperties.hasOwnProperty(word)) {
-                var error = {
-                    row: lineNumber,
-                    column: line.indexOf(word),
-                    text: i18n._("%(word)s is a reserved word.", { word: word }),
-                    breaksCode: true,
-                    source: "bannedwords",
-                    context: { word: word }
-                };
+        if (window.security) {
+            _.each(words, function (word) {
+                if (BabyHint.bannedProperties.hasOwnProperty(word)) {
+                    var error = {
+                        row: lineNumber,
+                        column: line.indexOf(word),
+                        text: i18n._("%(word)s is a reserved word.", { word: word }),
+                        breaksCode: true,
+                        source: "bannedwords",
+                        context: { word: word }
+                    };
 
-                errors.push(error);
-            }
-        });
+                    errors.push(error);
+                }
+            });
+        }
         return errors;
     },
 
@@ -2483,12 +2489,6 @@ window.PJSOutput = Backbone.View.extend({
     // Canvas mouse events to track
     // Tracking: mousemove, mouseover, mouseout, mousedown, and mouseup
     trackedMouseEvents: ["move", "over", "out", "down", "up"],
-
-    // Banned Properties
-    // Prevent certain properties from being exposed
-    bannedProps: {
-        externals: true
-    },
 
     initialize: function initialize(options) {
         // Handle recording playback

@@ -1222,7 +1222,6 @@ window.LiveEditor = Backbone.View.extend({
         this.config.on("versionSwitched", (function (e, version) {
             // Re-run the code after a version switch
             this.markDirty();
-
             // Run the JSHint config
             this.config.runVersion(version, "jshint");
         }).bind(this));
@@ -1928,7 +1927,6 @@ window.LiveEditor = Backbone.View.extend({
         // arbitrary HTML to the user outside the iframe.
         var event = e.originalEvent;
         var data;
-
         try {
             data = JSON.parse(event.data);
         } catch (err) {}

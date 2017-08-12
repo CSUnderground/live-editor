@@ -3,12 +3,6 @@ window.PJSOutput = Backbone.View.extend({
     // Tracking: mousemove, mouseover, mouseout, mousedown, and mouseup
     trackedMouseEvents: ["move", "over", "out", "down", "up"],
 
-    // Banned Properties
-    // Prevent certain properties from being exposed
-    bannedProps: {
-        externals: true
-    },
-
     initialize: function(options) {
         // Handle recording playback
         this.handlers = {};

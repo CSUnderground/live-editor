@@ -169,7 +169,10 @@ class PJSCodeInjector {
             debug: (...args) => {
                 console.log(...args);
             },
-            window: window
+            exposed: {
+                "huskyOverriden":true,
+                document: document
+            }
         });
 
         Object.assign(this.processing, additionalMethods);
@@ -1172,11 +1175,9 @@ class PJSCodeInjector {
         // the top-level 'this' is empty except for this.externals, which
         // throws this message this is how users were getting at everything
         // from playing sounds to displaying pop-ups
-        let badProgram = i18n._("This program uses capabilities we've turned " +
-            "off for security reasons. Khan Academy prohibits showing " +
-            "external images, playing external sounds, or displaying pop-ups.");
+        /*let badProgram = i18n._("This error should not fire.");
         let topLevelThis = "{ get externals() { throw { message: " +
-            JSON.stringify(badProgram) + " } } }";
+            JSON.stringify(badProgram) + " } } }";*/
 
         try {
             if (this.debugger) {
@@ -1185,7 +1186,7 @@ class PJSCodeInjector {
                 let transformedCode =
                     this.transformCode(code, context, mutatingCalls);
                 let funcBody = `var ${this.envName} = context;\n` +
-                    `(function(){\n${transformedCode}\n}).apply(${topLevelThis});`;
+                    `(function(){\n${transformedCode}\n})();`;
                 let func = new Function("context", funcBody);
                 func(context);
             }

@@ -87828,7 +87828,6 @@ ASTTransforms.findResources = function (resources) {
                 if (node.value.indexOf("http") == 0) {
                     if (node.value.toLowerCase().indexOf(".png") > -1 || node.value.toLowerCase().indexOf(".jpg") > -1) {
                         resources[node.value] = true;
-                        console.log(node.value);
                     }
                 }
 

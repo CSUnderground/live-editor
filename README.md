@@ -3,15 +3,17 @@
 This is the live coding environment developed for the [Khan Academy Computer Programming curriculum](https://www.khanacademy.org/computer-programming/). It gives learners an editor on the left (either ACE or our Blocks-based drag-and-drop editor) and an output on the right (either JS+ProcessingJS, HTML, or SQL).
 Here's a [tour of how it's used on KA](https://www.youtube.com/watch?v=bPCWwEApKw4).
 
-You can find various demos in the `demos/` directory, and start playing immediately with the simple demo:
-
-* [http://khan.github.io/live-editor/demos/simple/](http://khan.github.io/live-editor/demos/simple/)
+The demos will work and should be up to date in this repo. Simply download the repo and start a python http server as described below.
 
 ## Running
 
-In order to run `live-editor` locally you'll have run a local web server.  If you have python installed this can be accomplished by running the following command from the `live-editor` folder:
+In order to run `live-editor` locally you'll have run a local web server.  If you have Python 2.x.x installed this can be accomplished by running the following command from the `live-editor` folder:
 
     python -m SimpleHTTPServer
+    
+Or, with Python 3.x.x
+
+    python -m http.server
 
 You should see the following console output:
 

@@ -190,9 +190,10 @@ window.LiveEditorOutput = Backbone.View.extend({
     postParent: function(data) {
         // If there is no frameSource (e.g. we're not embedded in another page)
         // Then we don't need to care about sending the messages anywhere!
+        var dat = typeof data === "string" ? data : JSON.stringify(data);
         if (this.frameSource) {
-            this.frameSource.postMessage(
-                typeof data === "string" ? data : JSON.stringify(data),
+            parent.postMessage(
+                dat,
                 this.frameOrigin);
         }
     },

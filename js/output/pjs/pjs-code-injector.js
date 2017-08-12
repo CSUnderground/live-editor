@@ -1022,7 +1022,6 @@ class PJSCodeInjector {
                 return `${envName}.${call}`;
             }).join("\n");
         }
-        console.log(code + escodegen.generate(ast))
         return code + escodegen.generate(ast);
     }
 

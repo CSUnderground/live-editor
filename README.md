@@ -40,6 +40,8 @@ At this point you can make a fresh build, using [Gulp](http://gulpjs.com/):
 
 If you have an issue with "this.merge" is undefined, then `rm -rf node_modules/gulp-handlebars/node_modules/handlebars`.
 
+Please do **not** delete the build folder. It contains some external libraries and images which are irritating to redownload.
+
 This issue also occurs if you do something wrong during the setup process.
 
 ## Testing

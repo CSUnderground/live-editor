@@ -379,6 +379,9 @@
     height: 400px;
     border: 1px solid #D4CCB0;
 }
+#output-frame {
+    border-left:none;
+}
 
 .scratchpad-draw-canvas,
 #output-frame {
@@ -429,4 +432,14 @@ button {
 
 button.hilite {
     box-shadow: 0 0 20px green;
+}
+.editor-toolbar {
+    border: 1px solid #d4ccb0;
+    border-top: none;
+    margin-top: 0px !important;
+    height: 43px;
+}
+.editor-toolbar .error-buddy-resting {
+    margin-left: 4px;
+    margin-top: 4px;
 }

@@ -205,9 +205,6 @@ var PJSCodeInjector = (function () {
                 debug: function debug() {
                     console.log.apply(console, arguments);
                 },
-                externals: function externals() {
-                    return 10;
-                },
                 exposed: {
                     "huskyOverriden": true,
                     document: document,

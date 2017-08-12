@@ -233,6 +233,7 @@ window.LiveEditor = Backbone.View.extend({
 
         this.bind();
         this.setupAudio();
+
     },
 
     render: function() {
@@ -1456,7 +1457,7 @@ window.LiveEditor = Backbone.View.extend({
     updateCanvasSize: function(width, height) {
         width = width || this.defaultOutputWidth;
         height = height || this.defaultOutputHeight;
-
+        $(".scratchpad-wrap .scratchpad-editor-wrap").css("margin-right",width.toString() + "px")
         this.$el.find(this.dom.CANVAS_WRAP).width(width);
         this.$el.find(this.dom.ALL_OUTPUT).height(height);
 

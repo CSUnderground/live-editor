@@ -20,39 +20,6 @@
                 <span class="hide-text">{{#_}}Loading...{{/_}}</span>
             </div>
         </div>
-
-        <div class="scratchpad-toolbar">
-            <div class="error-buddy-resting">
-                <div class="error-buddy-happy" style="display:none;">
-                    <img src="{{imagesDir}}/creatures/OhNoes-Happy.png"/>
-                </div>
-                <a class="error-buddy-thinking" style="display:none;" href="javascript:void()">
-                    <img src="{{imagesDir}}/creatures/OhNoes-Hmm.png"/>
-                    {{! I18N: The CS error buddy is thinking there might be an error in your code and is waiting for you to fix it !}}
-                    {{#_}}Hmm...{{/_}}
-                </a>
-            </div>
-            <button id="restart-code"
-                class="simple-button pull-right">
-                <span class="icon-refresh"></span>
-                {{#_}}Restart{{/_}}</button>
-
-            <!-- Widgets for selecting colors to doodle on the canvas during
-                recordings -->
-            <div id="draw-widgets" style="display:none;">
-                <a href="" id="draw-clear-button" class="ui-button">
-                    <span class="ui-icon-cancel"></span>
-                </a>
-                {{#each colors}}
-                <a href="" class="draw-color-button" id="{{this}}">
-                    <span></span>
-                </a>
-                {{/each}}
-            </div>
-
-            <!-- Record button -->
-            <button id="record" class="simple-button pull-left" style="display:none;">{{#_}}Record{{/_}}</button>
-        </div>
     </div>
 
     <!-- Editor -->
@@ -79,6 +46,38 @@
                 <span class="hide-text">{{#_}}Play{{/_}}</span>
             </button>
           </div>
+          <div class="scratchpad-toolbar editor-toolbar">
+                <div class="error-buddy-resting">
+                    <div class="error-buddy-happy" style="display:none;">
+                        <img src="{{imagesDir}}/creatures/OhNoes-Happy.png"/>
+                    </div>
+                    <a class="error-buddy-thinking" style="display:none;" href="javascript:void()">
+                        <img src="{{imagesDir}}/creatures/OhNoes-Hmm.png"/>
+                        {{! I18N: The CS error buddy is thinking there might be an error in your code and is waiting for you to fix it !}}
+                        <span class="error-buddy-hmm">{{#_}}Hmm...{{/_}}</span>
+                    </a>
+                </div>
+                <button id="restart-code"
+                    class="simple-button pull-right">
+                    <span class="icon-refresh"></span>
+                    {{#_}}Restart{{/_}}</button>
+
+                <!-- Widgets for selecting colors to doodle on the canvas during
+                    recordings -->
+                <div id="draw-widgets" style="display:none;">
+                    <a href="" id="draw-clear-button" class="ui-button">
+                        <span class="ui-icon-cancel"></span>
+                    </a>
+                    {{#each colors}}
+                    <a href="" class="draw-color-button" id="{{this}}">
+                        <span></span>
+                    </a>
+                    {{/each}}
+                </div>
+
+                <!-- Record button -->
+                <button id="record" class="simple-button pull-left" style="display:none;">{{#_}}Record{{/_}}</button>
+            </div>
         </div>
 
         <div class="scratchpad-toolbar">

@@ -1476,7 +1476,7 @@ window.LiveEditor = Backbone.View.extend({
         this.$el.find(this.dom.ALL_OUTPUT).height(height);
 
         // Set the editor height to be the same as the canvas height
-        this.$el.find(this.dom.EDITOR).height(this.editorHeight || height);
+        this.$el.find(this.dom.EDITOR).height($(".scratchpad-canvas-wrap").height() - 46);
 
         this.trigger("canvasSizeUpdated", {
             width: width,

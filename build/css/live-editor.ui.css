@@ -188,8 +188,8 @@
 
 .scratchpad-wrap .scratchpad-canvas-wrap  #output {
     overflow: hidden;
-    min-width: 402px;
-    min-height: 402px;
+    /*min-width: 402px;
+    min-height: 402px;*/
     border-bottom:1px solid #d4ccb0;
 }
 

@@ -1471,6 +1471,7 @@ window.LiveEditor = Backbone.View.extend({
         width = width || this.defaultOutputWidth;
         height = height || this.defaultOutputHeight;
         $(".scratchpad-wrap .scratchpad-editor-wrap").css("margin-right",width.toString() + "px")
+        $(".tipbar").css("width",(width - 140) +"px")
         this.$el.find(this.dom.CANVAS_WRAP).width(width);
         this.$el.find(this.dom.ALL_OUTPUT).height(height);
 

@@ -1469,14 +1469,17 @@ window.LiveEditor = Backbone.View.extend({
 
     updateCanvasSize: function(width, height) {
         width = width || this.defaultOutputWidth;
+        this.canvasWidth = width;
         height = height || this.defaultOutputHeight;
+        this.canvasHeight = height;
         $(".scratchpad-wrap .scratchpad-editor-wrap").css("margin-right",width.toString() + "px")
+        $(".scratchpad-wrap").css("min-height",(height+41).toString() + "px")
         $(".tipbar").css("width",(width - 140) +"px")
         this.$el.find(this.dom.CANVAS_WRAP).width(width);
         this.$el.find(this.dom.ALL_OUTPUT).height(height);
 
         // Set the editor height to be the same as the canvas height
-        this.$el.find(this.dom.EDITOR).height($(".scratchpad-canvas-wrap").height() - 46);
+        this.$el.find(this.dom.EDITOR).height($(".scratchpad-canvas-wrap").height() - 46 - 8);
 
         this.trigger("canvasSizeUpdated", {
             width: width,
@@ -1489,8 +1492,8 @@ window.LiveEditor = Backbone.View.extend({
         // own screenshot (so we just use the text in the editor)
         if (!this.hasFrame()) {
             var canvas = document.createElement("canvas");
-            canvas.width = 200;
-            canvas.height = 200;
+            canvas.width = this.canvasWidth / 2;
+            canvas.height = this.canvasHeight / 2;
             var ctx = canvas.getContext("2d");
 
             // Default sizing, we also use a 5px margin

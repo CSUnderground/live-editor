@@ -247,10 +247,19 @@ window.PJSOutput = Backbone.View.extend({
         // We want to resize the image to a thumbnail,
         // which we can do by creating a temporary canvas
         var tmpCanvas = document.createElement("canvas");
-        tmpCanvas.width = screenshotSize;
-        tmpCanvas.height = screenshotSize;
+        var $window = $(window);
+        var width = $window.width();
+        var height = $window.height();
+        var factor;
+        if(width > height){
+            factor = 216/width;
+        }else{
+            factor = 216/height;
+        }
+        tmpCanvas.width = Math.round(width*factor);
+        tmpCanvas.height = Math.round(height*factor);
         tmpCanvas.getContext("2d").drawImage(
-            this.$canvas[0], 0, 0, screenshotSize, screenshotSize);
+            this.$canvas[0], 0, 0, tmpCanvas.width, tmpCanvas.height);
 
         // Send back the screenshot data
         callback(tmpCanvas.toDataURL("image/png"));

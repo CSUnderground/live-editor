@@ -205,7 +205,9 @@
     margin-right: @row-spacing;
     position: relative;
 }
-
+.scratchpad-editor-tabs, .scratchpad-canvas-wrap {
+    background-color:white;
+}
 .scratchpad-wrap .scratchpad-editor-wrap .scratchpad-editor-tabs-links {
     overflow: hidden;
 }
@@ -272,7 +274,6 @@
 .scratchpad-ace-editor {
     background: #FFF;
     position: relative;
-    min-width: 400px;
     z-index: 2;
 }
 
@@ -441,11 +442,10 @@ button.hilite {
     border: 1px solid #d4ccb0;
     border-top: none;
     margin-top: 0px !important;
-    height: 43px;
+    height: 51px;
 }
 .editor-toolbar .error-buddy-resting {
-    /*margin-left: 4px;
-    margin-top: 4px;*/
+    margin-left:4px;
 }
 .editor-toolbar .simple-button {
     background:none;
@@ -466,13 +466,13 @@ button.hilite {
     position:relative !important;
 }
 .vam-trick {
-    height:42px;
+    height:50px;
     width:0px;
     display:inline-block;
 }
 .restartIcon {
     margin-bottom: -2px;
-    margin-right: -1px;
+    margin-right: 4px;
 }
 
 .error-buddy-hmm {

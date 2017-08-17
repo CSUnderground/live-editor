@@ -546,8 +546,6 @@ var PJSCodeInjector = (function () {
                     _this4.injectCode(userCode, callback);
                 });
             } catch (e) {
-                console.log(e);
-
                 var _e$message$split = e.message.split(":");
 
                 var _e$message$split2 = _slicedToArray(_e$message$split, 2);
@@ -995,7 +993,10 @@ var PJSCodeInjector = (function () {
             var enableLoopProtect = this.enableLoopProtect;
             var loopProtector = this.loopProtector;
 
-            var rewriteNewExpression = false;
+            var rewriteNewExpression = true;
+            if (options.hasOwnProperty("rewriteNewExpression")) {
+                rewriteNewExpression = options.rewriteNewExpression;
+            }
 
             context.KAInfiniteLoopProtect = this.loopProtector.KAInfiniteLoopProtect;
             context.KAInfiniteLoopSetTimeout = this.loopProtector.KAInfiniteLoopSetTimeout;
@@ -1867,7 +1868,7 @@ var BabyHint = {
             // we don't allow ending lines with "="
             .concat(BabyHint.checkTrailingEquals(line, lineNumber))
             // check for correct number of parameters
-            //.concat(BabyHint.checkFunctionParams(line, lineNumber))
+            .concat(BabyHint.checkFunctionParams(line, lineNumber))
             // check for banned property names
             .concat(BabyHint.checkBannedProperties(line, lineNumber));
 
@@ -2320,18 +2321,15 @@ var BabyHint = {
                 }
 
                 if (text) {
-                    var functionForm = BabyHint.functionFormSuggestion[functionName];
-                    if (!functionForm) {
-                        var error = {
-                            row: lineNumber,
-                            column: index,
-                            text: text,
-                            breaksCode: true,
-                            source: "paramschecker",
-                            context: {}
-                        };
-                        errors.push(error);
-                    }
+                    var error = {
+                        row: lineNumber,
+                        column: index,
+                        text: text,
+                        breaksCode: true,
+                        source: "paramschecker",
+                        context: {}
+                    };
+                    errors.push(error);
                 }
             }
             // remove this function call so we don't mess up future comma counts

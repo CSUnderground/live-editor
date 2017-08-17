@@ -1190,7 +1190,6 @@ window.LiveEditor = Backbone.View.extend({
         $el.find('#output-frame').on('load', function () {
             _this.outputState = 'clean';
             _this.markDirty();
-            _this.postFrame({ loopProtect: window.loopProtect });
         });
 
         // Whenever the user changes code, execute the code

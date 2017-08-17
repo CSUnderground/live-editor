@@ -314,7 +314,6 @@ OutputTester.prototype = {
 };
 // TODO(kevinb) remove after challenges have been converted to use i18n._
 $._ = i18n._;
-
 window.LiveEditorOutput = Backbone.View.extend({
     recording: false,
     loaded: false,
@@ -370,6 +369,7 @@ window.LiveEditorOutput = Backbone.View.extend({
             enableLoopProtect: enableLoopProtect,
             loopProtectTimeouts: loopProtectTimeouts
         });
+        window.enableProtect = enableLoopProtect;
     },
 
     setPaths: function setPaths(data) {

@@ -87443,8 +87443,6 @@ window.LoopProtector = function (callback, timeouts, reportLocation) {
 
     this.visible = !visibly.hidden();
 };
-window.enableProtect = false;
-//if(window.parent.loopProtect) window.enableProtect = window.parent.loopProtect;
 window.LoopProtector.prototype = {
     /**
      * Throws 'KA_INFINITE_LOOP' if the difference between the current time

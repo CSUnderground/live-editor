@@ -997,10 +997,10 @@ class PJSCodeInjector {
         // Program.assertEquals.
         astTransformPasses.push(ASTTransforms.rewriteAssertEquals);
 
-        // rewriteNewExpressions transforms NewExpressions into CallExpressions.
+        /*// rewriteNewExpressions transforms NewExpressions into CallExpressions.
         if (rewriteNewExpression) {
             astTransformPasses.push(ASTTransforms.rewriteNewExpressions(envName, context));
-        }
+        }*/
 
         try {
             walkAST(ast, null, astTransformPasses);

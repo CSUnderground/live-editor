@@ -7,7 +7,8 @@
             {{#if execFile}}
                 <iframe id="output-frame"
                     src="{{execFile}}"
-                    data-src="{{execFile}}"></iframe>
+                    data-src="{{execFile}}"
+                    sandbox="allow-scripts allow-pointer-lock allow-same-origin"></iframe>
             {{/if}}
             <canvas class="scratchpad-draw-canvas" style="display:none;"
                 width="400" height="400"></canvas>

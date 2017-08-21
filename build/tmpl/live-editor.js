@@ -22,7 +22,7 @@ function program3(depth0,data) {
   stack1 = foundHelper || depth0.execFile;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "execFile", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "\"></iframe>\r\n            ";
+  buffer += escapeExpression(stack1) + "\"\r\n                    sandbox=\"allow-scripts allow-pointer-lock allow-same-origin\"></iframe>\r\n            ";
   return buffer;}
 
 function program5(depth0,data) {

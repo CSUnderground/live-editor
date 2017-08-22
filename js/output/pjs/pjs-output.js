@@ -405,15 +405,16 @@ window.PJSOutput = Backbone.View.extend({
         });
 
         // Merge JSHint and BabyHint errors
-        let errors = babyErrors;
-        let babyErrorRows = _.uniq(babyErrors.map(error => error.row));
+        let errors = hintErrors;//babyErrors;
+        /*let babyErrorRows = _.uniq(babyErrors.map(error => error.row));
         hintErrors.forEach(error => {
             // Only add JSHint errors if there isn't already a BabyHint error
             // on that line (row).
             if (!_.contains(babyErrorRows, error.row)) {
                 errors.push(error);
             }
-        });
+        });*/
+        console.log(errors);
 
         // De-duplicate errors. Replacer tells JSON.stringify to ignore column
         // and lint keys so objects with different columns or lint will still be

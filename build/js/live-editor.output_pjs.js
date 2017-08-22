@@ -2425,7 +2425,7 @@ PJSResourceCache.prototype.loadSound = function (filename) {
     var deferred = $.Deferred();
     var audio = document.createElement("audio");
     var parts = filename.split("/");
-    //audio.setAttribute('crossOrigin', 'anonymous');
+    audio.setAttribute("crossOrigin", "anonymous");
     var group = _.findWhere(OutputSounds[0].groups, { groupName: parts[0] });
     var hasSound = group && group.sounds.includes(parts[1].replace(".mp3", ""));
     if (!hasSound && filename.indexOf("http") != 0) {

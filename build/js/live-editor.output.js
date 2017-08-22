@@ -403,13 +403,6 @@ window.LiveEditorOutput = Backbone.View.extend({
     },
 
     handleMessage: function handleMessage(event) {
-        var data;
-
-        this.frameSource = event.source;
-        this.frameOrigin = event.origin;
-
-        // let the parent know we're up and running
-        this.notifyActive();
 
         // filter out events that are objects
         // currently the only messages that contain objects are messages
@@ -418,12 +411,20 @@ window.LiveEditorOutput = Backbone.View.extend({
         if (typeof event.data === "object") {
             return;
         }
+        var data;
 
         try {
             data = JSON.parse(event.data);
         } catch (err) {
             return;
         }
+        console.log(event);
+        if (event.origin.indexOf("google.com") > -1) return;
+        this.frameSource = event.source;
+        this.frameOrigin = event.origin;
+
+        // let the parent know we're up and running
+        this.notifyActive();
         if (!this.output) {
             var outputType = data.outputType || _.keys(this.outputs)[0];
             var enableLoopProtect = true;

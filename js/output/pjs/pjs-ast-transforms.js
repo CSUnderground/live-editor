@@ -94,6 +94,7 @@ ASTTransforms.rewriteContextVariables = function(envName, context) {
 
             if (node.type === "Identifier") {
                 if (isReference(node, parent)) {
+
                     let scopeIndex = -1;
                     for (let i = scopes.length - 1; i > -1; i--) {
                         if (scopes[i][node.name]) {
@@ -101,10 +102,22 @@ ASTTransforms.rewriteContextVariables = function(envName, context) {
                             break;
                         }
                     }
-
+                    /*console.log(JSON.parse(JSON.stringify(parent)))
+                    console.log(JSON.parse(JSON.stringify(node)))
+                    console.log("-------------")*/
                     // Don't rewrite function parameters.
                     let isParam = /^Function/.test(parent.type) && parent.params.includes(node);
                     if (isParam) {
+                        return;
+                    }
+
+                    // Don't rewrite es6 object patterns.
+                    if (parent.type==="AssignmentPattern") {
+                        return;
+                    }
+
+                    //don't rewrite es6 method declarations
+                    if(parent.type === "MethodDefinition"){
                         return;
                     }
 

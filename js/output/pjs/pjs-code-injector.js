@@ -169,11 +169,9 @@ class PJSCodeInjector {
             debug: (...args) => {
                 console.log(...args);
             },
-            exposed: {
-                "huskyOverriden":true,
-                document: document,
-                window: window
-            }
+            window: window,
+            XMLHttpRequest: window.XMLHttpRequest,
+            JSON:window.JSON
         });
 
         Object.assign(this.processing, additionalMethods);
@@ -360,6 +358,9 @@ class PJSCodeInjector {
             // propName: false (is a global property, cannot be overridden)
             `/*global ${this.propListString(this.props)} */\n` +
 
+            // lol idk why KA is doing this when you can pass JS Hint parameters.
+            // it would probably help if they updated their crap once in a while.
+
             // The user's code to execute
             userCode;
 
@@ -500,6 +501,7 @@ class PJSCodeInjector {
             if (text.trim() === "Unexpected token ILLEGAL") {
                 text = i18n._("Unexpected character.");
             } else {
+                console.log(e);
                 text = i18n._("Parser error.");
             }
 
@@ -1026,6 +1028,8 @@ class PJSCodeInjector {
                 return `${envName}.${call}`;
             }).join("\n");
         }
+        //console.log(acorn.generate(ast))
+        //console.log(acorn);
         return code + escodegen.generate(ast);
     }
 

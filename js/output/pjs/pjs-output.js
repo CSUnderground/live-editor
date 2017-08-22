@@ -414,7 +414,7 @@ window.PJSOutput = Backbone.View.extend({
                 errors.push(error);
             }
         });*/
-        console.log(errors);
+        //console.log(errors);
 
         // De-duplicate errors. Replacer tells JSON.stringify to ignore column
         // and lint keys so objects with different columns or lint will still be

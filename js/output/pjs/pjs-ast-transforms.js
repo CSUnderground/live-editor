@@ -288,9 +288,14 @@ ASTTransforms.findResources = function(resources) {
                         }
                     });
                 });
+                var validImageExtensions = ["png","jpg","jpeg"];
+                var validSoundExtensions = ["mp3","mp4","ogg","opus","wav"];
+                var validExtensions = validImageExtensions.concat(validSoundExtensions);
                 if(node.value.indexOf("http") == 0){
-                    if(node.value.toLowerCase().indexOf(".png") > -1 || node.value.toLowerCase().indexOf(".jpg") > -1){
-                        resources[node.value] = true;
+                    for(var i in validExtensions){
+                        if(node.value.toLowerCase().endsWith("." + validExtensions[i])){
+                            resources[node.value] = true;
+                        }
                     }
                 }
 

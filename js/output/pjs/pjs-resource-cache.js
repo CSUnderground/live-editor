@@ -37,10 +37,17 @@ PJSResourceCache.prototype.cacheResources = function(resources) {
 };
 
 PJSResourceCache.prototype.loadResource = function(filename) {
-    if (filename.endsWith(".png") || filename.endsWith(".jpg")) {
-        return this.loadImage(filename);
-    } else if (filename.endsWith(".mp3")) {
-        return this.loadSound(filename);
+    var validImageExtensions = ["png","jpg","jpeg"];
+    var validSoundExtensions = ["mp3","mp4","ogg","opus","wav"];
+    for(var i in validImageExtensions){
+        if(filename.toLowerCase().endsWith("." + validImageExtensions[i])){
+            return this.loadImage(filename);
+        }
+    }
+    for(var i in validSoundExtensions){
+        if(filename.toLowerCase().endsWith("." + validSoundExtensions[i])){
+            return this.loadSound(filename);
+        }
     }
 };
 
@@ -73,7 +80,7 @@ PJSResourceCache.prototype.loadSound = function(filename) {
 
     var group = _.findWhere(OutputSounds[0].groups, { groupName: parts[0] });
     var hasSound = group && group.sounds.includes(parts[1].replace(".mp3", ""));
-    if (!hasSound) {
+    if (!hasSound && filename.indexOf("http") != 0) {
         deferred.resolve();
         return deferred;
     }
@@ -88,11 +95,16 @@ PJSResourceCache.prototype.loadSound = function(filename) {
         };
         deferred.resolve();
     }.bind(this);
-    audio.onerror = function() {
+    audio.onerror = function(e) {
+        console.log(e);
         deferred.resolve();
     }.bind(this);
-
-    audio.src = this.output.soundsDir + filename;
+    if(filename.indexOf("http") == 0){
+        audio.src = filename;
+    }else{
+        audio.src = this.output.soundsDir + filename;
+    }
+    
 
     return deferred;
 };
@@ -133,8 +145,11 @@ PJSResourceCache.prototype.getSound = function(filename) {
     var sound = this.cache[filename + ".mp3"];
 
     if (!sound) {
-        throw {message:
-            i18n._("Sound '%(file)s' was not found.", {file: filename})};
+        sound = this.cache[filename];
+        if(!sound){
+            throw {message:
+                i18n._("Sound '%(file)s' was not found.", {file: filename})};
+        }
     }
 
     return sound;

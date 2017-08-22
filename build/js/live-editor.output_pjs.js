@@ -205,11 +205,11 @@ var PJSCodeInjector = (function () {
                 debug: function debug() {
                     console.log.apply(console, arguments);
                 },
-                exposed: {
-                    "huskyOverriden": true,
-                    document: document,
-                    window: window
-                }
+                getWindow: function getWindow() {
+                    return window;
+                },
+                XMLHttpRequest: window.XMLHttpRequest,
+                JSON: window.JSON
             });
 
             Object.assign(this.processing, additionalMethods);
@@ -404,6 +404,9 @@ var PJSCodeInjector = (function () {
             // propName: false (is a global property, cannot be overridden)
             "/*global " + this.propListString(this.props) + " */\n") +
 
+            // lol idk why KA is doing this when you can pass JS Hint parameters.
+            // it would probably help if they updated their crap once in a while.
+
             // The user's code to execute
             userCode;
 
@@ -556,6 +559,7 @@ var PJSCodeInjector = (function () {
                 if (text.trim() === "Unexpected token ILLEGAL") {
                     text = i18n._("Unexpected character.");
                 } else {
+                    console.log(e);
                     text = i18n._("Parser error.");
                 }
 
@@ -1070,6 +1074,8 @@ var PJSCodeInjector = (function () {
                     return envName + "." + call;
                 }).join("\n");
             }
+            //console.log(acorn.generate(ast))
+            //console.log(acorn);
             return code + escodegen.generate(ast);
         }
     }, {
@@ -2379,10 +2385,17 @@ PJSResourceCache.prototype.cacheResources = function (resources) {
 };
 
 PJSResourceCache.prototype.loadResource = function (filename) {
-    if (filename.endsWith(".png") || filename.endsWith(".jpg")) {
-        return this.loadImage(filename);
-    } else if (filename.endsWith(".mp3")) {
-        return this.loadSound(filename);
+    var validImageExtensions = ["png", "jpg", "jpeg"];
+    var validSoundExtensions = ["mp3", "mp4", "ogg", "opus", "wav"];
+    for (var i in validImageExtensions) {
+        if (filename.toLowerCase().endsWith("." + validImageExtensions[i])) {
+            return this.loadImage(filename);
+        }
+    }
+    for (var i in validSoundExtensions) {
+        if (filename.toLowerCase().endsWith("." + validSoundExtensions[i])) {
+            return this.loadSound(filename);
+        }
     }
 };
 
@@ -2412,10 +2425,10 @@ PJSResourceCache.prototype.loadSound = function (filename) {
     var deferred = $.Deferred();
     var audio = document.createElement("audio");
     var parts = filename.split("/");
-
+    //audio.setAttribute('crossOrigin', 'anonymous');
     var group = _.findWhere(OutputSounds[0].groups, { groupName: parts[0] });
     var hasSound = group && group.sounds.includes(parts[1].replace(".mp3", ""));
-    if (!hasSound) {
+    if (!hasSound && filename.indexOf("http") != 0) {
         deferred.resolve();
         return deferred;
     }
@@ -2430,11 +2443,16 @@ PJSResourceCache.prototype.loadSound = function (filename) {
         };
         deferred.resolve();
     }).bind(this);
-    audio.onerror = (function () {
+    audio.onerror = (function (e) {
+        console.log("???");
+        console.log(e);
         deferred.resolve();
     }).bind(this);
-
-    audio.src = this.output.soundsDir + filename;
+    if (filename.indexOf("http") == 0) {
+        audio.src = filename;
+    } else {
+        audio.src = this.output.soundsDir + filename;
+    }
 
     return deferred;
 };
@@ -2474,7 +2492,10 @@ PJSResourceCache.prototype.getSound = function (filename) {
     var sound = this.cache[filename + ".mp3"];
 
     if (!sound) {
-        throw { message: i18n._("Sound '%(file)s' was not found.", { file: filename }) };
+        sound = this.cache[filename];
+        if (!sound) {
+            throw { message: i18n._("Sound '%(file)s' was not found.", { file: filename }) };
+        }
     }
 
     return sound;
@@ -2885,7 +2906,7 @@ window.PJSOutput = Backbone.View.extend({
                 errors.push(error);
             }
         });*/
-        console.log(errors);
+        //console.log(errors);
 
         // De-duplicate errors. Replacer tells JSON.stringify to ignore column
         // and lint keys so objects with different columns or lint will still be

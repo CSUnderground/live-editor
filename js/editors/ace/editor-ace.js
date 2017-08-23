@@ -36,6 +36,7 @@ window.AceEditor = Backbone.View.extend({
         this.type = options.type;
         this.workersDir = options.workersDir;
         this.editor = ace.edit(this.el);
+        this.editor.$blockScrolling = Infinity;
         this.textarea = this.$(this.dom.TEXT_INPUT);
         this.content = this.$(this.dom.CONTENT);
         this.offset = this.content.offset();
@@ -156,15 +157,15 @@ window.AceEditor = Backbone.View.extend({
 
         // Track text change events
         doc.on("change", function(e) {
-            var start = e.data.range.start;
-            var end = e.data.range.end;
+            var start = e.start;
+            var end = e.end;
 
-            if (e.data.action.indexOf("insert") === 0) {
-                var insert = e.data.lines || e.data.text;
-                self.record.log(e.data.action,
+            if (e.action.indexOf("insert") === 0) {
+                var insert = e.lines || e.text;
+                self.record.log(e.action,
                     start.row, start.column, end.row, end.column, insert);
             } else {
-                self.record.log(e.data.action,
+                self.record.log(e.action,
                     start.row, start.column, end.row, end.column);
             }
         }, true);

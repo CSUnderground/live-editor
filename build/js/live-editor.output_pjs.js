@@ -415,9 +415,10 @@ var PJSCodeInjector = (function () {
             // it would probably help if they updated their crap once in a while.
 
             // The user's code to execute
+
             userCode;
 
-            this.hintWorker.exec(hintCode, function (hintData, hintErrors) {
+            this.hintWorker.exec("/*global " + this.propListString(this.props) + " */\n" + userCode, function (hintData, hintErrors) {
                 _this3.globals = _this3.extractGlobals(hintData);
                 deferred.resolve(hintErrors);
             });
@@ -1266,7 +1267,7 @@ var PJSCodeInjector = (function () {
 
 // TODO(kevinb) convert to a commonjs module at somepoint in the future
 window.PJSCodeInjector = PJSCodeInjector;
-
+/* Using userCode is better since it doesn't have all the useless KA JSHINT garbage */
 // Ignore any errors that were generated in the callback
 // NOTE(jeresig): This is needed because Mocha throws errors
 // when it encounters an assertion error, which causes this

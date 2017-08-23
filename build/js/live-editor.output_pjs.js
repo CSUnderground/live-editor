@@ -340,6 +340,7 @@ var PJSCodeInjector = (function () {
          */
         value: function restart() {
             for (var i in this.resourceCache.cache) {
+                if (!this.resourceCache.cache[i].audio) continue;
                 this.resourceCache.cache[i].audio.currentTime = 0;
                 this.resourceCache.cache[i].audio.pause();
             }
@@ -553,6 +554,7 @@ var PJSCodeInjector = (function () {
 
             try {
                 for (var i in this.resourceCache.cache) {
+                    if (!this.resourceCache.cache[i].audio) continue;
                     this.resourceCache.cache[i].audio.currentTime = 0;
                     this.resourceCache.cache[i].audio.pause();
                 }
@@ -1237,6 +1239,7 @@ var PJSCodeInjector = (function () {
                 return;
             }
             for (var i in this.resourceCache.cache) {
+                if (!this.resourceCache.cache[i].audio) continue;
                 this.resourceCache.cache[i].audio.currentTime = 0;
                 this.resourceCache.cache[i].audio.pause();
             }

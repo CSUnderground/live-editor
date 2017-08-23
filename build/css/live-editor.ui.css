@@ -438,6 +438,9 @@ button {
 button.hilite {
     box-shadow: 0 0 20px green;
 }
+.scratchpad-ace-editor {
+    border-bottom:1px solid rgba(0,0,0,0.25);
+}
 .editor-toolbar {
     border: 1px solid #d4ccb0;
     border-top: none;

@@ -341,6 +341,7 @@ var PJSCodeInjector = (function () {
         value: function restart() {
             for (var i in this.resourceCache.cache) {
                 this.resourceCache.cache[i].audio.currentTime = 0;
+                this.resourceCache.cache[i].audio.pause();
             }
             this.lastGrab = null;
             this.lastGrabObj = null;
@@ -552,6 +553,7 @@ var PJSCodeInjector = (function () {
             try {
                 for (var i in this.resourceCache.cache) {
                     this.resourceCache.cache[i].audio.currentTime = 0;
+                    this.resourceCache.cache[i].audio.pause();
                 }
                 var resources = PJSResourceCache.findResources(userCode);
                 this.resourceCache.cacheResources(resources).then(function () {
@@ -1235,6 +1237,7 @@ var PJSCodeInjector = (function () {
             }
             for (var i in this.resourceCache.cache) {
                 this.resourceCache.cache[i].audio.currentTime = 0;
+                this.resourceCache.cache[i].audio.pause();
             }
             // the top-level 'this' is empty except for this.externals, which
             // throws this message this is how users were getting at everything

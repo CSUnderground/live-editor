@@ -209,7 +209,10 @@ var PJSCodeInjector = (function () {
                     return window;
                 },
                 XMLHttpRequest: window.XMLHttpRequest,
-                JSON: window.JSON
+                JSON: window.JSON,
+                setInterval: setInterval.bind(window),
+                setTimeout: setTimeout.bind(window),
+                clearInterval: clearInterval.bind(window)
             });
 
             Object.assign(this.processing, additionalMethods);
@@ -336,6 +339,9 @@ var PJSCodeInjector = (function () {
          * Restarts the user's program.
          */
         value: function restart() {
+            for (var i in this.resourceCache.cache) {
+                this.resourceCache.cache[i].audio.currentTime = 0;
+            }
             this.lastGrab = null;
             this.lastGrabObj = null;
 
@@ -544,6 +550,9 @@ var PJSCodeInjector = (function () {
             var _this4 = this;
 
             try {
+                for (var i in this.resourceCache.cache) {
+                    this.resourceCache.cache[i].audio.currentTime = 0;
+                }
                 var resources = PJSResourceCache.findResources(userCode);
                 this.resourceCache.cacheResources(resources).then(function () {
                     _this4.injectCode(userCode, callback);
@@ -1224,7 +1233,9 @@ var PJSCodeInjector = (function () {
             if (!code) {
                 return;
             }
-
+            for (var i in this.resourceCache.cache) {
+                this.resourceCache.cache[i].audio.currentTime = 0;
+            }
             // the top-level 'this' is empty except for this.externals, which
             // throws this message this is how users were getting at everything
             // from playing sounds to displaying pop-ups
@@ -2401,6 +2412,10 @@ PJSResourceCache.prototype.loadResource = function (filename) {
 
 PJSResourceCache.prototype.loadImage = function (filename) {
     var deferred = $.Deferred();
+    if (this.cache.hasOwnProperty(filename)) {
+        deferred.resolve();
+        return deferred;
+    }
     var path = this.output.imagesDir + filename;
     var img = document.createElement("img");
     img.setAttribute("crossOrigin", "anonymous");
@@ -2423,9 +2438,13 @@ PJSResourceCache.prototype.loadImage = function (filename) {
 
 PJSResourceCache.prototype.loadSound = function (filename) {
     var deferred = $.Deferred();
+    if (this.cache.hasOwnProperty(filename)) {
+        deferred.resolve();
+        return deferred;
+    }
     var audio = document.createElement("audio");
     var parts = filename.split("/");
-    audio.setAttribute("crossOrigin", "anonymous");
+    //audio.setAttribute('crossOrigin', 'anonymous');
     var group = _.findWhere(OutputSounds[0].groups, { groupName: parts[0] });
     var hasSound = group && group.sounds.includes(parts[1].replace(".mp3", ""));
     if (!hasSound && filename.indexOf("http") != 0) {

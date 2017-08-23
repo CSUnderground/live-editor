@@ -404,6 +404,9 @@ window.LiveEditorOutput = Backbone.View.extend({
 
     handleMessage: function handleMessage(event) {
 
+        // Google likes to send us messages.
+        if (event.origin.indexOf("google.com") > -1) return;
+
         // filter out events that are objects
         // currently the only messages that contain objects are messages
         // being sent by Poster instances being used by the iframeOverlay
@@ -418,8 +421,7 @@ window.LiveEditorOutput = Backbone.View.extend({
         } catch (err) {
             return;
         }
-        console.log(event);
-        if (event.origin.indexOf("google.com") > -1) return;
+
         this.frameSource = event.source;
         this.frameOrigin = event.origin;
 

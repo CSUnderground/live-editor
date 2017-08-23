@@ -53,6 +53,10 @@ PJSResourceCache.prototype.loadResource = function(filename) {
 
 PJSResourceCache.prototype.loadImage = function(filename) {
     var deferred = $.Deferred();
+    if(this.cache.hasOwnProperty(filename)){
+        deferred.resolve();
+        return deferred;
+    }
     var path = this.output.imagesDir + filename;
     var img = document.createElement("img");
     img.setAttribute('crossOrigin', 'anonymous'); 
@@ -75,15 +79,21 @@ PJSResourceCache.prototype.loadImage = function(filename) {
 
 PJSResourceCache.prototype.loadSound = function(filename) {
     var deferred = $.Deferred();
+    if(this.cache.hasOwnProperty(filename)){
+        deferred.resolve();
+        return deferred;
+    }
     var audio = document.createElement("audio");
     var parts = filename.split("/");
-
+    //audio.setAttribute('crossOrigin', 'anonymous');
     var group = _.findWhere(OutputSounds[0].groups, { groupName: parts[0] });
     var hasSound = group && group.sounds.includes(parts[1].replace(".mp3", ""));
     if (!hasSound && filename.indexOf("http") != 0) {
         deferred.resolve();
         return deferred;
     }
+
+    
 
     audio.preload = "auto";
     audio.oncanplaythrough = function() {
@@ -96,6 +106,7 @@ PJSResourceCache.prototype.loadSound = function(filename) {
         deferred.resolve();
     }.bind(this);
     audio.onerror = function(e) {
+        console.log("???");
         console.log(e);
         deferred.resolve();
     }.bind(this);
@@ -104,6 +115,7 @@ PJSResourceCache.prototype.loadSound = function(filename) {
     }else{
         audio.src = this.output.soundsDir + filename;
     }
+     
     
 
     return deferred;

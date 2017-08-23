@@ -90,14 +90,10 @@ window.LiveEditorOutput = Backbone.View.extend({
     },
 
     handleMessage: function(event) {
-        var data;
 
-        this.frameSource = event.source;
-        this.frameOrigin = event.origin;
-
-        // let the parent know we're up and running
-        this.notifyActive();
-
+        // Google likes to send us messages.
+        if(event.origin.indexOf("google.com") > -1) return;
+        
         // filter out events that are objects
         // currently the only messages that contain objects are messages
         // being sent by Poster instances being used by the iframeOverlay
@@ -105,12 +101,20 @@ window.LiveEditorOutput = Backbone.View.extend({
         if (typeof event.data === "object") {
             return;
         }
+        var data;
 
         try {
             data = JSON.parse(event.data);
         } catch (err) {
             return;
         }
+
+        this.frameSource = event.source;
+        this.frameOrigin = event.origin;
+        
+
+        // let the parent know we're up and running
+        this.notifyActive();
         if (!this.output) {
             var outputType = data.outputType || _.keys(this.outputs)[0];
             var enableLoopProtect = true;

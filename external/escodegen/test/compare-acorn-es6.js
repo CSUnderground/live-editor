@@ -25,7 +25,7 @@
 'use strict';
 
 var fs = require('fs'),
-    acorn = require('./3rdparty/acorn'),
+    acorn = require('acorn'),
     escodegen = require('./loader'),
     chai = require('chai'),
     expect = chai.expect;
@@ -37,10 +37,8 @@ function test(code, expected) {
     StringObject = String;
 
     options = {
-        range: true,
-        loc: false,
-        tokens: true,
-        raw: false,
+        ranges: true,
+        locations: false,
         ecmaVersion: 6
     };
 
@@ -58,10 +56,8 @@ function testMin(code, expected) {
     StringObject = String;
 
     options = {
-        range: true,
-        loc: false,
-        tokens: true,
-        raw: false,
+        ranges: true,
+        locations: false,
         ecmaVersion: 6
     };
 

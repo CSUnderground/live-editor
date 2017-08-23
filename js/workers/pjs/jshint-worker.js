@@ -18,7 +18,14 @@ self.onmessage = function(event) {
     }
 
     // Evaluate the code using JSHint
-    JSHINT(event.data.code,{evil:true,esversion:6});
+    JSHINT(event.data.code,{
+        evil:true,
+        curly:false,
+        expr:true,
+        asi:true,
+        shadow:true,
+        esversion:6
+    });
 
     // Return the JSHint results to the main code
     self.postMessage({

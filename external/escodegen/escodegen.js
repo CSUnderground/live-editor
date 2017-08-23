@@ -1,5 +1,6 @@
 /*
   Copyright (C) 2012-2014 Yusuke Suzuki <utatane.tea@gmail.com>
+  Copyright (C) 2015 Ingvar Stepanyan <me@rreverser.com>
   Copyright (C) 2014 Ivan Nikulin <ifaaan@gmail.com>
   Copyright (C) 2012-2013 Michael Ficarra <escodegen.copyright@michael.ficarra.me>
   Copyright (C) 2012-2013 Mathias Bynens <mathias@qiwi.be>
@@ -82,6 +83,7 @@
     Precedence = {
         Sequence: 0,
         Yield: 1,
+        Await: 1,
         Assignment: 1,
         Conditional: 2,
         ArrowFunction: 2,
@@ -467,7 +469,7 @@
             } else if (esutils.code.isLineTerminator(code) || code === 0x5C  /* \ */) {
                 result += escapeDisallowedCharacter(code);
                 continue;
-            } else if ((json && code < 0x20  /* SP */) || !(json || escapeless || (code >= 0x20  /* SP */ && code <= 0x7E  /* ~ */))) {
+            } else if (!esutils.code.isIdentifierPartES5(code) && (json && code < 0x20  /* SP */ || !json && !escapeless && (code < 0x20  /* SP */ || code > 0x7E  /* ~ */))) {
                 result += escapeAllowedCharacter(code, str.charCodeAt(i + 1));
                 continue;
             }
@@ -559,7 +561,7 @@
         rightCharCode = rightSource.charCodeAt(0);
 
         if ((leftCharCode === 0x2B  /* + */ || leftCharCode === 0x2D  /* - */) && leftCharCode === rightCharCode ||
-            esutils.code.isIdentifierPart(leftCharCode) && esutils.code.isIdentifierPart(rightCharCode) ||
+            esutils.code.isIdentifierPartES5(leftCharCode) && esutils.code.isIdentifierPartES5(rightCharCode) ||
             leftCharCode === 0x2F  /* / */ && rightCharCode === 0x69  /* i */) { // infix word operators all start with `i`
             return [left, noEmptySpace(), right];
         } else if (esutils.code.isWhiteSpace(leftCharCode) || esutils.code.isLineTerminator(leftCharCode) ||
@@ -864,6 +866,25 @@
         return toSourceNodeWhenNeeded(node.name, node);
     }
 
+    function generateAsyncPrefix(node, spaceRequired) {
+        return node.async ? 'async' + (spaceRequired ? noEmptySpace() : space) : '';
+    }
+
+    function generateStarSuffix(node) {
+        var isGenerator = node.generator && !extra.moz.starlessGenerator;
+        return isGenerator ? '*' + space : '';
+    }
+
+    function generateMethodPrefix(prop) {
+        var func = prop.value;
+        if (func.async) {
+            return generateAsyncPrefix(func, !prop.computed);
+        } else {
+            // avoid space before method name
+            return generateStarSuffix(func) ? '*' : '';
+        }
+    }
+
     CodeGenerator.prototype.generatePattern = function (node, precedence, flags) {
         if (node.type === Syntax.Identifier) {
             return generateIdentifier(node);
@@ -880,9 +901,10 @@
                 !node.rest && (!node.defaults || node.defaults.length === 0) &&
                 node.params.length === 1 && node.params[0].type === Syntax.Identifier) {
             // arg => { } case
-            result = [generateIdentifier(node.params[0])];
+            result = [generateAsyncPrefix(node, true), generateIdentifier(node.params[0])];
         } else {
-            result = ['('];
+            result = node.type === Syntax.ArrowFunctionExpression ? [generateAsyncPrefix(node, false)] : [];
+            result.push('(');
             if (node.defaults) {
                 hasDefault = true;
             }
@@ -958,14 +980,19 @@
         return result;
     };
 
-    CodeGenerator.prototype.generatePropertyKey = function (expr, computed) {
+    CodeGenerator.prototype.generatePropertyKey = function (expr, computed, value) {
         var result = [];
 
         if (computed) {
             result.push('[');
         }
 
-        result.push(this.generateExpression(expr, Precedence.Sequence, E_TTT));
+        if (value.type === 'AssignmentPattern') {
+            result.push(this.AssignmentPattern(value, Precedence.Sequence, E_TTT));
+        } else {
+            result.push(this.generateExpression(expr, Precedence.Sequence, E_TTT));
+        }
+
         if (computed) {
             result.push(']');
         }
@@ -1123,7 +1150,10 @@
 
         ClassDeclaration: function (stmt, flags) {
             var result, fragment;
-            result  = ['class ' + stmt.id.name];
+            result  = ['class'];
+            if (stmt.id) {
+                result = join(result, this.generateExpression(stmt.id, Precedence.Sequence, E_TTT));
+            }
             if (stmt.superClass) {
                 fragment = join('extends', this.generateExpression(stmt.superClass, Precedence.Assignment, E_TTT));
                 result = join(result, fragment);
@@ -1179,22 +1209,26 @@
             return ';';
         },
 
-        ExportDeclaration: function (stmt, flags) {
-            var result = [ 'export' ], bodyFlags, that = this;
+        ExportDefaultDeclaration: function (stmt, flags) {
+            var result = [ 'export' ], bodyFlags;
 
             bodyFlags = (flags & F_SEMICOLON_OPT) ? S_TFFT : S_TFFF;
 
             // export default HoistableDeclaration[Default]
             // export default AssignmentExpression[In] ;
-            if (stmt['default']) {
-                result = join(result, 'default');
-                if (isStatement(stmt.declaration)) {
-                    result = join(result, this.generateStatement(stmt.declaration, bodyFlags));
-                } else {
-                    result = join(result, this.generateExpression(stmt.declaration, Precedence.Assignment, E_TTT) + this.semicolon(flags));
-                }
-                return result;
+            result = join(result, 'default');
+            if (isStatement(stmt.declaration)) {
+                result = join(result, this.generateStatement(stmt.declaration, bodyFlags));
+            } else {
+                result = join(result, this.generateExpression(stmt.declaration, Precedence.Assignment, E_TTT) + this.semicolon(flags));
             }
+            return result;
+        },
+
+        ExportNamedDeclaration: function (stmt, flags) {
+            var result = [ 'export' ], bodyFlags, that = this;
+
+            bodyFlags = (flags & F_SEMICOLON_OPT) ? S_TFFT : S_TFFF;
 
             // export VariableStatement
             // export Declaration[Default]
@@ -1202,7 +1236,6 @@
                 return join(result, this.generateStatement(stmt.declaration, bodyFlags));
             }
 
-            // export * FromClause ;
             // export ExportClause[NoReference] FromClause ;
             // export ExportClause ;
             if (stmt.specifiers) {
@@ -1243,16 +1276,70 @@
             return result;
         },
 
+        ExportAllDeclaration: function (stmt, flags) {
+            // export * FromClause ;
+            return [
+                'export' + space,
+                '*' + space,
+                'from' + space,
+                // ModuleSpecifier
+                this.generateExpression(stmt.source, Precedence.Sequence, E_TTT),
+                this.semicolon(flags)
+            ];
+        },
+
         ExpressionStatement: function (stmt, flags) {
             var result, fragment;
+
+            function isClassPrefixed(fragment) {
+                var code;
+                if (fragment.slice(0, 5) !== 'class') {
+                    return false;
+                }
+                code = fragment.charCodeAt(5);
+                return code === 0x7B  /* '{' */ || esutils.code.isWhiteSpace(code) || esutils.code.isLineTerminator(code);
+            }
+
+            function isFunctionPrefixed(fragment) {
+                var code;
+                if (fragment.slice(0, 8) !== 'function') {
+                    return false;
+                }
+                code = fragment.charCodeAt(8);
+                return code === 0x28 /* '(' */ || esutils.code.isWhiteSpace(code) || code === 0x2A  /* '*' */ || esutils.code.isLineTerminator(code);
+            }
+
+            function isAsyncPrefixed(fragment) {
+                var code, i, iz;
+                if (fragment.slice(0, 5) !== 'async') {
+                    return false;
+                }
+                if (!esutils.code.isWhiteSpace(fragment.charCodeAt(5))) {
+                    return false;
+                }
+                for (i = 6, iz = fragment.length; i < iz; ++i) {
+                    if (!esutils.code.isWhiteSpace(fragment.charCodeAt(i))) {
+                        break;
+                    }
+                }
+                if (i === iz) {
+                    return false;
+                }
+                if (fragment.slice(i, i + 8) !== 'function') {
+                    return false;
+                }
+                code = fragment.charCodeAt(i + 8);
+                return code === 0x28 /* '(' */ || esutils.code.isWhiteSpace(code) || code === 0x2A  /* '*' */ || esutils.code.isLineTerminator(code);
+            }
 
             result = [this.generateExpression(stmt.expression, Precedence.Sequence, E_TTT)];
             // 12.4 '{', 'function', 'class' is not allowed in this position.
             // wrap expression with parentheses
             fragment = toSourceNodeWhenNeeded(result).toString();
-            if (fragment.charAt(0) === '{' ||  // ObjectExpression
-                    (fragment.slice(0, 5) === 'class' && ' {'.indexOf(fragment.charAt(5)) >= 0) ||  // class
-                    (fragment.slice(0, 8) === 'function' && '* ('.indexOf(fragment.charAt(8)) >= 0) ||  // function or generator
+            if (fragment.charCodeAt(0) === 0x7B  /* '{' */ ||  // ObjectExpression
+                    isClassPrefixed(fragment) ||
+                    isFunctionPrefixed(fragment) ||
+                    isAsyncPrefixed(fragment) ||
                     (directive && (flags & F_DIRECTIVE_CTX) && stmt.expression.type === Syntax.Literal && typeof stmt.expression.value === 'string')) {
                 result = ['(', result, ')' + this.semicolon(flags)];
             } else {
@@ -1652,11 +1739,11 @@
         },
 
         FunctionDeclaration: function (stmt, flags) {
-            var isGenerator = stmt.generator && !extra.moz.starlessGenerator;
             return [
-                (isGenerator ? 'function*' : 'function'),
-                (isGenerator ? space : noEmptySpace()),
-                generateIdentifier(stmt.id),
+                generateAsyncPrefix(stmt, true),
+                'function',
+                generateStarSuffix(stmt) || noEmptySpace(),
+                stmt.id ? generateIdentifier(stmt.id) : '',
                 this.generateFunctionBody(stmt)
             ];
         },
@@ -1761,7 +1848,7 @@
 
             leftSource = fragment.toString();
 
-            if (leftSource.charCodeAt(leftSource.length - 1) === 0x2F /* / */ && esutils.code.isIdentifierPart(expr.operator.charCodeAt(0))) {
+            if (leftSource.charCodeAt(leftSource.length - 1) === 0x2F /* / */ && esutils.code.isIdentifierPartES5(expr.operator.charCodeAt(0))) {
                 result = [fragment, noEmptySpace(), expr.operator];
             } else {
                 result = join(fragment, expr.operator);
@@ -1855,13 +1942,22 @@
                             esutils.code.isDecimalDigit(fragment.charCodeAt(fragment.length - 1)) &&
                             !(fragment.length >= 2 && fragment.charCodeAt(0) === 48)  // '0'
                             ) {
-                        result.push('.');
+                        result.push(' ');
                     }
                 }
                 result.push('.');
                 result.push(generateIdentifier(expr.property));
             }
 
+            return parenthesize(result, Precedence.Member, precedence);
+        },
+
+        MetaProperty: function (expr, precedence, flags) {
+            var result;
+            result = [];
+            result.push(expr.meta);
+            result.push('.');
+            result.push(expr.property);
             return parenthesize(result, Precedence.Member, precedence);
         },
 
@@ -1885,7 +1981,7 @@
                     rightCharCode = fragment.toString().charCodeAt(0);
 
                     if (((leftCharCode === 0x2B  /* + */ || leftCharCode === 0x2D  /* - */) && leftCharCode === rightCharCode) ||
-                            (esutils.code.isIdentifierPart(leftCharCode) && esutils.code.isIdentifierPart(rightCharCode))) {
+                            (esutils.code.isIdentifierPartES5(leftCharCode) && esutils.code.isIdentifierPartES5(rightCharCode))) {
                         result.push(noEmptySpace());
                         result.push(fragment);
                     } else {
@@ -1909,9 +2005,15 @@
                     this.generateExpression(expr.argument, Precedence.Yield, E_TTT)
                 );
             }
-            // TODO: revert to "return parenthesize(result, Precedence.Yield, precedence);"
-            // after https://bugzilla.mozilla.org/show_bug.cgi?id=1100441 is fixed
-            return parenthesize(result, Precedence.Yield, Infinity);
+            return parenthesize(result, Precedence.Yield, precedence);
+        },
+
+        AwaitExpression: function (expr, precedence, flags) {
+            var result = join(
+                expr.all ? 'await*' : 'await',
+                this.generateExpression(expr.argument, Precedence.Await, E_TTT)
+            );
+            return parenthesize(result, Precedence.Await, precedence);
         },
 
         UpdateExpression: function (expr, precedence, flags) {
@@ -1936,30 +2038,30 @@
         },
 
         FunctionExpression: function (expr, precedence, flags) {
-            var result, isGenerator;
-            isGenerator = expr.generator && !extra.moz.starlessGenerator;
-            result = isGenerator ? 'function*' : 'function';
-
+            var result = [
+                generateAsyncPrefix(expr, true),
+                'function'
+            ];
             if (expr.id) {
-                return [result, (isGenerator) ? space : noEmptySpace(), generateIdentifier(expr.id), this.generateFunctionBody(expr)];
+                result.push(generateStarSuffix(expr) || noEmptySpace());
+                result.push(generateIdentifier(expr.id));
+            } else {
+                result.push(generateStarSuffix(expr) || space);
             }
-            return [result + space, this.generateFunctionBody(expr)];
-        },
-
-        ExportBatchSpecifier: function (expr, precedence, flags) {
-            return '*';
+            result.push(this.generateFunctionBody(expr));
+            return result;
         },
 
         ArrayPattern: function (expr, precedence, flags) {
-            return this.ArrayExpression(expr, precedence, flags);
+            return this.ArrayExpression(expr, precedence, flags, true);
         },
 
-        ArrayExpression: function (expr, precedence, flags) {
+        ArrayExpression: function (expr, precedence, flags, isPattern) {
             var result, multiline, that = this;
             if (!expr.elements.length) {
                 return '[]';
             }
-            multiline = expr.elements.length > 1;
+            multiline = isPattern ? false : expr.elements.length > 1;
             result = ['[', multiline ? newline : ''];
             withIndent(function (indent) {
                 var i, iz;
@@ -1988,6 +2090,10 @@
             return result;
         },
 
+        RestElement: function(expr, precedence, flags) {
+            return '...' + this.generatePattern(expr.argument);
+        },
+
         ClassExpression: function (expr, precedence, flags) {
             var result, fragment;
             result = ['class'];
@@ -2010,53 +2116,44 @@
             } else {
                 result = [];
             }
-
             if (expr.kind === 'get' || expr.kind === 'set') {
-                result = join(result, [
-                    join(expr.kind, this.generatePropertyKey(expr.key, expr.computed)),
-                    this.generateFunctionBody(expr.value)
-                ]);
-            } else {
                 fragment = [
-                    this.generatePropertyKey(expr.key, expr.computed),
+                    join(expr.kind, this.generatePropertyKey(expr.key, expr.computed, expr.value)),
                     this.generateFunctionBody(expr.value)
                 ];
-                if (expr.value.generator) {
-                    result.push('*');
-                    result.push(fragment);
-                } else {
-                    result = join(result, fragment);
-                }
+            } else {
+                fragment = [
+                    generateMethodPrefix(expr),
+                    this.generatePropertyKey(expr.key, expr.computed, expr.value),
+                    this.generateFunctionBody(expr.value)
+                ];
             }
-            return result;
+            return join(result, fragment);
         },
 
         Property: function (expr, precedence, flags) {
-            var result;
             if (expr.kind === 'get' || expr.kind === 'set') {
                 return [
                     expr.kind, noEmptySpace(),
-                    this.generatePropertyKey(expr.key, expr.computed),
+                    this.generatePropertyKey(expr.key, expr.computed, expr.value),
                     this.generateFunctionBody(expr.value)
                 ];
             }
 
             if (expr.shorthand) {
-                return this.generatePropertyKey(expr.key, expr.computed);
+                return this.generatePropertyKey(expr.key, expr.computed, expr.value);
             }
 
             if (expr.method) {
-                result = [];
-                if (expr.value.generator) {
-                    result.push('*');
-                }
-                result.push(this.generatePropertyKey(expr.key, expr.computed));
-                result.push(this.generateFunctionBody(expr.value));
-                return result;
+                return [
+                    generateMethodPrefix(expr),
+                    this.generatePropertyKey(expr.key, expr.computed, expr.value),
+                    this.generateFunctionBody(expr.value)
+                ];
             }
 
             return [
-                this.generatePropertyKey(expr.key, expr.computed),
+                this.generatePropertyKey(expr.key, expr.computed, expr.value),
                 ':' + space,
                 this.generateExpression(expr.value, Precedence.Assignment, E_TTT)
             ];
@@ -2112,6 +2209,10 @@
             return result;
         },
 
+        AssignmentPattern: function(expr, precedence, flags) {
+            return this.generateAssignment(expr.left, expr.right, '=', precedence, flags);
+        },
+
         ObjectPattern: function (expr, precedence, flags) {
             var result, i, iz, multiline, property, that = this;
             if (!expr.properties.length) {
@@ -2158,30 +2259,43 @@
             return 'this';
         },
 
+        Super: function (expr, precedence, flags) {
+            return 'super';
+        },
+
         Identifier: function (expr, precedence, flags) {
             return generateIdentifier(expr);
         },
 
         ImportDefaultSpecifier: function (expr, precedence, flags) {
-            return generateIdentifier(expr.id);
+            return generateIdentifier(expr.id || expr.local);
         },
 
         ImportNamespaceSpecifier: function (expr, precedence, flags) {
             var result = ['*'];
-            if (expr.id) {
-                result.push(space + 'as' + noEmptySpace() + generateIdentifier(expr.id));
+            var id = expr.id || expr.local;
+            if (id) {
+                result.push(space + 'as' + noEmptySpace() + generateIdentifier(id));
             }
             return result;
         },
 
         ImportSpecifier: function (expr, precedence, flags) {
-            return this.ExportSpecifier(expr, precedence, flags);
+            var imported = expr.imported;
+            var result = [ imported.name ];
+            var local = expr.local;
+            if (local && local.name !== imported.name) {
+                result.push(noEmptySpace() + 'as' + noEmptySpace() + generateIdentifier(local));
+            }
+            return result;
         },
 
         ExportSpecifier: function (expr, precedence, flags) {
-            var result = [ expr.id.name ];
-            if (expr.name) {
-                result.push(noEmptySpace() + 'as' + noEmptySpace() + generateIdentifier(expr.name));
+            var local = expr.local;
+            var result = [ local.name ];
+            var exported = expr.exported;
+            if (exported && exported.name !== local.name) {
+                result.push(noEmptySpace() + 'as' + noEmptySpace() + generateIdentifier(exported));
             }
             return result;
         },
@@ -2217,6 +2331,9 @@
                 return expr.value ? 'true' : 'false';
             }
 
+            if (expr.regex) {
+              return '/' + expr.regex.pattern + '/' + expr.regex.flags;
+            }
             return generateRegExp(expr.value);
         },
 
@@ -2343,7 +2460,7 @@
 
 
         if (extra.comment) {
-            result = addComments(expr,result);
+            result = addComments(expr, result);
         }
         return toSourceNodeWhenNeeded(result, expr);
     };

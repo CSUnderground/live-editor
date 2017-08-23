@@ -169,9 +169,12 @@ class PJSCodeInjector {
             debug: (...args) => {
                 console.log(...args);
             },
-            window: window,
+            getWindow: function(){return window;},
             XMLHttpRequest: window.XMLHttpRequest,
-            JSON:window.JSON
+            JSON:window.JSON,
+            setInterval: setInterval.bind(window),
+            setTimeout: setTimeout.bind(window),
+            clearInterval: clearInterval.bind(window)
         });
 
         Object.assign(this.processing, additionalMethods);
@@ -295,7 +298,12 @@ class PJSCodeInjector {
     /**
      * Restarts the user's program.
      */
-    restart() {
+    restart() { 
+        for(var i in this.resourceCache.cache){
+            if(!this.resourceCache.cache[i].audio) continue;
+            this.resourceCache.cache[i].audio.currentTime=0;
+            this.resourceCache.cache[i].audio.pause();
+        }
         this.lastGrab = null;
         this.lastGrabObj = null;
 
@@ -362,9 +370,10 @@ class PJSCodeInjector {
             // it would probably help if they updated their crap once in a while.
 
             // The user's code to execute
+
             userCode;
 
-        this.hintWorker.exec(hintCode, (hintData, hintErrors) => {
+        this.hintWorker.exec((`/*global ${this.propListString(this.props)} */\n` +userCode) /* Using userCode is better since it doesn't have all the useless KA JSHINT garbage */, (hintData, hintErrors) => {
             this.globals = this.extractGlobals(hintData);
             deferred.resolve(hintErrors);
         });
@@ -490,7 +499,12 @@ class PJSCodeInjector {
     }
 
     runCode(userCode, callback) {
-        try {
+        try { 
+            for(var i in this.resourceCache.cache){
+                if(!this.resourceCache.cache[i].audio) continue;
+                this.resourceCache.cache[i].audio.currentTime=0;
+                this.resourceCache.cache[i].audio.pause();
+            }
             let resources = PJSResourceCache.findResources(userCode);
             this.resourceCache.cacheResources(resources).then(() => {
                 this.injectCode(userCode, callback);
@@ -1178,8 +1192,12 @@ class PJSCodeInjector {
     exec(code, context, mutatingCalls) {
         if (!code) {
             return;
+        }  
+        for(var i in this.resourceCache.cache){
+            if(!this.resourceCache.cache[i].audio) continue;
+            this.resourceCache.cache[i].audio.currentTime=0;
+            this.resourceCache.cache[i].audio.pause();
         }
-
         // the top-level 'this' is empty except for this.externals, which
         // throws this message this is how users were getting at everything
         // from playing sounds to displaying pop-ups

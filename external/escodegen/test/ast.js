@@ -25,7 +25,7 @@
 'use strict';
 
 var data,
-    esprima = require('./3rdparty/esprima'),
+    esprima = require('./3rdparty/esprima-1.0.0-dev'),
     escodegen = require('./loader'),
     chai = require('chai'),
     expect = chai.expect;
@@ -144,7 +144,27 @@ data = {
                 },
             }],
             expected: '/(?:)/i;'
-        }
+        },
+        {
+            type: 'Program',
+            body: [{
+                type: 'ExpressionStatement',
+                expression: {
+                    type: 'MemberExpression',
+                    computed: false,
+                    object: {
+                        type: 'Literal',
+                        value: 1,
+                        raw: '1'
+                    },
+                    property: {
+                        type: 'Identifier',
+                        name: 'a'
+                    }
+                }
+            }],
+            expected: '1 .a;'
+        },
     ]
 };
 

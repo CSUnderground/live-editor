@@ -139,13 +139,13 @@ class PJSCodeInjector {
                 return this.resourceCache.getImage(filename);
             },
 
-            loadImage: (file) => {
+            /*loadImage: (file) => {
                 throw {message: "Use getImage instead of loadImage."};
             },
 
             requestImage: (file) => {
                 throw {message: "Use getImage instead of requestImage."};
-            },
+            },*/
 
             // Disable link method
             link: () => {

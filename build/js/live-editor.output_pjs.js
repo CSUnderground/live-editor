@@ -175,13 +175,12 @@ var PJSCodeInjector = (function () {
                     return _this.resourceCache.getImage(filename);
                 },
 
-                loadImage: function loadImage(file) {
-                    throw { message: "Use getImage instead of loadImage." };
+                /*loadImage: (file) => {
+                    throw {message: "Use getImage instead of loadImage."};
                 },
-
-                requestImage: function requestImage(file) {
-                    throw { message: "Use getImage instead of requestImage." };
-                },
+                  requestImage: (file) => {
+                    throw {message: "Use getImage instead of requestImage."};
+                },*/
 
                 // Disable link method
                 link: function link() {

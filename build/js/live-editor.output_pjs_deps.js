@@ -57812,7 +57812,7 @@ ASTTransforms.rewriteContextVariables = function (envName, context) {
                     //  (IE. no init value given to parser), and the current node type
                     //  doesn't match "ForInStatement" (a for-in loop), exit the
                     //  function.
-                    if (decl.init === null && parent.type !== "ForInStatement") {
+                    if (decl.init === null && parent.type !== "ForInStatement" && parent.type !== "ForOfStatement") {
                         return;
                     }
 
@@ -57837,6 +57837,13 @@ ASTTransforms.rewriteContextVariables = function (envName, context) {
                                 // Example:
                                 //  for (var i in obj) { ... }
                                 //  for (__env__.i in __env__.obj) { ... }
+                                return b.MemberExpression(b.Identifier(envName), b.Identifier(decl.id.name));
+                            } else if (["ForOfStatement"].includes(parent.type)) {
+                                // Handle variables declared inside a 'for of' statement,
+                                //  occuring in the global scope.
+                                // Example:
+                                //  for (var i of obj) { ... }
+                                //  for (__env__.i of __env__.obj) { ... }
                                 return b.MemberExpression(b.Identifier(envName), b.Identifier(decl.id.name));
                             }
                         }

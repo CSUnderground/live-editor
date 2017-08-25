@@ -178,7 +178,7 @@ var PJSCodeInjector = (function () {
                 /*loadImage: (file) => {
                     throw {message: "Use getImage instead of loadImage."};
                 },
-                 requestImage: (file) => {
+                  requestImage: (file) => {
                     throw {message: "Use getImage instead of requestImage."};
                 },*/
 

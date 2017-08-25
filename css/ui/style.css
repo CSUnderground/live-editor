@@ -25,7 +25,7 @@
 }
 
 .scratchpad-wrap .scratchpad-canvas-wrap #output {
-    overflow: auto;
+    overflow: hidden;
     position: relative;
 }
 

@@ -2347,7 +2347,7 @@ window.LiveEditor = Backbone.View.extend({
         $(".tipbar").css("width",(width - 140) +"px")
         this.$el.find(this.dom.CANVAS_WRAP).width(width);
         this.$el.find(this.dom.ALL_OUTPUT).height(height);
-         // Set the editor height to be the same as the canvas height
+          // Set the editor height to be the same as the canvas height
         this.$el.find(this.dom.EDITOR).height($(".scratchpad-canvas-wrap").height() - 46 - 8);*/
 
         this.$el.find(this.dom.OUTPUT_FRAME).css({

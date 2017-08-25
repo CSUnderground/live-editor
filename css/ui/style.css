@@ -38,8 +38,11 @@
 }
 
 .scratchpad-wrap .scratchpad-editor-wrap .scratchpad-editor-tab {
-    flex: 1;
     display: flex;
+
+}
+.scratchpad-wrap .scratchpad-editor-wrap .scratchpad-editor-tab:not([style*=height]) {
+    flex: 1;
 }
 .scratchpad-wrap .scratchpad-editor-wrap .scratchpad-toolbar {
     position: relative;

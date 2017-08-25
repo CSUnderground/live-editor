@@ -58,8 +58,8 @@ window.AceEditor = Backbone.View.extend({
         }
 
         // Make the editor vertically resizable
-        if (this.$el.resizable) {
-            this.$el.resizable({
+        if (this.$el.parent().resizable) {
+            this.$el.parent().resizable({
                 // Only allow for vertical resizing
                 handles: "s",
 

@@ -17,7 +17,6 @@ window.LiveEditor = Backbone.View.extend({
     dom: {
         DRAW_CANVAS: ".scratchpad-draw-canvas",
         DRAW_COLOR_BUTTONS: "#draw-widgets a.draw-color-button",
-        CANVAS_WRAP: ".scratchpad-canvas-wrap",
         EDITOR: ".scratchpad-editor",
         CANVAS_LOADING: ".scratchpad-canvas-loading",
         BIG_PLAY_LOADING: ".scratchpad-editor-bigplay-loading",
@@ -1079,7 +1078,7 @@ window.LiveEditor = Backbone.View.extend({
         // so now we also hide if we see data.results
 
         if (data.loaded || data.results) {
-            this.$el.find(this.dom.CANVAS_LOADING).hide();
+            this.$el.find(".scratchpad-wrap").removeClass("loading");
         }
 
         // Set the code in the editor
@@ -1472,14 +1471,19 @@ window.LiveEditor = Backbone.View.extend({
         this.canvasWidth = width;
         height = height || this.defaultOutputHeight;
         this.canvasHeight = height;
-        $(".scratchpad-wrap .scratchpad-editor-wrap").css("margin-right",width.toString() + "px")
+        /*$(".scratchpad-wrap .scratchpad-editor-wrap").css("margin-right",width.toString() + "px")
         $(".scratchpad-wrap").css("min-height",(height+41).toString() + "px")
         $(".tipbar").css("width",(width - 140) +"px")
         this.$el.find(this.dom.CANVAS_WRAP).width(width);
         this.$el.find(this.dom.ALL_OUTPUT).height(height);
 
         // Set the editor height to be the same as the canvas height
-        this.$el.find(this.dom.EDITOR).height($(".scratchpad-canvas-wrap").height() - 46 - 8);
+        this.$el.find(this.dom.EDITOR).height($(".scratchpad-canvas-wrap").height() - 46 - 8);*/
+
+        this.$el.find(this.dom.OUTPUT_FRAME).css({
+            width: width,
+            height: height
+        });
 
         this.trigger("canvasSizeUpdated", {
             width: width,

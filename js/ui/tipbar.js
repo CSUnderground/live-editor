@@ -43,7 +43,7 @@ window.TipBar = Backbone.View.extend({
             return false;
         });
 
-        this.$el.on("click", ".tipbar .show-me a", function(e) {
+        this.$el.on("click", ".tipbar .show-me", function(e) {
             e.preventDefault();
 
             var error = self.errors[self.pos];

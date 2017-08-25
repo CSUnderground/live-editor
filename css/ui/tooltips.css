@@ -82,6 +82,8 @@ html.playing .tooltip.hide-while-playing {
     bottom: auto;
     left: -7px;
     top: 5px;
+    width: 0;
+    height: 0;
 }
 
 .tooltip.picker .picker {

@@ -6,50 +6,66 @@
  * of the canvases.
  */
 .tipbar {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    padding: 10px;
+    animation: ErrorBuddyAppear 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.175);
+}
+@keyframes ErrorBuddyAppear {
+    from { opacity: 0; transform: translateY(150%) scale(0); }
+}
+.scratchpad-wrap.loading .tipbar {
+    visibility: hidden;
+}
+
+.tipbar .error-buddy {
+    background: url(../images/scratchpads/error-buddy.png) center/contain no-repeat;
+    cursor: move;
+    width: 130px;
+    height: 116px;
+    opacity: 0.75;
+    animation: ErrorBuddyFloat 1s infinite ease-in-out;
+}
+@keyframes ErrorBuddyFloat {
+    from, to { transform: translateY(-3px); }
+    50% { transform: translateY(3px); }
+}
+.tipbar .speech-arrow {
+   /* background-image: url(../images/scratchpads/speech-arrow.png);
+    background-repeat: no-repeat;
+    width: 14px;
+    height: 24px;*/
+    position: absolute;
+    left: -13px;
+    top: 40px;
+
+    border-right: 14px solid #f9f9f9;
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+}
+.tipbar .text-wrap {
     border-radius: 10px;
     /* Needs to match the background image */
     background: #F9F9F9;
     border: 1px solid #EEE;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); */
     color: #000;
-    display: none;
-    font-family: Helvetica;
-    font-weight: normal;
-    left: 125px;
-    margin: auto;
-    min-height: 40px;
-    position: absolute;
-    top: 100px;
-    width: 300;
-}
-.tipbar .error-buddy {
-    background: url(../images/scratchpads/error-buddy.png);
-    cursor: move;
-    height: 116px;
-    left: -140px;
-    opacity: 0.75;
-    position: absolute;
-    top: -12px;
-    width: 130px;
-}
-.tipbar .speech-arrow {
-    background-image: url(../images/scratchpads/speech-arrow.png);
-    background-repeat: no-repeat;
-    height: 24px;
-    left: -14px;
-    position: absolute;
-    top: 40px;
-    width: 14px;
-}
-.tipbar .text-wrap {
+    margin-left: 14px;
+    flex: 1;
+    position: relative;
+
     line-height: 1.4em;
-    margin: 8px 8px 33px 8px;
+    padding: 8px 10px;
     word-wrap:break-word;
+    -webkit-filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5));
 }
 .tipbar .text-wrap .message {
-    line-height: 20px;
     margin: 10px 0px;
-    text-align: left;
+    min-height: 2.8em;
 }
 .tipbar .text-wrap .message .quote {
     border-radius: 5px;
@@ -61,64 +77,47 @@
     line-height: 22px;
     margin: 0px 2px;
     padding: 1px 4px;
-    text-align: left;
 }
 .tipbar .text-wrap .oh-no {
     font-size: 13px;
     font-weight: bold;
 }
-.tipbar .text-wrap .show-me a {
+.tipbar .text-wrap .show-me {
     color: #005987;
     font-size: 14px;
     font-weight: bold;
-    position: absolute;
-    left: 7px;
 }
-.tipbar .text-wrap .show-me a:hover {
+.tipbar .text-wrap .show-me:hover {
     color: #678D00;
     text-decoration: underline;
 }
 .tipbar .tipnav {
-    right: 7px;
+    display: flex;
+    align-items: center;
     position: absolute;
+    right: 7px;
+    bottom: 7px;
 }
-.tipbar .tipnav a {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 5px;
-    color: #000;
-    display: inline-block;
-    font-size: 10px;
-    height: 16px;
-    line-height: 16px;
-    padding: 1px 1px 1px 3px;
+.tipbar .tipnav .current-pos {
+    margin: 0 3px;
 }
-.tipbar .tipnav a.prev {
-    padding: 1px 3px 1px 1px;
-}
-.tipbar .tipnav a .ui-icon {
+.tipbar .tipnav .ui-icon {
     background-image: url(../images/scratchpads/ui-icons_808080_256x240.png);
     background-repeat: no-repeat;
-    display: inline-block;
-    height: 16px;
-    margin-top: -4px;
-    overflow: hidden;
-    text-indent: -99999px;
-    vertical-align: middle;
-    width: 16px;
 }
-.tipbar .tipnav a .ui-icon.ui-icon-circle-triangle-w {
+.tipbar .tipnav .ui-icon.ui-icon-circle-triangle-w {
     background-position: -80px -192px;
 }
-.tipbar .tipnav a .ui-icon.ui-icon-circle-triangle-e {
+.tipbar .tipnav .ui-icon.ui-icon-circle-triangle-e {
     background-position: -48px -192px;
 }
 .tipbar .close {
-    background-color: transparent;
-    border: none;
-    color: black;
-    float: right;
     text-shadow: 0 1px 0 #CDCDCD;
     font-size:17px;
+    width: 1em;
+    position: absolute;
+    right: 5px;
+    top: 5px;
 }
 .tipbar .text a {
     text-decoration: underline;
@@ -154,20 +153,33 @@
  * blocked by the overlay.
  */
 .overlay {
-    height: 100%;
-    left: 0px;
-    margin: 0;
     position: absolute;
-    top: 0px;
     width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
 }
 .error-overlay {
     background: rgba(255, 255, 255, 0.6);
+    background-color: rgba(245, 245, 245, 0.6);
     z-index: auto;
 }
 
 .scratchpad-wrap {
+    display: flex;
     position: relative;
+    font-family: "Proxima Nova", Helvetica, Corbel, sans-serif;
+}
+@media (max-width: 740px) {
+    .scratchpad-wrap {
+        flex-direction: column-reverse;
+    }
+    .scratchpad-wrap .scratchpad-editor-wrap {
+        min-height: 400px;
+    }
+    .scratchpad-canvas-wrap {
+        align-items: center;
+    }
 }
 
 .scratchpad-wrap .hide-text {
@@ -176,33 +188,27 @@
 
 .scratchpad-wrap.no-output .scratchpad-canvas-wrap {
     display: none;
-}
-
-.scratchpad-wrap.no-output .scratchpad-editor-wrap {
     margin-right: 0;
 }
 
-.scratchpad-wrap .scratchpad-canvas-wrap {
-    float: right;
-}
-
-.scratchpad-wrap .scratchpad-canvas-wrap  #output {
-    overflow: hidden;
-    /*min-width: 402px;
-    min-height: 402px;*/
-    border-left: 1px solid #d4ccb0;
-    margin-left: -1px;
-    border-bottom:1px solid #d4ccb0;
-}
-
-.scratchpad-wrap .scratchpad-editor-wrap {
-    margin-right: 412px;
+.scratchpad-wrap .scratchpad-canvas-wrap #output {
+    overflow: auto;
     position: relative;
 }
 
-.scratchpad-wrap .scratchpad-editor-wrap .scratchpad-editor-tabs,
+.scratchpad-wrap .scratchpad-editor-wrap {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #D4CCB0;/*rgba(0,0,0,0.25)*/
+}
+
+.scratchpad-wrap .scratchpad-editor-wrap .scratchpad-editor-tab {
+    flex: 1;
+    display: flex;
+}
 .scratchpad-wrap .scratchpad-editor-wrap .scratchpad-toolbar {
-    margin-right: @row-spacing;
     position: relative;
 }
 .scratchpad-editor-tabs, .scratchpad-canvas-wrap {
@@ -213,8 +219,9 @@
 }
 
 .scratchpad-wrap .scratchpad-toolbar {
-    margin-top: 10px;
-    min-height: 30px;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
 }
 
 .scratchpad-wrap .scratchpad-toolbar .simple-button.pull-left {
@@ -230,28 +237,28 @@
 .scratchpad-wrap .error-buddy-resting {
     color: #4A7040;
     display: inline-block;
-    height: 35px;
+    height: 38px;
     position: relative;
     white-space: nowrap;
 }
-.scratchpad-wrap .error-buddy-resting .error-buddy-happy,
-.scratchpad-wrap .error-buddy-resting .error-buddy-thinking {
-    position: absolute;
-    text-decoration: none;
-}
 .scratchpad-wrap .error-buddy-resting img {
-    height: 35px;
-    vertical-align: middle;
+    height: 100%;
+}
+.scratchpad-wrap .error-buddy-resting .error-buddy-thinking {
+    cursor: pointer;
+    position: relative;
 }
 
 .scratchpad-editor-bigplay-button,
 .scratchpad-editor-bigplay-loading,
-.scratchpad-canvas-loading,
 #sm2-container.swf_timedout {
     left: 40%;
     position: absolute;
     top: 30%;
     z-index: 1000;
+}
+.scratchpad-wrap.loading .scratchpad-canvas-loading {
+    background: url(../images/spinner-large.gif) no-repeat center;
 }
 
 .scratchpad-editor-bigplay-button {
@@ -368,28 +375,17 @@
     padding: 5px;
 }
 
-.scratchpad-playbar .loading-msg {
+.scratchpad-wrap.loading .scratchpad-playbar .loading-msg {
     background: url(../images/spinner.gif) no-repeat 7px center;
     line-height: 30px;
     padding-left: 30px;
 }
 
-#output {
-    height: 402px;
-    position: relative;
-}
-
-#output-frame,
 .scratchpad-ace-editor {
-    height: 400px;
-    border: 1px solid #D4CCB0;
-}
-#output-frame {
-    border-left:none;
+    flex: 1;
 }
 
-.scratchpad-draw-canvas,
-#output-frame {
+.scratchpad-draw-canvas {
     width: 100%;
     top: 0;
     left: auto;
@@ -398,7 +394,10 @@
 }
 
 #output-frame {
+    border:none;
     box-sizing: border-box;
+    display: block;
+    margin: auto;
     height: 100%;
     overflow: hidden;
 }
@@ -408,15 +407,13 @@
 }
 
 .scratchpad-wrap .overlay {
-    height: 100%;
-    left: 0px;
-    margin: 0;
     /* Ensure the output can be scrolled behind, like for SQL */
     pointer-events: none;
     position: absolute;
-    top: 0px;
     width: 100%;
-    z-index: @zindexModal + 1;
+    height: 100%;
+    left: 0px;
+    top: 0px;
 }
 
 .scratchpad-wrap .overlay-container {
@@ -434,53 +431,77 @@ button {
     transition: box-shadow 200ms ease-in-out;
     box-shadow: 0 0 0px green;
 }
-
 button.hilite {
     box-shadow: 0 0 20px green;
 }
-.scratchpad-ace-editor {
-    border-bottom:1px solid rgba(0,0,0,0.25);
-}
+
 .editor-toolbar {
-    border: 1px solid #d4ccb0;
-    border-top: none;
-    margin-top: 0px !important;
-    height: 51px;
+    border-top: 1px solid #d4ccb0;
+    padding: 6px;
 }
-.editor-toolbar .error-buddy-resting {
-    margin-left:4px;
+.editor-toolbar .csunderground-toolbar {
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    margin: -3px;
+    margin-left: auto;
 }
-.editor-toolbar .simple-button {
-    background:none;
-    border-radius:10px;
-    border: 1px solid green;
-    color:green;
-    margin-top:5px;
-    margin-right:5px;
-    padding:6px 8px;
-    font-family:"Proxima Nova", Helvetica, Corbel, sans-serif;
-    text-decoration:none;
-    font-size:15px;
+.editor-toolbar .csunderground-toolbar > * {
+    margin: 0;
 }
-.vam {
-    vertical-align: middle;
-    /*border-top: 1px solid #888;
-    border-bottom: 1px solid #888;*/
-    position:relative !important;
+.editor-toolbar .csunderground-toolbar > .btn {
+    margin: 3px;
 }
-.vam-trick {
-    height:50px;
-    width:0px;
-    display:inline-block;
-}
-.restartIcon {
-    margin-bottom: -2px;
-    margin-right: 4px;
+.btn svg {
+    margin-right: 6px;
 }
 
 .error-buddy-hmm {
-    font-family:"Proxima Nova", Helvetica, Corbel, sans-serif;
     text-decoration:none;
     font-size:15px;
     color:black;
+}
+
+
+
+
+button, .btn, .simple-button, button.btn {
+    display: inline-flex;
+}
+button, .btn, .simple-button {
+    cursor: pointer;
+    align-items: center;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    border-radius: .25rem;
+    transition: all .15s ease-in-out;
+    text-decoration: none;
+    font-family: inherit;
+}
+
+.btn:focus, .btn:hover {
+    text-decoration: none;
+}
+.btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(0,123,255,.25);
+}
+.btn-outline-success:hover {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+.btn-outline-success.focus, .btn-outline-success:focus {
+    box-shadow: 0 0 0 3px rgba(40,167,69,.5);
 }

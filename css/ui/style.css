@@ -316,3 +316,15 @@ button.hilite {
     font-size:15px;
     color:black;
 }
+
+.csunderground-toolbar {
+    display: flex;
+    align-items: center;
+    padding: 3px;
+}
+.csunderground-toolbar > * {
+    margin: 0;
+}
+.csunderground-toolbar > .btn {
+    margin: 3px;
+}

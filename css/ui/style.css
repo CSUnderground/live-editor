@@ -45,6 +45,8 @@
 }
 
 .scratchpad-wrap .scratchpad-toolbar {
+    display: flex;
+    overflow-x: auto;
     margin-top: 10px;
     min-height: 30px;
 }

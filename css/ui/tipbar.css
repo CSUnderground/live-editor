@@ -40,7 +40,7 @@
     height: 24px;*/
     position: absolute;
     left: -13px;
-    top: 40px;
+    top: calc(50% - 14px);
 
     border-right: 14px solid #f9f9f9;
     border-top: 14px solid transparent;

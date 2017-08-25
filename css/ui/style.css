@@ -1,5 +1,18 @@
 .scratchpad-wrap {
+    display: flex;
     position: relative;
+    font-family: "Proxima Nova", Helvetica, Corbel, sans-serif;
+}
+@media (max-width: 740px) {
+    .scratchpad-wrap {
+        flex-direction: column-reverse;
+    }
+    .scratchpad-wrap .scratchpad-editor-wrap {
+        min-height: 400px;
+    }
+    .scratchpad-canvas-wrap {
+        align-items: center;
+    }
 }
 
 .scratchpad-wrap .hide-text {
@@ -8,33 +21,30 @@
 
 .scratchpad-wrap.no-output .scratchpad-canvas-wrap {
     display: none;
-}
-
-.scratchpad-wrap.no-output .scratchpad-editor-wrap {
     margin-right: 0;
 }
 
-.scratchpad-wrap .scratchpad-canvas-wrap {
-    float: right;
-}
-
-.scratchpad-wrap .scratchpad-canvas-wrap  #output {
-    overflow: hidden;
-    /*min-width: 402px;
-    min-height: 402px;*/
-    border-left: 1px solid #d4ccb0;
-    margin-left: -1px;
-    border-bottom:1px solid #d4ccb0;
-}
-
-.scratchpad-wrap .scratchpad-editor-wrap {
-    margin-right: 412px;
+.scratchpad-wrap .scratchpad-canvas-wrap #output {
+    overflow: auto;
     position: relative;
 }
 
-.scratchpad-wrap .scratchpad-editor-wrap .scratchpad-editor-tabs,
+.scratchpad-wrap .scratchpad-editor-wrap {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #D4CCB0;/*rgba(0,0,0,0.25)*/
+}
+
+.scratchpad-wrap .scratchpad-editor-wrap .scratchpad-editor-tab {
+    display: flex;
+
+}
+.scratchpad-wrap .scratchpad-editor-wrap .scratchpad-editor-tab:not([style*=height]) {
+    flex: 1;
+}
 .scratchpad-wrap .scratchpad-editor-wrap .scratchpad-toolbar {
-    margin-right: @row-spacing;
     position: relative;
 }
 .scratchpad-editor-tabs, .scratchpad-canvas-wrap {
@@ -45,8 +55,9 @@
 }
 
 .scratchpad-wrap .scratchpad-toolbar {
-    margin-top: 10px;
-    min-height: 30px;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
 }
 
 .scratchpad-wrap .scratchpad-toolbar .simple-button.pull-left {
@@ -62,28 +73,28 @@
 .scratchpad-wrap .error-buddy-resting {
     color: #4A7040;
     display: inline-block;
-    height: 35px;
+    height: 38px;
     position: relative;
     white-space: nowrap;
 }
-.scratchpad-wrap .error-buddy-resting .error-buddy-happy,
-.scratchpad-wrap .error-buddy-resting .error-buddy-thinking {
-    position: absolute;
-    text-decoration: none;
-}
 .scratchpad-wrap .error-buddy-resting img {
-    height: 35px;
-    vertical-align: middle;
+    height: 100%;
+}
+.scratchpad-wrap .error-buddy-resting .error-buddy-thinking {
+    cursor: pointer;
+    position: relative;
 }
 
 .scratchpad-editor-bigplay-button,
 .scratchpad-editor-bigplay-loading,
-.scratchpad-canvas-loading,
 #sm2-container.swf_timedout {
     left: 40%;
     position: absolute;
     top: 30%;
     z-index: 1000;
+}
+.scratchpad-wrap.loading .scratchpad-canvas-loading {
+    background: url(../images/spinner-large.gif) no-repeat center;
 }
 
 .scratchpad-editor-bigplay-button {
@@ -200,28 +211,17 @@
     padding: 5px;
 }
 
-.scratchpad-playbar .loading-msg {
+.scratchpad-wrap.loading .scratchpad-playbar .loading-msg {
     background: url(../images/spinner.gif) no-repeat 7px center;
     line-height: 30px;
     padding-left: 30px;
 }
 
-#output {
-    height: 402px;
-    position: relative;
-}
-
-#output-frame,
 .scratchpad-ace-editor {
-    height: 400px;
-    border: 1px solid #D4CCB0;
-}
-#output-frame {
-    border-left:none;
+    flex: 1;
 }
 
-.scratchpad-draw-canvas,
-#output-frame {
+.scratchpad-draw-canvas {
     width: 100%;
     top: 0;
     left: auto;
@@ -230,7 +230,10 @@
 }
 
 #output-frame {
+    border:none;
     box-sizing: border-box;
+    display: block;
+    margin: auto;
     height: 100%;
     overflow: hidden;
 }
@@ -240,15 +243,13 @@
 }
 
 .scratchpad-wrap .overlay {
-    height: 100%;
-    left: 0px;
-    margin: 0;
     /* Ensure the output can be scrolled behind, like for SQL */
     pointer-events: none;
     position: absolute;
-    top: 0px;
     width: 100%;
-    z-index: @zindexModal + 1;
+    height: 100%;
+    left: 0px;
+    top: 0px;
 }
 
 .scratchpad-wrap .overlay-container {
@@ -266,53 +267,77 @@ button {
     transition: box-shadow 200ms ease-in-out;
     box-shadow: 0 0 0px green;
 }
-
 button.hilite {
     box-shadow: 0 0 20px green;
 }
-.scratchpad-ace-editor {
-    border-bottom:1px solid rgba(0,0,0,0.25);
-}
+
 .editor-toolbar {
-    border: 1px solid #d4ccb0;
-    border-top: none;
-    margin-top: 0px !important;
-    height: 51px;
+    border-top: 1px solid #d4ccb0;
+    padding: 6px;
 }
-.editor-toolbar .error-buddy-resting {
-    margin-left:4px;
+.editor-toolbar .csunderground-toolbar {
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    margin: -3px;
+    margin-left: auto;
 }
-.editor-toolbar .simple-button {
-    background:none;
-    border-radius:10px;
-    border: 1px solid green;
-    color:green;
-    margin-top:5px;
-    margin-right:5px;
-    padding:6px 8px;
-    font-family:"Proxima Nova", Helvetica, Corbel, sans-serif;
-    text-decoration:none;
-    font-size:15px;
+.editor-toolbar .csunderground-toolbar > * {
+    margin: 0;
 }
-.vam {
-    vertical-align: middle;
-    /*border-top: 1px solid #888;
-    border-bottom: 1px solid #888;*/
-    position:relative !important;
+.editor-toolbar .csunderground-toolbar > .btn {
+    margin: 3px;
 }
-.vam-trick {
-    height:50px;
-    width:0px;
-    display:inline-block;
-}
-.restartIcon {
-    margin-bottom: -2px;
-    margin-right: 4px;
+.btn svg {
+    margin-right: 6px;
 }
 
 .error-buddy-hmm {
-    font-family:"Proxima Nova", Helvetica, Corbel, sans-serif;
     text-decoration:none;
     font-size:15px;
     color:black;
+}
+
+
+
+
+button, .btn, .simple-button, button.btn {
+    display: inline-flex;
+}
+button, .btn, .simple-button {
+    cursor: pointer;
+    align-items: center;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    border-radius: .25rem;
+    transition: all .15s ease-in-out;
+    text-decoration: none;
+    font-family: inherit;
+}
+
+.btn:focus, .btn:hover {
+    text-decoration: none;
+}
+.btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(0,123,255,.25);
+}
+.btn-outline-success:hover {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+.btn-outline-success.focus, .btn-outline-success:focus {
+    box-shadow: 0 0 0 3px rgba(40,167,69,.5);
 }

@@ -6,50 +6,67 @@
  * of the canvases.
  */
 .tipbar {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    padding: 10px;
+    animation: ErrorBuddyAppear 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.175);
+}
+@keyframes ErrorBuddyAppear {
+    from { opacity: 0; transform: translateY(150%) scale(0); }
+}
+.scratchpad-wrap.loading .tipbar {
+    visibility: hidden;
+}
+
+.tipbar .error-buddy {
+    background: url(../images/scratchpads/error-buddy.png) center/contain no-repeat;
+    cursor: move;
+    width: 130px;
+    height: 116px;
+    opacity: 0.75;
+    animation: ErrorBuddyFloat 1s infinite ease-in-out;
+}
+@keyframes ErrorBuddyFloat {
+    from, to { transform: translateY(-3px); }
+    50% { transform: translateY(3px); }
+}
+.tipbar .speech-arrow {
+   /* background-image: url(../images/scratchpads/speech-arrow.png);
+    background-repeat: no-repeat;
+    width: 14px;
+    height: 24px;*/
+    position: absolute;
+    left: -13px;
+    top: calc(50% - 14px);
+
+    border-right: 14px solid #f9f9f9;
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+}
+.tipbar .text-wrap {
     border-radius: 10px;
     /* Needs to match the background image */
     background: #F9F9F9;
     border: 1px solid #EEE;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); */
     color: #000;
-    display: none;
-    font-family: Helvetica;
-    font-weight: normal;
-    left: 125px;
-    margin: auto;
-    min-height: 40px;
-    position: absolute;
-    top: 100px;
-    width: 300;
-}
-.tipbar .error-buddy {
-    background: url(../images/scratchpads/error-buddy.png);
-    cursor: move;
-    height: 116px;
-    left: -140px;
-    opacity: 0.75;
-    position: absolute;
-    top: -12px;
-    width: 130px;
-}
-.tipbar .speech-arrow {
-    background-image: url(../images/scratchpads/speech-arrow.png);
-    background-repeat: no-repeat;
-    height: 24px;
-    left: -14px;
-    position: absolute;
-    top: 40px;
-    width: 14px;
-}
-.tipbar .text-wrap {
+    margin-left: 14px;
+    flex: 1;
+    position: relative;
+
     line-height: 1.4em;
-    margin: 8px 8px 33px 8px;
+    padding: 8px 10px;
     word-wrap:break-word;
+    -webkit-filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5));
 }
 .tipbar .text-wrap .message {
-    line-height: 20px;
     margin: 10px 0px;
-    text-align: left;
+    min-height: 2.8em;
+    word-break: break-word;
 }
 .tipbar .text-wrap .message .quote {
     border-radius: 5px;
@@ -61,64 +78,47 @@
     line-height: 22px;
     margin: 0px 2px;
     padding: 1px 4px;
-    text-align: left;
 }
 .tipbar .text-wrap .oh-no {
     font-size: 13px;
     font-weight: bold;
 }
-.tipbar .text-wrap .show-me a {
+.tipbar .text-wrap .show-me {
     color: #005987;
     font-size: 14px;
     font-weight: bold;
-    position: absolute;
-    left: 7px;
 }
-.tipbar .text-wrap .show-me a:hover {
+.tipbar .text-wrap .show-me:hover {
     color: #678D00;
     text-decoration: underline;
 }
 .tipbar .tipnav {
-    right: 7px;
+    display: flex;
+    align-items: center;
     position: absolute;
+    right: 7px;
+    bottom: 7px;
 }
-.tipbar .tipnav a {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 5px;
-    color: #000;
-    display: inline-block;
-    font-size: 10px;
-    height: 16px;
-    line-height: 16px;
-    padding: 1px 1px 1px 3px;
+.tipbar .tipnav .current-pos {
+    margin: 0 3px;
 }
-.tipbar .tipnav a.prev {
-    padding: 1px 3px 1px 1px;
-}
-.tipbar .tipnav a .ui-icon {
+.tipbar .tipnav .ui-icon {
     background-image: url(../images/scratchpads/ui-icons_808080_256x240.png);
     background-repeat: no-repeat;
-    display: inline-block;
-    height: 16px;
-    margin-top: -4px;
-    overflow: hidden;
-    text-indent: -99999px;
-    vertical-align: middle;
-    width: 16px;
 }
-.tipbar .tipnav a .ui-icon.ui-icon-circle-triangle-w {
+.tipbar .tipnav .ui-icon.ui-icon-circle-triangle-w {
     background-position: -80px -192px;
 }
-.tipbar .tipnav a .ui-icon.ui-icon-circle-triangle-e {
+.tipbar .tipnav .ui-icon.ui-icon-circle-triangle-e {
     background-position: -48px -192px;
 }
 .tipbar .close {
-    background-color: transparent;
-    border: none;
-    color: black;
-    float: right;
     text-shadow: 0 1px 0 #CDCDCD;
     font-size:17px;
+    width: 1em;
+    position: absolute;
+    right: 5px;
+    top: 5px;
 }
 .tipbar .text a {
     text-decoration: underline;
@@ -154,14 +154,14 @@
  * blocked by the overlay.
  */
 .overlay {
-    height: 100%;
-    left: 0px;
-    margin: 0;
     position: absolute;
-    top: 0px;
     width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
 }
 .error-overlay {
     background: rgba(255, 255, 255, 0.6);
+    background-color: rgba(245, 245, 245, 0.6);
     z-index: auto;
 }

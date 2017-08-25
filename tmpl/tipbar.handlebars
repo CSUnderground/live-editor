@@ -1,20 +1,16 @@
 <div class="tipbar">
-    <div class="speech-arrow"></div>
     <div class="error-buddy"></div>
     
     <div class="text-wrap">
         <button class="close" type="button" aria-label="Close">{{#i18nDoNotTranslate}}&times;{{/i18nDoNotTranslate}}</button>
         <div class="oh-no">{{#_}}Oh noes!{{/_}}</div>
         <div class="message"></div>
-        <div class="show-me"><a href>{{#_}}Show me where{{/_}}</a></div>
-        <div class="tipnav">
-            <a href="javascript:void(0);" class="prev" title="{{#_}}Previous error{{/_}}">
-                <span class="ui-icon ui-icon-circle-triangle-w"></span>
-            </a>
+        <a class="show-me" href>{{#_}}Show me where{{/_}}</a>
+        <div class="tipnav" style="display: none">
+            <a href="javascript:void(0);" class="prev ui-icon ui-icon-circle-triangle-w" title="{{#_}}Previous error{{/_}}"></a>
             <span class="current-pos"></span>
-            <a href="javascript:void(0);" class="next" title="{{#_}}Next error{{/_}}">
-                <span class="ui-icon ui-icon-circle-triangle-e"></span>
-            </a>
+            <a href="javascript:void(0);" class="next ui-icon ui-icon-circle-triangle-e" title="{{#_}}Next error{{/_}}"></a>
         </div>
+        <div class="speech-arrow"></div>
     </div>
 </div>

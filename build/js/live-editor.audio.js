@@ -6450,7 +6450,7 @@ function program15(depth0,data) {
   
   return "Empty";}
 
-  buffer += "<div class=\"scratchpad-dev-record\">\r\n    <div class=\"scratchpad-dev-record-buttons\">\r\n        <button class=\"scratchpad-dev-new-chunk simple-button\">";
+  buffer += "<div class=\"scratchpad-dev-record\">\n    <div class=\"scratchpad-dev-record-buttons\">\n        <button class=\"scratchpad-dev-new-chunk simple-button\">";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(1, program1, data);
@@ -6460,7 +6460,7 @@ function program15(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</button>\r\n        <button class=\"scratchpad-dev-discard-chunk simple-button\">";
+  buffer += "</button>\n        <button class=\"scratchpad-dev-discard-chunk simple-button\">";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(3, program3, data);
@@ -6470,7 +6470,7 @@ function program15(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</button>\r\n        <button class=\"scratchpad-dev-save-chunk simple-button\">";
+  buffer += "</button>\n        <button class=\"scratchpad-dev-save-chunk simple-button\">";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(5, program5, data);
@@ -6480,7 +6480,7 @@ function program15(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</button>\r\n        <button class=\"scratchpad-dev-refresh-editor-state simple-button\">";
+  buffer += "</button>\n        <button class=\"scratchpad-dev-refresh-editor-state simple-button\">";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(7, program7, data);
@@ -6490,7 +6490,7 @@ function program15(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</button>\r\n    </div>\r\n    <div class=\"show-audio-chunks-wrapper\">\r\n        <p>";
+  buffer += "</button>\n    </div>\n    <div class=\"show-audio-chunks-wrapper\">\n        <p>";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(9, program9, data);
@@ -6510,7 +6510,7 @@ function program15(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</span></p>\r\n        <p>";
+  buffer += "</span></p>\n        <p>";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(13, program13, data);
@@ -6530,7 +6530,7 @@ function program15(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</span></p>\r\n    </div>\r\n</div>";
+  buffer += "</span></p>\n    </div>\n</div>";
   return buffer;});;
 $(document).delegate("a.ui-button", {
     mouseenter: function mouseenter() {

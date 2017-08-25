@@ -1,31 +1,6 @@
-<div class="scratchpad-wrap{{#unless execFile}} no-output{{/unless}}">
-    <!-- Canvases (Drawing + Output) -->
-    <div class="scratchpad-canvas-wrap">
-        <div id="output">
-            <!-- Extra data-src attribute to work around
-                 cross-origin access policies. -->
-            {{#if execFile}}
-                <iframe id="output-frame"
-                    src="{{execFile}}"
-                    data-src="{{execFile}}"
-                    sandbox="allow-scripts allow-pointer-lock allow-same-origin"></iframe>
-            {{/if}}
-            <canvas class="scratchpad-draw-canvas" style="display:none;"
-                width="400" height="400"></canvas>
-
-            <div class="overlay disable-overlay" style="display:none;">
-            </div>
-
-            <div class="scratchpad-canvas-loading">
-                <img src="{{imagesDir}}/spinner-large.gif">
-                <span class="hide-text">{{#_}}Loading...{{/_}}</span>
-            </div>
-        </div>
-    </div>
-
+<div class="scratchpad-wrap loading{{#unless execFile}} no-output{{/unless}}">
     <!-- Editor -->
     <div class="scratchpad-editor-wrap overlay-container">
-        <div class="scratchpad-editor-tabs">
           <div id="scratchpad-code-editor-tab" class="scratchpad-editor-tab">
             <div class="scratchpad-editor scratchpad-ace-editor"></div>
             <div class="overlay disable-overlay" style="display:none;">
@@ -48,23 +23,19 @@
             </button>
           </div>
           <div class="scratchpad-toolbar editor-toolbar">
-            <span class="vam vam-trick"></span>
-                <span class="error-buddy-resting vam">
-                    <span class="error-buddy-happy vam" style="display:none;">
-                        <img class="vam" src="{{imagesDir}}/creatures/OhNoes-Happy.png"/>
-                    </span>
-                    <a class="error-buddy-thinking vam" style="display:none;" href="javascript:void()">
+                <span class="error-buddy-resting">
+                    <img class="error-buddy-happy" style="display:none;" src="{{imagesDir}}/creatures/OhNoes-Happy.png"/>
+                    <span class="error-buddy-thinking" style="display:none;">
                         <img src="{{imagesDir}}/creatures/OhNoes-Hmm.png"/>
                         {{! I18N: The CS error buddy is thinking there might be an error in your code and is waiting for you to fix it !}}
                         <span class="error-buddy-hmm">{{#_}}Hmm...{{/_}}</span>
-                    </a>
+                    </span>
                 </span>
-                <span class="csunderground-toolbar" style="float:right">
-                    <span class="vam vam-trick" style="height:50px"></span>
-                    <a id="restart-code" href="javascript:void(0)" class="btn btn-outline-success" style="margin-right: 6px;">
-                        <span class="icon-refresh"><svg class="restartIcon" focusable="false" width="1.000020000400008em" height="1em" viewBox="0 0 100 99.998"><path fill="currentColor" d="M50.046 83.391q8.778 0 16.302-4.218t12.084-11.685q.741-1.083 3.477-7.638.513-1.482 1.938-1.482l12.483 0q.855.057 1.482.627t.627 1.14-.057.741q-4.104 17.499-17.442 28.329t-31.179 10.83q-9.519 0-18.411-3.591t-15.846-10.203l-8.379 8.379q-1.254 1.254-2.964 1.254-1.653 0-2.907-1.254t-1.254-2.907l0-29.184q0-1.71 1.254-2.964t2.907-1.197l29.184 0q1.71 0 2.964 1.254 1.197 1.197 1.197 2.907t-1.197 2.907l-8.949 8.949q9.747 9.006 22.686 9.006zm49.989-75.069l0 29.184q.057 1.71-1.197 2.964t-2.964 1.197l-29.184 0q-1.71 0-2.964-1.254t-1.197-2.907q0-1.71 1.254-2.907l9.006-9.006q-9.633-8.949-22.743-8.949-8.721.057-16.302 4.275t-12.141 11.628q-.741 1.083-3.42 7.638-.513 1.482-1.938 1.482l-12.996 0q-.855 0-1.482-.627t-.57-1.425l0-.456q4.218-17.442 17.556-28.272t31.293-10.887q9.462 0 18.468 3.591t15.96 10.203l8.493-8.379q1.197-1.254 2.907-1.254t2.964 1.254 1.197 2.907z"></path></svg></span>
+                <span class="csunderground-toolbar">
+                    <button id="restart-code" class="btn btn-outline-success">
+                        <svg class="restartIcon" focusable="false" width="1em" height="1em" viewBox="0 0 100 100"><path fill="currentColor" d="M50.046 83.391q8.778 0 16.302-4.218t12.084-11.685q.741-1.083 3.477-7.638.513-1.482 1.938-1.482l12.483 0q.855.057 1.482.627t.627 1.14-.057.741q-4.104 17.499-17.442 28.329t-31.179 10.83q-9.519 0-18.411-3.591t-15.846-10.203l-8.379 8.379q-1.254 1.254-2.964 1.254-1.653 0-2.907-1.254t-1.254-2.907l0-29.184q0-1.71 1.254-2.964t2.907-1.197l29.184 0q1.71 0 2.964 1.254 1.197 1.197 1.197 2.907t-1.197 2.907l-8.949 8.949q9.747 9.006 22.686 9.006zm49.989-75.069l0 29.184q.057 1.71-1.197 2.964t-2.964 1.197l-29.184 0q-1.71 0-2.964-1.254t-1.197-2.907q0-1.71 1.254-2.907l9.006-9.006q-9.633-8.949-22.743-8.949-8.721.057-16.302 4.275t-12.141 11.628q-.741 1.083-3.42 7.638-.513 1.482-1.938 1.482l-12.996 0q-.855 0-1.482-.627t-.57-1.425l0-.456q4.218-17.442 17.556-28.272t31.293-10.887q9.462 0 18.468 3.591t15.96 10.203l8.493-8.379q1.197-1.254 2.907-1.254t2.964 1.254 1.197 2.907z"></path></svg>
                         {{#_}}Restart{{/_}}
-                    </a>
+                    </button>
                 </span>
 
                 <!-- Widgets for selecting colors to doodle on the canvas during
@@ -83,7 +54,6 @@
                 <!-- Record button -->
                 <button id="record" class="simple-button pull-left" style="display:none;">{{#_}}Record{{/_}}</button>
             </div>
-        </div>
 
         <div class="scratchpad-toolbar">
             <!-- Row for playback controls -->
@@ -107,5 +77,28 @@
         </div>
 
         <div class="scratchpad-toolbar scratchpad-dev-record-row" style="display:none;"></div>
+    </div>
+
+    <!-- Canvases (Drawing + Output) -->
+    <div class="scratchpad-canvas-wrap">
+        <div id="output">
+            <!-- Extra data-src attribute to work around
+                 cross-origin access policies. -->
+            {{#if execFile}}
+                <iframe id="output-frame"
+                    src="{{execFile}}"
+                    data-src="{{execFile}}"
+                    sandbox="allow-scripts allow-pointer-lock allow-same-origin"></iframe>
+            {{/if}}
+            <canvas class="scratchpad-draw-canvas" style="display:none;"
+                width="400" height="400"></canvas>
+
+            <div class="overlay disable-overlay" style="display:none;">
+            </div>
+
+            <div class="overlay scratchpad-canvas-loading">
+                <span class="hide-text">{{#_}}Loading...{{/_}}</span>
+            </div>
+        </div>
     </div>
 </div>

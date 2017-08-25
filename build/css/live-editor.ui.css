@@ -66,6 +66,7 @@
 .tipbar .text-wrap .message {
     margin: 10px 0px;
     min-height: 2.8em;
+    word-break: break-word;
 }
 .tipbar .text-wrap .message .quote {
     border-radius: 5px;

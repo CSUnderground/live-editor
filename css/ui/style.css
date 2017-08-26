@@ -44,6 +44,13 @@
 .scratchpad-wrap .scratchpad-editor-wrap .scratchpad-editor-tab:not([style*=height]) {
     flex: 1;
 }
+.scratchpad-wrap .scratchpad-editor-wrap .editor-toolbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    height: 54px;
+}
 .scratchpad-wrap .scratchpad-editor-wrap .scratchpad-toolbar {
     position: relative;
 }
@@ -52,12 +59,6 @@
 }
 .scratchpad-wrap .scratchpad-editor-wrap .scratchpad-editor-tabs-links {
     overflow: hidden;
-}
-
-.scratchpad-wrap .scratchpad-toolbar {
-    display: flex;
-    align-items: center;
-    overflow-x: auto;
 }
 
 .scratchpad-wrap .scratchpad-toolbar .simple-button.pull-left {
@@ -73,7 +74,6 @@
 .scratchpad-wrap .error-buddy-resting {
     color: #4A7040;
     display: inline-block;
-    height: 38px;
     position: relative;
     white-space: nowrap;
 }
@@ -273,12 +273,11 @@ button.hilite {
 
 .editor-toolbar {
     border-top: 1px solid #d4ccb0;
-    padding: 6px;
+    padding: 7px;
 }
 .editor-toolbar .csunderground-toolbar {
     display: flex;
     align-items: center;
-    padding: 3px;
     margin: -3px;
     margin-left: auto;
 }
@@ -316,7 +315,6 @@ button, .btn, .simple-button {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    border: 1px solid transparent;
     padding: .5rem .75rem;
     font-size: 1rem;
     line-height: 1.25;

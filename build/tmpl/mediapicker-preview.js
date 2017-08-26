@@ -17,12 +17,12 @@ function program3(depth0,data) {
 function program5(depth0,data) {
   
   
-  return "\n		<audio controls class=\"mediapicker-preview-file\"></audio>\n		<div class=\"thumb-error\"></div>\n		";}
+  return "\r\n		<audio controls class=\"mediapicker-preview-file\"></audio>\r\n		<div class=\"thumb-error\"></div>\r\n		";}
 
 function program7(depth0,data) {
   
   
-  return "\n		<img src=\"/images/spinner.gif\" class=\"thumb-throbber\" />\n		<div class=\"thumb-shell\">\n			<img class=\"thumb\" />\n			<div class=\"thumb-error\"></div>\n		</div> \n		";}
+  return "\r\n		<img src=\"/images/spinner.gif\" class=\"thumb-throbber\" />\r\n		<div class=\"thumb-shell\">\r\n			<img class=\"thumb\" />\r\n			<div class=\"thumb-error\"></div>\r\n		</div> \r\n		";}
 
 function program9(depth0,data) {
   
@@ -39,7 +39,7 @@ function program9(depth0,data) {
   tmp1.inverse = self.program(3, program3, data);
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\">\n	<div class=\"mediapicker-preview-content\">\n		\n		";
+  buffer += "\">\r\n	<div class=\"mediapicker-preview-content\">\r\n		\r\n		";
   foundHelper = helpers.isAudio;
   stack1 = foundHelper || depth0.isAudio;
   stack2 = helpers['if'];
@@ -49,7 +49,7 @@ function program9(depth0,data) {
   tmp1.inverse = self.program(7, program7, data);
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n\n		<button class=\"kui-button kui-button-submit kui-button-primary\" style=\"padding: 5px; width: 100%; margin: 0 auto;\" >\n			";
+  buffer += "\r\n\r\n		<button class=\"kui-button kui-button-submit kui-button-primary\" style=\"padding: 5px; width: 100%; margin: 0 auto;\" >\r\n			";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(9, program9, data);
@@ -59,5 +59,5 @@ function program9(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n		</button> \n	</div>\n	<div class=\"arrow\"></div>\n</div>";
+  buffer += "\r\n		</button> \r\n	</div>\r\n	<div class=\"arrow\"></div>\r\n</div>";
   return buffer;});;

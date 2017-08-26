@@ -7,17 +7,17 @@ this["Handlebars"]["templates"]["sql-results"] = Handlebars.template(function (H
 function program1(depth0,data) {
   
   
-  return "\n        <h1>Database Schema</h1>\n    ";}
+  return "\r\n        <h1>Database Schema</h1>\r\n    ";}
 
 function program3(depth0,data) {
   
   var buffer = "", stack1, stack2;
-  buffer += "\n        <table class=\"sql-schema-table\" data-table-name=\"";
+  buffer += "\r\n        <table class=\"sql-schema-table\" data-table-name=\"";
   foundHelper = helpers.name;
   stack1 = foundHelper || depth0.name;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "\">\n        <thead>\n        ";
+  buffer += escapeExpression(stack1) + "\">\r\n        <thead>\r\n        ";
   foundHelper = helpers.hasSingleRow;
   stack1 = foundHelper || depth0.hasSingleRow;
   stack2 = helpers['if'];
@@ -27,7 +27,7 @@ function program3(depth0,data) {
   tmp1.inverse = self.program(6, program6, data);
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </thead>\n        <tbody>\n        ";
+  buffer += "\r\n        </thead>\r\n        <tbody>\r\n        ";
   foundHelper = helpers.columns;
   stack1 = foundHelper || depth0.columns;
   stack2 = helpers.each;
@@ -37,12 +37,12 @@ function program3(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </tbody>\n        </table>\n    ";
+  buffer += "\r\n        </tbody>\r\n        </table>\r\n    ";
   return buffer;}
 function program4(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n            <th><a href=\"javascript:void(0)\">";
+  buffer += "\r\n            <th><a href=\"javascript:void(0)\">";
   foundHelper = helpers.name;
   stack1 = foundHelper || depth0.name;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
@@ -52,13 +52,13 @@ function program4(depth0,data) {
   stack1 = foundHelper || depth0.rowCount;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "rowCount", { hash: {} }); }
-  buffer += escapeExpression(stack1) + " row</span></th>\n        ";
+  buffer += escapeExpression(stack1) + " row</span></th>\r\n        ";
   return buffer;}
 
 function program6(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n            <th><a href=\"javascript:void(0)\">";
+  buffer += "\r\n            <th><a href=\"javascript:void(0)\">";
   foundHelper = helpers.name;
   stack1 = foundHelper || depth0.name;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
@@ -68,13 +68,13 @@ function program6(depth0,data) {
   stack1 = foundHelper || depth0.rowCount;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "rowCount", { hash: {} }); }
-  buffer += escapeExpression(stack1) + " rows</span></th>\n        ";
+  buffer += escapeExpression(stack1) + " rows</span></th>\r\n        ";
   return buffer;}
 
 function program8(depth0,data) {
   
   var buffer = "", stack1, stack2;
-  buffer += "\n            <tr><td>\n            ";
+  buffer += "\r\n            <tr><td>\r\n            ";
   foundHelper = helpers.name;
   stack1 = foundHelper || depth0.name;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
@@ -94,7 +94,7 @@ function program8(depth0,data) {
   stack1 = foundHelper || depth0.type;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "type", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</span></span>\n            </td></tr>\n        ";
+  buffer += escapeExpression(stack1) + "</span></span>\r\n            </td></tr>\r\n        ";
   return buffer;}
 function program9(depth0,data) {
   
@@ -104,12 +104,12 @@ function program9(depth0,data) {
 function program11(depth0,data) {
   
   
-  return "\n        <h1>Results</h1>\n    ";}
+  return "\r\n        <h1>Results</h1>\r\n    ";}
 
 function program13(depth0,data) {
   
   var buffer = "", stack1, stack2;
-  buffer += "\n        <table class=\"sql-result-table\">\n        <thead>\n        ";
+  buffer += "\r\n        <table class=\"sql-result-table\">\r\n        <thead>\r\n        ";
   foundHelper = helpers.columns;
   stack1 = foundHelper || depth0.columns;
   stack2 = helpers.each;
@@ -119,7 +119,7 @@ function program13(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </thead>\n        <tbody>\n        ";
+  buffer += "\r\n        </thead>\r\n        <tbody>\r\n        ";
   foundHelper = helpers.values;
   stack1 = foundHelper || depth0.values;
   stack2 = helpers.each;
@@ -129,22 +129,22 @@ function program13(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </tbody>\n        </table>\n    ";
+  buffer += "\r\n        </tbody>\r\n        </table>\r\n    ";
   return buffer;}
 function program14(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n            <th>";
+  buffer += "\r\n            <th>";
   stack1 = depth0;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "this", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</th>\n        ";
+  buffer += escapeExpression(stack1) + "</th>\r\n        ";
   return buffer;}
 
 function program16(depth0,data) {
   
   var buffer = "", stack1, stack2;
-  buffer += "\n            <tr>\n                ";
+  buffer += "\r\n            <tr>\r\n                ";
   foundHelper = helpers.result;
   stack1 = foundHelper || depth0.result;
   stack2 = helpers.each;
@@ -154,12 +154,12 @@ function program16(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n            </tr>\n        ";
+  buffer += "\r\n            </tr>\r\n        ";
   return buffer;}
 function program17(depth0,data) {
   
   var buffer = "", stack1, stack2;
-  buffer += "\n                    ";
+  buffer += "\r\n                    ";
   foundHelper = helpers.data;
   stack1 = foundHelper || depth0.data;
   foundHelper = helpers.isNull;
@@ -171,26 +171,26 @@ function program17(depth0,data) {
   if(foundHelper && typeof stack2 === functionType) { stack1 = stack2.call(depth0, stack1, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack2, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                ";
+  buffer += "\r\n                ";
   return buffer;}
 function program18(depth0,data) {
   
   
-  return "\n                        <td>NULL</td>\n                    ";}
+  return "\r\n                        <td>NULL</td>\r\n                    ";}
 
 function program20(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n                        <td>";
+  buffer += "\r\n                        <td>";
   foundHelper = helpers.data;
   stack1 = foundHelper || depth0.data;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "data", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</td>\n                    ";
+  buffer += escapeExpression(stack1) + "</td>\r\n                    ";
   return buffer;}
 
-  buffer += "<html>\n<head>\n";
-  buffer += "\n<style>\ntable {\n    border-collapse: collapse;\n    border-spacing: 0;\n    empty-cells: show;\n    width: 100%;\n    margin-bottom: 20px;\n}\ntable thead {\n    background: #e6e6e6;\n    color: #000;\n    text-align: left;\n    vertical-align: bottom;\n}\nth:first-child {\n    border-radius: 6px 0 0 0;\n}\nth:last-child {\n    border-radius: 0 6px 0 0;\n}\nth:only-child{\n    border-radius: 6px 6px 0 0;\n}\ntbody {\n    border: 1px solid #dbdbdb;\n}\ntd {\n    border: 1px solid #eeeeee;\n    font-family: Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;\n    font-size: inherit;\n    margin: 0;\n    overflow: visible;\n    padding: .3em 1em;\n}\nth {\n    font-family: \"Proxima Nova\", sans-serif;\n    padding: .4em 1em;\n}\nth a {\n    color: #699c52;\n}\nh1 {\n    clear: both;\n    color: #aaa;\n    font-family: \"Proxima Nova\", sans-serif;\n    font-size: 1.1em;\n    font-weight: normal;\n    margin-top: 10px;\n    text-transform: uppercase;\n}\ntable.sql-schema-table {\n    float:left;\n    width: auto;\n}\ntable.sql-schema-table .column-type-wrap {\n    float: right;\n    margin-left: 20px;\n    min-width: 70px;\n}\ntable.sql-schema-table .schema-pk {\n    color: #999;\n}\ntable.sql-schema-table .schema-column-type {\n    float: left;\n    color: #999;\n}\ntable.sql-schema-table + table.sql-schema-table {\n    margin-left: 10px\n}\ntable.sql-schema-table .row-count {\n    color: #999;\n    float: right;\n    margin-left: 30px;\n    text-align: right;\n    font-weight: normal;\n}\n</style>\n</head>\n\n<body>\n<div class=\"sql-output\">\n    ";
+  buffer += "<html>\r\n<head>\r\n";
+  buffer += "\r\n<style>\r\ntable {\r\n    border-collapse: collapse;\r\n    border-spacing: 0;\r\n    empty-cells: show;\r\n    width: 100%;\r\n    margin-bottom: 20px;\r\n}\r\ntable thead {\r\n    background: #e6e6e6;\r\n    color: #000;\r\n    text-align: left;\r\n    vertical-align: bottom;\r\n}\r\nth:first-child {\r\n    border-radius: 6px 0 0 0;\r\n}\r\nth:last-child {\r\n    border-radius: 0 6px 0 0;\r\n}\r\nth:only-child{\r\n    border-radius: 6px 6px 0 0;\r\n}\r\ntbody {\r\n    border: 1px solid #dbdbdb;\r\n}\r\ntd {\r\n    border: 1px solid #eeeeee;\r\n    font-family: Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;\r\n    font-size: inherit;\r\n    margin: 0;\r\n    overflow: visible;\r\n    padding: .3em 1em;\r\n}\r\nth {\r\n    font-family: \"Proxima Nova\", sans-serif;\r\n    padding: .4em 1em;\r\n}\r\nth a {\r\n    color: #699c52;\r\n}\r\nh1 {\r\n    clear: both;\r\n    color: #aaa;\r\n    font-family: \"Proxima Nova\", sans-serif;\r\n    font-size: 1.1em;\r\n    font-weight: normal;\r\n    margin-top: 10px;\r\n    text-transform: uppercase;\r\n}\r\ntable.sql-schema-table {\r\n    float:left;\r\n    width: auto;\r\n}\r\ntable.sql-schema-table .column-type-wrap {\r\n    float: right;\r\n    margin-left: 20px;\r\n    min-width: 70px;\r\n}\r\ntable.sql-schema-table .schema-pk {\r\n    color: #999;\r\n}\r\ntable.sql-schema-table .schema-column-type {\r\n    float: left;\r\n    color: #999;\r\n}\r\ntable.sql-schema-table + table.sql-schema-table {\r\n    margin-left: 10px\r\n}\r\ntable.sql-schema-table .row-count {\r\n    color: #999;\r\n    float: right;\r\n    margin-left: 30px;\r\n    text-align: right;\r\n    font-weight: normal;\r\n}\r\n</style>\r\n</head>\r\n\r\n<body>\r\n<div class=\"sql-output\">\r\n    ";
   foundHelper = helpers.tables;
   stack1 = foundHelper || depth0.tables;
   stack2 = helpers['if'];
@@ -200,7 +200,7 @@ function program20(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    ";
+  buffer += "\r\n    ";
   foundHelper = helpers.tables;
   stack1 = foundHelper || depth0.tables;
   stack2 = helpers.each;
@@ -210,7 +210,7 @@ function program20(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n\n    ";
+  buffer += "\r\n\r\n    ";
   foundHelper = helpers.results;
   stack1 = foundHelper || depth0.results;
   stack2 = helpers['if'];
@@ -220,7 +220,7 @@ function program20(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    ";
+  buffer += "\r\n    ";
   foundHelper = helpers.results;
   stack1 = foundHelper || depth0.results;
   stack2 = helpers.each;
@@ -230,5 +230,5 @@ function program20(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n</div>\n</body>\n</html>\n";
+  buffer += "\r\n</div>\r\n</body>\r\n</html>\r\n";
   return buffer;});;

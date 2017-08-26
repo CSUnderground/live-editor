@@ -64,7 +64,7 @@ function program23(depth0,data) {
   
   return "Continue";}
 
-  buffer += "<div class=\"scratchpad-debugger\">\n    ";
+  buffer += "<div class=\"scratchpad-debugger\">\r\n    ";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(1, program1, data);
@@ -74,7 +74,7 @@ function program23(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    <input type=\"checkbox\" class=\"debug-mode\">\n    <span class=\"debugger-level\" style=\"display:none;margin-left:20px;\">\n        ";
+  buffer += "\r\n    <input type=\"checkbox\" class=\"debug-mode\">\r\n    <span class=\"debugger-level\" style=\"display:none;margin-left:20px;\">\r\n        ";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(3, program3, data);
@@ -84,7 +84,7 @@ function program23(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        <select class=\"debugger-level-select\">\n            <option value=\"beginner\" selected>\n                ";
+  buffer += "\r\n        <select class=\"debugger-level-select\">\r\n            <option value=\"beginner\" selected>\r\n                ";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(5, program5, data);
@@ -94,7 +94,7 @@ function program23(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n            </option>\n            <option value=\"advanced\">\n                ";
+  buffer += "\r\n            </option>\r\n            <option value=\"advanced\">\r\n                ";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(7, program7, data);
@@ -104,7 +104,7 @@ function program23(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n            </option>\n        </select>\n    </span>\n\n    <div class=\"debugger-simple\" style=\"display:none;margin-top:5px;\">\n        <button class=\"debug-begin\" style=\"margin-right:20px;\">\n            ";
+  buffer += "\r\n            </option>\r\n        </select>\r\n    </span>\r\n\r\n    <div class=\"debugger-simple\" style=\"display:none;margin-top:5px;\">\r\n        <button class=\"debug-begin\" style=\"margin-right:20px;\">\r\n            ";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(9, program9, data);
@@ -114,7 +114,7 @@ function program23(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </button>\n        <button class=\"step-in\" disabled>\n            ";
+  buffer += "\r\n        </button>\r\n        <button class=\"step-in\" disabled>\r\n            ";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(11, program11, data);
@@ -124,7 +124,7 @@ function program23(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </button>\n        <button class=\"debug-end\" disabled style=\"margin-left:20px;\">\n            ";
+  buffer += "\r\n        </button>\r\n        <button class=\"debug-end\" disabled style=\"margin-left:20px;\">\r\n            ";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(13, program13, data);
@@ -134,7 +134,7 @@ function program23(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </button>\n    </div>\n    <div class=\"debugger-complex\" style=\"display:none;margin-top:5px;\">\n        <button class=\"debug-restart\" style=\"margin-right:10px;\">\n            ";
+  buffer += "\r\n        </button>\r\n    </div>\r\n    <div class=\"debugger-complex\" style=\"display:none;margin-top:5px;\">\r\n        <button class=\"debug-restart\" style=\"margin-right:10px;\">\r\n            ";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(15, program15, data);
@@ -144,7 +144,7 @@ function program23(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </button>\n        <!-- start/restart -->\n        <button class=\"step-over\" disabled>\n            ";
+  buffer += "\r\n        </button>\r\n        <!-- start/restart -->\r\n        <button class=\"step-over\" disabled>\r\n            ";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(17, program17, data);
@@ -154,7 +154,7 @@ function program23(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </button>\n        <button class=\"step-in\" disabled>\n            ";
+  buffer += "\r\n        </button>\r\n        <button class=\"step-in\" disabled>\r\n            ";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(19, program19, data);
@@ -164,7 +164,7 @@ function program23(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </button>\n        <button class=\"step-out\" disabled>\n            ";
+  buffer += "\r\n        </button>\r\n        <button class=\"step-out\" disabled>\r\n            ";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(21, program21, data);
@@ -174,7 +174,7 @@ function program23(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </button>\n        <button class=\"debug-continue\" disabled style=\"margin-left:10px;\">\n            ";
+  buffer += "\r\n        </button>\r\n        <button class=\"debug-continue\" disabled style=\"margin-left:10px;\">\r\n            ";
   foundHelper = helpers['_'];
   stack1 = foundHelper || depth0['_'];
   tmp1 = self.program(23, program23, data);
@@ -184,5 +184,5 @@ function program23(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </button>\n    </div>\n</div>\n";
+  buffer += "\r\n        </button>\r\n    </div>\r\n</div>\r\n";
   return buffer;});;

@@ -244,6 +244,7 @@
     display: inline-block;
     position: relative;
     white-space: nowrap;
+    height: 100%;
 }
 .scratchpad-wrap .error-buddy-resting img {
     height: 100%;

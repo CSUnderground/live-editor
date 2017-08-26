@@ -222,9 +222,9 @@
 .scratchpad-wrap .scratchpad-editor-wrap .scratchpad-toolbar {
     position: relative;
 }
-.scratchpad-editor-tabs, .scratchpad-canvas-wrap {
+/*.scratchpad-editor-tabs, .scratchpad-canvas-wrap {
     background-color:white;
-}
+}*/
 .scratchpad-wrap .scratchpad-editor-wrap .scratchpad-editor-tabs-links {
     overflow: hidden;
 }
@@ -441,7 +441,7 @@ button.hilite {
 }
 
 .editor-toolbar {
-    border-top: 1px solid #d4ccb0;
+    border-top: 1px solid rgba(200,200,200,0.25);
     padding: 7px;
 }
 .editor-toolbar .csunderground-toolbar {

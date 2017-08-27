@@ -45,7 +45,7 @@
 //    }
 	window.loopProtect = true;
 	
-    var code = window.localStorage["test-code"] || "var cookie = getImage(\"http://www.greatamericancookies.com/app/themes/greatamericancookies/library/images/home/carousel1.png\");\ndraw = function() {\n\tbackground(255);\n\timage(cookie,width/2 -cookie.width/2,height/2 - cookie.height/2);\n\tfill(255,255,255,200);\n\tnoStroke();\n\trect(0,0,width,height);\n\tfill(255, 0, 0);\n\ttextAlign(CENTER,CENTER);\n\ttextSize(32);\n\ttext(frameCount,width/2,height/2);\n};";
+    var code = window.localStorage["test-code"] || "var cookie = getImage(\"https://upload.wikimedia.org/wikipedia/commons/7/70/Cookie.png\");\ndraw = function() {\n\tbackground(255);\n\timageMode(CENTER);\n\timage(cookie,width/2,height/2,300,300);\n\tfill(255,255,255,200);\n\tnoStroke();\n\trect(0,0,width,height);\n\tfill(255, 0, 0);\n\ttextAlign(CENTER,CENTER);\n\ttextSize(32);\n\ttext(frameCount,width/2,height/2);\n};";
 
     var search = location.search.substring(1);
     var params = {};

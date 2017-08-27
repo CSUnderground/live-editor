@@ -287,7 +287,7 @@ window.PJSOutput = Backbone.View.extend({
             var h = Math.round(height*factor);
             var tempCtx = tmpCanvas.getContext("2d");
             tempCtx.drawImage(
-                c, -15, -15, tmpCanvas.width+15, tmpCanvas.height+15);
+                c, -10, -10, tmpCanvas.width+20, tmpCanvas.height+20);
             tempCtx.shadowColor="white"
             tempCtx.shadowBlur=20;
             tempCtx.shadowOffsetX=0;

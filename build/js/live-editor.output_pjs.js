@@ -1130,6 +1130,7 @@ var PJSCodeInjector = (function () {
                 var loadImage = function loadImage(filename) {
                     var deferred = $.Deferred();
                     var img = document.createElement("img");
+                    //img.setAttribute('crossOrigin', 'anonymous');
                     img.onload = (function () {
                         resourceCache[filename] = img;
                         deferred.resolve();
@@ -2424,7 +2425,7 @@ PJSResourceCache.prototype.loadImage = function (filename) {
     }
     var path = this.output.imagesDir + filename;
     var img = document.createElement("img");
-    img.setAttribute("crossOrigin", "anonymous");
+    //img.setAttribute('crossOrigin', 'anonymous');
     img.onload = (function () {
         this.cache[filename] = img;
         deferred.resolve();

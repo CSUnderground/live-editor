@@ -1085,6 +1085,7 @@ class PJSCodeInjector {
                 var loadImage = function(filename) {
                     var deferred = $.Deferred();
                     var img = document.createElement("img");
+                    //img.setAttribute('crossOrigin', 'anonymous'); 
                     img.onload = function() {
                         resourceCache[filename] = img;
                         deferred.resolve();

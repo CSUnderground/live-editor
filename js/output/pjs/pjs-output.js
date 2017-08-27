@@ -248,8 +248,8 @@ window.PJSOutput = Backbone.View.extend({
         // which we can do by creating a temporary canvas
         var tmpCanvas = document.createElement("canvas");
         var $window = $(window);
-        var width = $window.width();
-        var height = $window.height();
+        var width = this.$canvas[0].width;
+        var height = this.$canvas[0].height;
         var factor;
         if(width > height){
             factor = 216/width;

@@ -46,6 +46,16 @@ Please do **not** delete the build folder. It contains some external libraries a
 
 This issue also occurs if you do something wrong during the setup process.
 
+## Resolving issues
+
+### `live-editor is undefined` or something like that...
+Try deleting `/build/js` and then running `npm run build` again.
+
+### `this.merge is not a function`
+- Delete everything in `/build` but `/build/external` and `/build/images`.
+- Run `gulp templates`
+- Run `npm run build`
+
 ## Testing
 
 The tests are in the `/tests` folder. They use Mocha/Chai/Sinon. Gulp typically runs the tests when relevant files change, but you can explicitly run the tests with:

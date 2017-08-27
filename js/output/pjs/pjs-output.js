@@ -256,8 +256,51 @@ window.PJSOutput = Backbone.View.extend({
         }else{
             factor = 216/height;
         }
-        tmpCanvas.width = Math.round(width*factor);
-        tmpCanvas.height = Math.round(height*factor);
+        var square = false;
+        if(Math.round(width*factor) < Math.round(height*factor)){
+            tmpCanvas.width = tmpCanvas.height = Math.round(height*factor);
+        }else if(Math.round(width*factor) > Math.round(height*factor)) {
+            tmpCanvas.width = tmpCanvas.height = Math.round(width*factor);
+        }else{
+            square = true;
+            tmpCanvas.width = tmpCanvas.height = Math.round(height*factor);
+        }
+        if(!square){
+            var c = document.createElement('canvas')
+            var ctx = c.getContext('2d')
+            //img.onload = function(){
+            c.width = tmpCanvas.width
+            c.height = tmpCanvas.height
+            ctx.filter = 'blur(5px) grayscale(50%)'
+            var lFactor;
+            if(width > height){
+                lFactor = 216/height;
+            }else{
+                lFactor = 216/width;
+            }
+            var lWid = width*lFactor;
+            var lHei = height * lFactor;
+            ctx.drawImage(this.$canvas[0],  (tmpCanvas.width/2)-(lWid/2),(tmpCanvas.height/2)-(lHei/2),lWid,lHei)
+
+
+            var w = Math.round(width*factor);
+            var h = Math.round(height*factor);
+            var tempCtx = tmpCanvas.getContext("2d");
+            tempCtx.drawImage(
+                c, -15, -15, tmpCanvas.width+15, tmpCanvas.height+15);
+            tempCtx.shadowColor="white"
+            tempCtx.shadowBlur=40;
+            tempCtx.shadowOffsetX=0;
+            tempCtx.shadowOffsetY=0;
+            tempCtx.drawImage(
+                this.$canvas[0], (tmpCanvas.width/2) - (w/2), (tmpCanvas.height/2) - (h/2), w, h);
+            callback(tmpCanvas.toDataURL("image/png"))
+            //}
+
+            return;
+        }
+        var w = Math.round(width*factor);
+        var h = Math.round(height*factor);
         tmpCanvas.getContext("2d").drawImage(
             this.$canvas[0], 0, 0, tmpCanvas.width, tmpCanvas.height);
 
